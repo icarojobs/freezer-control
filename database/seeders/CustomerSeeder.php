@@ -14,18 +14,16 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create('pt_BR');
-
         $users = User::factory(20)->create();
 
-        $users->each(function (User $user) use ($faker) {
+        $users->each(function (User $user) {
             Customer::factory()->create([
                 'user_id' => $user->id,
-                'name' => $faker->name,
-                'document' => $faker->cpf,
+                'name' => fake()->name,
+                'document' => fake()->cpf,
                 'birthdate' => now()->subYears(25)->format('Y-m-d'),
-                'email' => $faker->safeEmail,
-                'mobile' => '(16) ' . $faker->cellphone,
+                'email' => fake()->safeEmail,
+                'mobile' => '(16) ' . fake()->cellphone,
             ]);
         });
     }
