@@ -9,5 +9,5 @@ Route::get('/', function () {
 
 
 Route::get('/app/login', function () {
-//    return to_route('filament.admin.auth.login');
+    return to_route('filament.admin.auth.login');
 })->name('login');
