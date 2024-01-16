@@ -18,7 +18,7 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::all()->random()->id,
+            'user_id' => User::factory()->create(),
             'name' => fake()->name,
             'document' => fake()->cpf,
             'birthdate' => now()->subYears(25)->format('Y-m-d'),
