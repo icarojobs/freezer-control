@@ -8,6 +8,6 @@ Route::get('/', function () {
 })->name('frontend.home');
 
 
-Route::get('/customer-administration', function () {
-    //return to_route('filament.auth.login');
+Route::get('/app/login', function () {
+//    return to_route('filament.admin.auth.login');
 })->name('login');
