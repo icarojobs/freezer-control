@@ -24,5 +24,5 @@ docker run --rm \
 
 ---
 ### PENDENCIAS
-1. Adicionar campos CPF, Celular, Data de Nascimento na tela de cadastro `http://laravel.test/app/register`
+1. Adicionar campos Nome, Email, CPF, Celular, Data de Nascimento na tela de cadastro `http://laravel.test/app/register`
 2. Ao cadastrar, verificar pela data de nascimento informada, se o caboclo é maior de 18 anos.
