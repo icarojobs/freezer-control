@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('filament.admin.auth.register');
 })->name('frontend.home');
 
 Route::fallback(function () {
