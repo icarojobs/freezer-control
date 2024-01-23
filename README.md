@@ -24,5 +24,6 @@ docker run --rm \
 
 ---
 ### PENDENCIAS
-1. Adicionar campos Nome, Email, CPF, Celular, Data de Nascimento na tela de cadastro `http://laravel.test/app/register`
-2. Ao cadastrar, verificar pela data de nascimento informada, se o caboclo é maior de 18 anos.
+1. Adicionar na tabela users os campos: document, phone, birthdate com base no arquivo `FreezerControlRegister`
+2. Verificar fluxo de, ao cadastrar um cliente (Customer) já cadastrar o usuário e disparar a senha pra ele.
+3. Verificar se novos usuário com o panel 'app' está logando no painel 'app' corretamente.
