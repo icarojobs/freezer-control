@@ -23,4 +23,9 @@ docker run --rm \
 [https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2](https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2)
 
 ---
+### PENDENCIAS
+ - Instalar lib de geração de QRCODE
+A ideia é ter uma URL, por exemplo: `http://laravel.test/qr-code` que vai exibir um QRCode para redirecionamento da
+tela de login. ( com base no config('app.url') )
 
+https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=473
