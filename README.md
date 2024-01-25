@@ -23,6 +23,4 @@ docker run --rm \
 [https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2](https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2)
 
 ---
-### PENDENCIAS
-3. Verificar se novos usuário com o panel 'app' está logando no painel 'app' corretamente. 
-4. Redirecionar o usuário para o painel dele, por exemplo: /app/login
+
