@@ -15,6 +15,7 @@ return new class extends Migration
             $table->float('cost_price', 10,);
             $table->float('sale_price', 10);
             $table->unsignedInteger('in_stock')->default(0);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
