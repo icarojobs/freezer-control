@@ -24,8 +24,7 @@ docker run --rm \
 
 ---
 ### PENDENCIAS
- - Instalar lib de geração de QRCODE
-A ideia é ter uma URL, por exemplo: `http://laravel.test/qr-code` que vai exibir um QRCode para redirecionamento da
-tela de login. ( com base no config('app.url') )
+ - Criar "Resource" de Cadastro de Produtos (já tem o model Product)
+ - Criar "Resourde" de Gestão de Estoque (já tem o model ProductTransaction)
 
-https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=473
+https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=483
