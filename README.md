@@ -24,7 +24,7 @@ docker run --rm \
 
 ---
 ### PENDENCIAS
- - Criar "Resource" de Cadastro de Produtos (já tem o model Product)
+ - Criar "Resource" de Cadastro de Produtos com imagem (já tem o model Product)
  - Criar "Resourde" de Gestão de Estoque (já tem o model ProductTransaction)
 
 https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=483
