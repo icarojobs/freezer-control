@@ -48,12 +48,6 @@ class ProductTransactionResource extends Resource
                     ->options(ProductTransactionTypeEnum::class)
                     ->native(false),
 
-//                Forms\Components\TextInput::make('type')
-//                    ->label('Tipo de Movimentação')
-//                    ->required()
-//                    ->maxLength(255)
-//                    ->default('sale'),
-
                 Forms\Components\TextInput::make('quantity')
                     ->label('Quantidade')
                     ->required()
@@ -65,8 +59,8 @@ class ProductTransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product_id')
-                    ->label('product.name')
+                Tables\Columns\TextColumn::make('product.name')
+                    ->label('Produto')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('description')

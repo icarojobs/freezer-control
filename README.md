@@ -24,7 +24,16 @@ docker run --rm \
 
 ---
 ### PENDENCIAS
- - Criar "Resource" de Gestão de Estoque (já tem o model ProductTransaction)
+ - Fazer a tela de compra do Consumidor (Usuário)
+ - Integrar com um gateway de pagamentos (ASAAS).
  - Revisar PR do campo "moeda-br" enviada por `Rodrigo Medeiros`.
+ - Dashboards, Relatórios, Gráficos, ETECETARASS!!!!
+ - Melhorias: Traduzir ENUMS para portugues (usando json)
 
-https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=483
+### PARTE 02
+ - Criar APIs para aplicativo Mobile (sanctum).
+
+### PARTE 03 
+ - Criar Aplicativo Mobile (Administrador + Consumidor)
+
+https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
