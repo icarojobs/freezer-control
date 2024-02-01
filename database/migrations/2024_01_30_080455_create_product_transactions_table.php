@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained('products')
                 ->cascadeOnDelete();
 
-            $table->string('description'); // exmplo: "Usuário {$x} {$type} {$y} unidades."
+            $table->string('description')->nullable(); // exmplo: "Usuário {$x} {$type} {$y} unidades."
 
             $table->string('type')->default('sale');
 
