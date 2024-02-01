@@ -4,15 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Forms\Components\PtbrMoney;
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductResource extends Resource
 {
@@ -68,12 +65,12 @@ class ProductResource extends Resource
 
                 Tables\Columns\TextColumn::make('cost_price')
                     ->label('Preço de Custo')
-                    ->numeric()
+                    ->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('sale_price')
                     ->label('Preço de Venda')
-                    ->numeric()
+                    ->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('in_stock')
