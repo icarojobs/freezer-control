@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
-    return to_route('filament.admin.auth.register');
+    $panelID = \Filament\Facades\Filament::getPanel()->getId();
+
+    return to_route("filament.{$panelID}.pages.dashboard");
 })->name('frontend.home');
 
 Route::get('/qr-code', \App\Http\Controllers\Frontend\QrCodeController::class)
