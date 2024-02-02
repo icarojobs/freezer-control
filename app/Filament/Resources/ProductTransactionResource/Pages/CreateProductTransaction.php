@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\ProductTransactionResource\Pages;
 
 use App\Enums\ProductTransactionTypeEnum;
@@ -17,7 +19,7 @@ class CreateProductTransaction extends CreateRecord
         if ($this->data['type'] === ProductTransactionTypeEnum::BUY->value) {
             Product::query()
                 ->where('id', $this->data['product_id'])
-                ->increment('in_stock', (int)$this->data['quantity']);
+                ->increment('in_stock', (int) $this->data['quantity']);
 
             $this->updateDescription();
 
@@ -27,7 +29,7 @@ class CreateProductTransaction extends CreateRecord
         if ($this->data['type'] === ProductTransactionTypeEnum::SALE->value) {
             Product::query()
                 ->where('id', $this->data['product_id'])
-                ->decrement('in_stock', (int)$this->data['quantity']);
+                ->decrement('in_stock', (int) $this->data['quantity']);
 
             $this->updateDescription();
 
@@ -42,12 +44,12 @@ class CreateProductTransaction extends CreateRecord
     {
         Product::query()
             ->where('id', $this->data['product_id'])
-            ->update(['in_stock' => (int)$this->data['quantity']]);
+            ->update(['in_stock' => (int) $this->data['quantity']]);
     }
 
     private function updateDescription(): void
     {
-        $message = "O usuário ". Auth::user()->name ." realizou a movimentação de {$this->getType()} de {$this->data['quantity']} unidades.";
+        $message = 'O usuário '.Auth::user()->name." realizou a movimentação de {$this->getType()} de {$this->data['quantity']} unidades.";
 
         $this->getRecord()->update(['description' => $message]);
     }

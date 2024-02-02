@@ -17,14 +17,13 @@
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
-        ,
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
+        "laravel/pint": "^1.13",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
+        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

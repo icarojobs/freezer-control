@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\Customer;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder
@@ -18,7 +18,7 @@ class CustomerSeeder extends Seeder
             'name' => fake()->name,
             'document' => fake()->cpf,
             'birthdate' => now()->subYears(25)->format('Y-m-d'),
-            'mobile' => '(16) ' . fake()->cellphone,
+            'mobile' => '(16) '.fake()->cellphone,
         ]);
     }
 }

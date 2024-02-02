@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Filament\Pages\Auth;
@@ -6,15 +7,12 @@ namespace App\Filament\Pages\Auth;
 use App\Models\Customer;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DomainException;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Register;
-use Illuminate\Support\Str;
 use Override;
 
 class FreezerControlRegister extends Register
@@ -61,8 +59,8 @@ class FreezerControlRegister extends Register
 
             $this->data = $this->form->getState();
 
-            if (!$this->checkIfCustomerHasMore18YearsOld()) {
-                throw new DomainException("Infelizmente, você não tem idade para se cadastrar no " . config('app.name'));
+            if (! $this->checkIfCustomerHasMore18YearsOld()) {
+                throw new DomainException('Infelizmente, você não tem idade para se cadastrar no '.config('app.name'));
             }
         } catch (TooManyRequestsException $exception) {
             Notification::make()

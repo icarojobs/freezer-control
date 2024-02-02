@@ -1,19 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
 use App\Enums\ProductTransactionTypeEnum;
 use App\Filament\Resources\ProductTransactionResource\Pages;
-use App\Filament\Resources\ProductTransactionResource\RelationManagers;
 use App\Models\ProductTransaction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductTransactionResource extends Resource
 {

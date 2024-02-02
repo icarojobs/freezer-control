@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\User;
@@ -23,7 +25,7 @@ class CustomerFactory extends Factory
             'document' => fake()->cpf,
             'birthdate' => now()->subYears(25)->format('Y-m-d'),
             'email' => fake()->safeEmail,
-            'mobile' => '(16) ' . fake()->cellphone,
+            'mobile' => '(16) '.fake()->cellphone,
         ];
     }
 }
