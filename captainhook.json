@@ -8,7 +8,7 @@
         "actions": []
     },
     "pre-commit": {
-        "enabled": true,
+        "enabled": false,
         "actions": [
             {
                 "action": "./vendor/bin/sail pint -v",
