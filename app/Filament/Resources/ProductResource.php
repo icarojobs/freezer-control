@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Filament\Forms\Components\PtbrMoney;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms;
@@ -29,15 +30,13 @@ class ProductResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\TextInput::make('cost_price')
+                PtbrMoney::make('cost_price')
                     ->label('Preço de Custo')
-                    ->required()
-                    ->numeric(),
+                    ->required(),
 
-                Forms\Components\TextInput::make('sale_price')
+                PtbrMoney::make('sale_price')
                     ->label('Preço de Venda')
-                    ->required()
-                    ->numeric(),
+                    ->required(),
 
                 Forms\Components\TextInput::make('in_stock')
                     ->label('Estoque Atual')
@@ -68,12 +67,12 @@ class ProductResource extends Resource
 
                 Tables\Columns\TextColumn::make('cost_price')
                     ->label('Preço de Custo')
-                    ->numeric()
+                    ->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('sale_price')
                     ->label('Preço de Venda')
-                    ->numeric()
+                    ->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('in_stock')
