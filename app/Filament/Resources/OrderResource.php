@@ -26,6 +26,8 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static float $total = 0.0;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,30 +41,45 @@ class OrderResource extends Resource
                         ->schema([
                             Repeater::make('items')
                                 ->schema([
-                                    Grid::make()
+                                    Grid::make(6)
                                         ->schema([
-                                            Select::make('product')
+                                            Select::make('product_id')
                                                 ->label('Item')
                                                 ->options(Product::all()->pluck('name', 'id'))
                                                 ->searchable()
                                                 ->preload()
-                                                ->native(false)
                                                 ->required()
-                                                ->columns(2),
+                                                ->reactive()
+                                                ->afterStateUpdated(function ($state, Forms\Set $set) {
+                                                    $price = Product::find($state)?->sale_price;
+                                                    $set('unit_price', $price ?? 0);
+                                                })
+                                                ->distinct()
+                                                ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                                                ->columnSpan(3),
 
                                             TextInput::make('quantity')
                                                 ->label('Quantidade')
                                                 ->numeric()
                                                 ->default(1)
-                                                ->columns(2),
-                                        ])->columnSpanFull(),
+                                                ->columnSpan(2),
+
+                                            TextInput::make('unit_price')
+                                                ->label('Valor Unitário')
+                                                ->default(0.0)
+                                                ->disabled()
+                                                ->columnSpan(1),
+                                        ]),
+
                                 ])->columnSpanFull(),
 
+                            // Atualizar esse total com base na quantidade de itens no carrinho
                             TextInput::make('total')
-                                ->required()
-                                ->numeric()
-                                ->columnSpanFull(),
-                        ]),
+                                ->disabled()
+                                ->reactive()
+                                ->default(self::$total)
+                                ->columnSpan(2),
+                        ])->columns(6),
                     Wizard\Step::make('Pagamento')
                         ->schema([
                             // todo: criar uma custom (view/component)
