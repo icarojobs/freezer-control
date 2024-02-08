@@ -26,7 +26,7 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static float $total = 0.0;
+    public static $total = 0.0;
 
     public static function form(Form $form): Form
     {
@@ -53,6 +53,7 @@ class OrderResource extends Resource
                                                 ->afterStateUpdated(function ($state, Forms\Set $set) {
                                                     $price = Product::find($state)?->sale_price;
                                                     $set('unit_price', $price ?? 0);
+                                                    $set('quantity', 1);
                                                 })
                                                 ->distinct()
                                                 ->disableOptionsWhenSelectedInSiblingRepeaterItems()
@@ -61,7 +62,11 @@ class OrderResource extends Resource
                                             TextInput::make('quantity')
                                                 ->label('Quantidade')
                                                 ->numeric()
-                                                ->default(1)
+                                                ->reactive()
+                                                ->default(0)
+                                                ->afterStateHydrated(function ($state, Forms\Set $set, Forms\Get $get) {
+                                                    static::$total += $state * $get('unit_price');
+                                                })
                                                 ->columnSpan(2),
 
                                             TextInput::make('unit_price')
@@ -76,8 +81,8 @@ class OrderResource extends Resource
                             // Atualizar esse total com base na quantidade de itens no carrinho
                             TextInput::make('total')
                                 ->disabled()
-                                ->reactive()
-                                ->default(self::$total)
+                                ->default(number_format(self::$total, 2))
+                                ->live()
                                 ->columnSpan(2),
                         ])->columns(6),
                     Wizard\Step::make('Pagamento')
