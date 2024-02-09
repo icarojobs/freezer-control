@@ -4,19 +4,29 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OrderResource\Pages;
+use Filament\Forms;
+use Filament\Tables;
 use App\Models\Order;
 use App\Models\Product;
-use Filament\Forms;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
+use App\Models\Customer;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\Group;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Placeholder;
+use LaraZeus\Quantity\Components\Quantity;
+use App\Filament\Forms\Components\PtbrMoney;
+use Filament\Forms\Components\Actions\Action;
+use App\Filament\Resources\OrderResource\Pages;
+use Filament\Forms\Components\Hidden;
 
 class OrderResource extends Resource
 {
@@ -32,70 +42,21 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                // todo: não esquecer de adicionar o usuário logado nesse campo....
-//                Forms\Components\TextInput::make('user_id')
-//                    ->numeric(),
 
-                Wizard::make([
-                    Wizard\Step::make('Itens')
-                        ->schema([
-                            Repeater::make('items')
-                                ->schema([
-                                    Grid::make(6)
-                                        ->schema([
-                                            Select::make('product_id')
-                                                ->label('Item')
-                                                ->options(Product::all()->pluck('name', 'id'))
-                                                ->searchable()
-                                                ->preload()
-                                                ->required()
-                                                ->reactive()
-                                                ->afterStateUpdated(function ($state, Forms\Set $set) {
-                                                    $price = Product::find($state)?->sale_price;
-                                                    $set('unit_price', $price ?? 0);
-                                                    $set('quantity', 1);
-                                                })
-                                                ->distinct()
-                                                ->disableOptionsWhenSelectedInSiblingRepeaterItems()
-                                                ->columnSpan(3),
+                Group::make()
+                    ->schema([
+                        Section::make()
+                            ->schema(static::getPaymentFormDetails()),
+                        Placeholder::make('Resumo')
+                            ->columns(2),
+                    ]),
+                Section::make()
+                    ->schema([
+                        Placeholder::make('Resumo')
+                    ])
 
-                                            TextInput::make('quantity')
-                                                ->label('Quantidade')
-                                                ->numeric()
-                                                ->reactive()
-                                                ->default(0)
-                                                ->afterStateHydrated(function ($state, Forms\Set $set, Forms\Get $get) {
-                                                    static::$total += $state * $get('unit_price');
-                                                })
-                                                ->columnSpan(2),
 
-                                            TextInput::make('unit_price')
-                                                ->label('Valor Unitário')
-                                                ->default(0.0)
-                                                ->disabled()
-                                                ->columnSpan(1),
-                                        ]),
-
-                                ])->columnSpanFull(),
-
-                            // Atualizar esse total com base na quantidade de itens no carrinho
-                            TextInput::make('total')
-                                ->disabled()
-                                ->default(number_format(self::$total, 2))
-                                ->live()
-                                ->columnSpan(2),
-                        ])->columns(6),
-                    Wizard\Step::make('Pagamento')
-                        ->schema([
-                            // todo: criar uma custom (view/component)
-                        ]),
-                ])->columnSpanFull(),
-
-//                Forms\Components\TextInput::make('status')
-//                    ->required()
-//                    ->maxLength(255)
-//                    ->default('PENDING'),
-            ])->columns(8);
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -146,5 +107,155 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
+    }
+
+    public static function getCustomerFormDetails(): array
+    {
+        return [
+            Grid::make(3)
+                ->schema([
+                    Section::make()
+                        ->schema([
+                            Select::make('customer_id')
+                                ->label('Cliente')
+                                ->required()
+                                ->options(Customer::all()->pluck('name', 'id'))
+                                ->live(debounce: 250)
+                                ->afterStateUpdated(function ($state, $set) {
+                                    if ($state != null) {
+                                        $customer = Customer::find($state);
+                                        $set('customer_name', $customer->name);
+                                        $set('customer_email', $customer->email);
+                                        $set('customer_birthdate', $customer->birthdate->format('d/m/Y'));
+                                    }
+                                })
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->label('Nome completo')
+                                        ->required()
+                                        ->maxLength(255),
+
+                                    TextInput::make('email')
+                                        ->label('Email')
+                                        ->required()
+                                        ->email()
+                                        ->maxLength(255)
+                                        ->unique(),
+
+                                    TextInput::make('document')
+                                        ->label('Documento')
+                                        ->required()
+                                        ->maxLength(255),
+
+                                    TextInput::make('mobile')
+                                        ->label('Celular')
+                                        ->maxLength(255),
+
+                                    DatePicker::make('birthdate')
+                                        ->label('Data Nascimento')
+                                        ->format('d/m/Y')
+                                        ->required(),
+
+
+                                ])
+                                ->createOptionAction(function (Action $action) {
+                                    return $action
+                                        ->modalHeading('Novo cliente')
+                                        ->modalSubmitActionLabel('Cadastrar cliente')
+                                        ->modalWidth('lg')
+                                        ->closeModalByClickingAway(false);
+                                }),
+
+                            TextInput::make('customer_email')
+                                ->label('Email')
+                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->disabled(),
+
+                            TextInput::make('customer_birthdate')
+                                ->label('Data Nascimento')
+                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->disabled(),
+                        ])
+                        ->columnSpan(2),
+                    Section::make()
+                        ->schema([
+                            Placeholder::make('Ultimas compras')
+                                ->content('Under construction'),
+                        ])
+                        ->columnSpan(1)
+                ]),
+
+        ];
+    }
+
+    public static function getPaymentFormDetails(): array
+    {
+        return [
+            Grid::make(3)
+                ->schema([
+                    Section::make()
+                        ->schema([
+                            Placeholder::make('Formulário de pagamento')
+                                ->content('Under construction'),
+                        ])
+                        ->columnSpan(2),
+                    Section::make()
+                        ->schema([
+                            Placeholder::make('Resumo da compra')
+                                ->content('Under construction'),
+                        ])
+                        ->columnSpan(1)
+                ])
+        ];
+    }
+
+    public static function getItemsRepeater(): Repeater
+    {
+        return Repeater::make('items')
+            ->schema([
+                Select::make('product_id')
+                    ->label('Item')
+                    ->options(Product::all()->pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, $set) {
+                        $price = Product::find($state)?->sale_price;
+                        $set('unit_price', $price ?? 0);
+                        $set('quantity', 1);
+                    })
+                    ->distinct()
+                    ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                    ->columnSpan(3),
+
+                Quantity::make('quantity')
+                    ->label('Quantidade')
+                    ->reactive()
+                    ->minValue(1)
+                    ->default(1)
+                    ->afterStateUpdated(function ($state, $set, $get) {
+
+                        $sub_total = number_format((float) $state * $get('unit_price'), 2, '.', '');
+
+                        $set('sub_total', $sub_total);
+                    })
+                    ->columnSpan(2),
+
+                PtbrMoney::make('unit_price')
+                    ->label('Valor Unitário')
+                    ->default(0.0)
+                    ->disabled()
+                    ->columnSpan(1),
+
+                PtbrMoney::make('sub_total')
+                    ->label('Subtotal')
+                    ->default(0.0)
+                    ->disabled()
+                    ->columnSpan(1),
+            ])
+            ->addActionLabel('Adicionar item')
+            ->columns(7)
+            ->columnSpanFull();
     }
 }
