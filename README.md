@@ -1,6 +1,8 @@
 # Freezer Control 1.0
 Sistema de gestão de freezers
 
+## *** TEM PR PARA ACEITAR!!! ***
+
 ---
 ### CONFIGURANDO PROJETO EM UM NOVO AMBIENTE
 1. Copie o seu `.env.example` para `.env`
