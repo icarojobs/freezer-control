@@ -23,6 +23,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Group;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
+use Illuminate\Support\HtmlString;
 use LaraZeus\Quantity\Components\Quantity;
 use App\Filament\Forms\Components\PtbrMoney;
 use Filament\Forms\Components\Actions\Action;
@@ -183,8 +184,10 @@ class OrderResource extends Resource
                         ->columnSpan(2),
                     Section::make()
                         ->schema([
-                            Placeholder::make('Ultimas compras')
-                                ->content('Under construction'),
+                            Forms\Components\ViewField::make('latest_orders')
+                                ->label('Últimas compras')
+                                ->view('orders.latest-orders')
+                                ->viewData(static::getSelectedCustomer()),
                         ])
                         ->columnSpan(1)
                 ]),
@@ -278,5 +281,12 @@ class OrderResource extends Resource
             ->body("O cliente {$data['name']} foi salvo com sucesso!")
             ->success()
             ->send();
+    }
+
+    public static function getSelectedCustomer(): array
+    {
+        //dd(static::getState()['customer_id']); // todo: queria fazer isso...
+
+        return ['name' => 'Sr. Batata'];
     }
 }
