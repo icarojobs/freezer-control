@@ -129,6 +129,8 @@ class OrderResource extends Resource
                                         $set('customer_birthdate', $customer->birthdate->format('d/m/Y'));
                                     }
                                 })
+                                ->searchable()
+                                ->preload()
                                 ->createOptionForm([
                                     TextInput::make('name')
                                         ->label('Nome completo')
