@@ -117,7 +117,7 @@ class OrderResource extends Resource
                             Select::make('customer_id')
                                 ->label('Cliente')
                                 ->required()
-                                ->options(Customer::all()->pluck('name', 'id'))
+                                ->relationship('customer', 'name')
                                 ->live(debounce: 250)
                                 ->afterStateUpdated(function ($state, $set) {
                                     if ($state != null) {
@@ -149,11 +149,12 @@ class OrderResource extends Resource
 
                                     TextInput::make('mobile')
                                         ->label('Celular')
+                                        ->extraAlpineAttributes(['x-mask' => '(99) 99999-9999'])
                                         ->maxLength(255),
 
                                     DatePicker::make('birthdate')
                                         ->label('Data Nascimento')
-                                        ->format('d/m/Y')
+                                        ->displayFormat('d/m/Y')
                                         ->required(),
 
 
@@ -163,8 +164,7 @@ class OrderResource extends Resource
                                         ->modalHeading('Novo cliente')
                                         ->modalSubmitActionLabel('Cadastrar cliente')
                                         ->modalWidth('lg')
-                                        ->closeModalByClickingAway(false)
-                                        ->action(fn(array $data) => static::saveCustomer($data));
+                                        ->closeModalByClickingAway(false);
                                 }),
 
                             TextInput::make('customer_email')
@@ -180,20 +180,20 @@ class OrderResource extends Resource
                         ->columnSpan(2),
                     Section::make()
                         ->schema([
-                            Placeholder::make('total')
-                                ->label('Últimas Compras')
-                                ->content(function ($get) {
-                                    if (is_null($get('customer_id'))) {
-                                        return "Selecione um cliente...";
-                                    }
+                            // Placeholder::make('total')
+                            //     ->label('Últimas Compras')
+                            //     ->content(function ($get) {
+                            //         if (is_null($get('customer_id'))) {
+                            //             return "Selecione um cliente...";
+                            //         }
 
-                                    return new HtmlString(
-                                        view(
-                                            view: 'orders.latest-orders',
-                                            data: static::getSelectedCustomer($get('customer_id'),
-                                            ))->render()
-                                    );
-                                }),
+                            //         return new HtmlString(
+                            //             view(
+                            //                 view: 'orders.latest-orders',
+                            //                 data: static::getSelectedCustomer($get('customer_id'),
+                            //                 ))->render()
+                            //         );
+                            //     }),
                         ])
                         ->columnSpan(1)
                 ]),
@@ -272,22 +272,7 @@ class OrderResource extends Resource
             ->columnSpanFull();
     }
 
-    public static function saveCustomer(array $data)
-    {
-        Customer::create([
-            "name" => $data['name'],
-            "email" => $data['email'],
-            "document" => $data['document'],
-            "mobile" => $data['mobile'],
-            "birthdate" => $data['birthdate'],
-        ]);
 
-        Notification::make('saved_customer')
-            ->title('Cliente Registrado!')
-            ->body("O cliente {$data['name']} foi salvo com sucesso!")
-            ->success()
-            ->send();
-    }
 
     public static function getSelectedCustomer(string|int $customerId): array
     {
