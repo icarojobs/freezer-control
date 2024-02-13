@@ -234,7 +234,7 @@ class OrderResource extends Resource
                         $price = Product::find($state)?->sale_price;
                         $set('unit_price', $price ?? 0);
                         $set('sub_total', $price ?? 0);
-                        $set('quantity', 1);
+                        $set('quantity', 0);
                     })
                     ->distinct()
                     ->disableOptionsWhenSelectedInSiblingRepeaterItems()
@@ -242,12 +242,22 @@ class OrderResource extends Resource
 
                 Quantity::make('quantity')
                     ->label('Quantidade')
+                    ->hint('Estoque: 0')
                     ->reactive()
                     ->minValue(1)
-                    ->default(1)
+                    ->hint(function ($get) {
+
+                        $stock = Product::find($get('product_id'))?->in_stock;
+
+                        if (!is_null($stock)) return "{$stock} em estoque";
+
+                        return null;
+                    })
                     ->afterStateUpdated(function ($state, $set, $get) {
 
-                        $sub_total = number_format((float)$state * $get('unit_price'), 2, '.', '');
+                        $unit_price = $get('unit_price');
+
+                        $sub_total = number_format((float)$state * $unit_price, 2, '.', '');
 
                         $set('sub_total', $sub_total);
                     })

@@ -81,7 +81,6 @@ class CreateOrder extends CreateRecord
                                     $fields = $get('items');
                                     $sum = 0.0;
                                     foreach ($fields as $field) {
-
                                         $sum += floatval($field['sub_total']);
                                     }
                                     $sum = number_format($sum, 2, '.', '');
