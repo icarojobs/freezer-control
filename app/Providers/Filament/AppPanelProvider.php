@@ -13,6 +13,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+use Illuminate\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -30,6 +31,10 @@ class AppPanelProvider extends PanelProvider
             ->path('app')
             ->login()
             ->registration(FreezerControlRegister::class)
+            ->brandName('FREEZE CONTROL')
+            ->darkModeBrandLogo(fn(): View => view('filament.partials.logo.brand-logo-dark'))
+            ->brandLogo(fn(): View => view('filament.partials.logo.brand-logo'))
+            ->favicon(asset('brands/icon-340.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])
