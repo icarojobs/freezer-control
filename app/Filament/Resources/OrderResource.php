@@ -4,31 +4,27 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Notifications\Notification;
-use Filament\Tables;
+use App\Filament\Forms\Components\PtbrMoney;
+use App\Filament\Resources\OrderResource\Pages;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Customer;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Carbon;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\Group;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Infolists\Components\Group;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
 use LaraZeus\Quantity\Components\Quantity;
-use App\Filament\Forms\Components\PtbrMoney;
-use Filament\Forms\Components\Actions\Action;
-use App\Filament\Resources\OrderResource\Pages;
-use Filament\Forms\Components\Hidden;
 
 class OrderResource extends Resource
 {
@@ -168,26 +164,36 @@ class OrderResource extends Resource
                                         ->modalSubmitActionLabel('Cadastrar cliente')
                                         ->modalWidth('lg')
                                         ->closeModalByClickingAway(false)
-                                        ->action(fn (array $data) => static::saveCustomer($data) );
+                                        ->action(fn(array $data) => static::saveCustomer($data));
                                 }),
 
                             TextInput::make('customer_email')
                                 ->label('Email')
-                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->hidden(fn($get) => $get('customer_id') == null)
                                 ->disabled(),
 
                             TextInput::make('customer_birthdate')
                                 ->label('Data Nascimento')
-                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->hidden(fn($get) => $get('customer_id') == null)
                                 ->disabled(),
                         ])
                         ->columnSpan(2),
                     Section::make()
                         ->schema([
-                            Forms\Components\ViewField::make('latest_orders')
-                                ->label('Últimas compras')
-                                ->view('orders.latest-orders')
-                                ->viewData(static::getSelectedCustomer()),
+                            Placeholder::make('total')
+                                ->label('Últimas Compras')
+                                ->content(function ($get) {
+                                    if (is_null($get('customer_id'))) {
+                                        return "Selecione um cliente...";
+                                    }
+
+                                    return new HtmlString(
+                                        view(
+                                            view: 'orders.latest-orders',
+                                            data: static::getSelectedCustomer($get('customer_id'),
+                                            ))->render()
+                                    );
+                                }),
                         ])
                         ->columnSpan(1)
                 ]),
@@ -243,7 +249,7 @@ class OrderResource extends Resource
                     ->default(1)
                     ->afterStateUpdated(function ($state, $set, $get) {
 
-                        $sub_total = number_format((float) $state * $get('unit_price'), 2, '.', '');
+                        $sub_total = number_format((float)$state * $get('unit_price'), 2, '.', '');
 
                         $set('sub_total', $sub_total);
                     })
@@ -283,10 +289,10 @@ class OrderResource extends Resource
             ->send();
     }
 
-    public static function getSelectedCustomer(): array
+    public static function getSelectedCustomer(string|int $customerId): array
     {
-        //dd(static::getState()['customer_id']); // todo: queria fazer isso...
+        $orders = Customer::query()->with('orders')->find($customerId)?->orders;
 
-        return ['name' => 'Sr. Batata'];
+        return compact('orders');
     }
 }

@@ -17,6 +17,10 @@ class CustomerObserver
     {
         $password = Str::password(8);
 
+        if (app()->isLocal() && $customer->email === 'admin@admin.com') {
+            $password = 'password';
+        }
+
         $user = User::create([
             'name' => $customer->name,
             'email' => $customer->email,

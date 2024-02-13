@@ -39,3 +39,7 @@ docker run --rm \
  - Criar Aplicativo Mobile (Administrador + Consumidor)
 
 https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
+
+---
+### CONSTRIBUIÇÕES
+ - Checkout by @fabianosfbr

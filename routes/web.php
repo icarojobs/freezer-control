@@ -21,4 +21,4 @@ Route::get('/teste', function () {
 
 Route::fallback(function () {
     return redirect('/app');
-});
+})->name('login');
