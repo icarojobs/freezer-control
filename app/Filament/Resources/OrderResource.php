@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Tables;
 use App\Models\Order;
 use App\Models\Product;
@@ -165,7 +166,8 @@ class OrderResource extends Resource
                                         ->modalHeading('Novo cliente')
                                         ->modalSubmitActionLabel('Cadastrar cliente')
                                         ->modalWidth('lg')
-                                        ->closeModalByClickingAway(false);
+                                        ->closeModalByClickingAway(false)
+                                        ->action(fn (array $data) => static::saveCustomer($data) );
                                 }),
 
                             TextInput::make('customer_email')
@@ -259,5 +261,22 @@ class OrderResource extends Resource
             ->addActionLabel('Adicionar item')
             ->columns(7)
             ->columnSpanFull();
+    }
+
+    public static function saveCustomer(array $data)
+    {
+        Customer::create([
+            "name" => $data['name'],
+            "email" => $data['email'],
+            "document" => $data['document'],
+            "mobile" => $data['mobile'],
+            "birthdate" => $data['birthdate'],
+        ]);
+
+        Notification::make('saved_customer')
+            ->title('Cliente Registrado!')
+            ->body("O cliente {$data['name']} foi salvo com sucesso!")
+            ->success()
+            ->send();
     }
 }
