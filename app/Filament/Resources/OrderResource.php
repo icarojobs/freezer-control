@@ -4,27 +4,29 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Forms\Components\PtbrMoney;
-use App\Filament\Resources\OrderResource\Pages;
-use App\Models\Customer;
+use Filament\Tables;
 use App\Models\Order;
 use App\Models\Product;
-use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
+use App\Models\Customer;
 use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ViewField;
 use Filament\Infolists\Components\Group;
 use Filament\Notifications\Notification;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Placeholder;
 use LaraZeus\Quantity\Components\Quantity;
+use App\Filament\Forms\Components\PtbrMoney;
+use Filament\Forms\Components\Actions\Action;
+use App\Filament\Resources\OrderResource\Pages;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class OrderResource extends Resource
 {
@@ -34,45 +36,40 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static $total = 0.0;
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-
-                Group::make()
-                    ->schema([
-                        Section::make()
-                            ->schema(static::getPaymentFormDetails()),
-                        Placeholder::make('Resumo')
-                            ->columns(2),
-                    ]),
-                Section::make()
-                    ->schema([
-                        Placeholder::make('Resumo')
-                    ])
-
-
-            ]);
+            ->schema([]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null)
+            ->modifyQueryUsing(function (Builder $query) {
+                return $query->orderBy('created_at', 'desc');
+            })
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('customer.name')
+                    ->label('Nome do cliente')
+                    ->description(function (Order $record) {
+                        return $record->customer->document;
+                    })
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('total')
                     ->numeric()
+                    ->money('BRL')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Data da compra')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -81,9 +78,7 @@ class OrderResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions([])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -169,31 +164,33 @@ class OrderResource extends Resource
 
                             TextInput::make('customer_email')
                                 ->label('Email')
-                                ->hidden(fn($get) => $get('customer_id') == null)
+                                ->hidden(fn ($get) => $get('customer_id') == null)
                                 ->disabled(),
 
                             TextInput::make('customer_birthdate')
                                 ->label('Data Nascimento')
-                                ->hidden(fn($get) => $get('customer_id') == null)
+                                ->hidden(fn ($get) => $get('customer_id') == null)
                                 ->disabled(),
                         ])
                         ->columnSpan(2),
                     Section::make()
                         ->schema([
-                            // Placeholder::make('total')
-                            //     ->label('Últimas Compras')
-                            //     ->content(function ($get) {
-                            //         if (is_null($get('customer_id'))) {
-                            //             return "Selecione um cliente...";
-                            //         }
+                            Placeholder::make('total')
+                                ->label('Últimas Compras')
+                                ->content(function ($get) {
+                                    if (is_null($get('customer_id'))) {
+                                        return "Nenhum cliente selecionado";
+                                    }
 
-                            //         return new HtmlString(
-                            //             view(
-                            //                 view: 'orders.latest-orders',
-                            //                 data: static::getSelectedCustomer($get('customer_id'),
-                            //                 ))->render()
-                            //         );
-                            //     }),
+                                    return new HtmlString(
+                                        view(
+                                            view: 'orders.latest-orders',
+                                            data: static::getSelectedCustomer(
+                                                $get('customer_id'),
+                                            )
+                                        )->render()
+                                    );
+                                }),
                         ])
                         ->columnSpan(1)
                 ]),
@@ -236,6 +233,7 @@ class OrderResource extends Resource
                     ->afterStateUpdated(function ($state, $set) {
                         $price = Product::find($state)?->sale_price;
                         $set('unit_price', $price ?? 0);
+                        $set('sub_total', $price ?? 0);
                         $set('quantity', 1);
                     })
                     ->distinct()
@@ -276,7 +274,8 @@ class OrderResource extends Resource
 
     public static function getSelectedCustomer(string|int $customerId): array
     {
-        $orders = Customer::query()->with('orders')->find($customerId)?->orders;
+
+        $orders = Order::where('customer_id', $customerId)->get();
 
         return compact('orders');
     }
