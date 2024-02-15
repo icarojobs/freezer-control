@@ -15,6 +15,12 @@ Simplesmente execute o comando `make` no seu terminal:
 ```bash
 make
 ```
+
+E, para popular os dados teste, faça:
+```bash
+make populate
+```
+
 Agora, basta acessar a URL `http://laravel.test`
 
 *OBS.:* Verifique se no seu arquivo `hosts` existe o alias para `127.0.0.1 laravel.test`.

@@ -20,3 +20,8 @@ up:
 key-generate:
 	@echo "--> Generating new laravel key..."
 	@./vendor/bin/sail art key:generate
+
+.PHONE: populate
+populate:
+	@echo "--> Populating all table and data of project..."
+	@./vendor/bin/sail art migrate:fresh --seed
