@@ -31,7 +31,8 @@ Agora, basta acessar a URL `http://laravel.test`
 
 ---
 ### PENDENCIAS
- - Fazer a tela de compra do Consumidor (Usuário)
+ - Corrigir redirecionamento incorreto de /app para /admin (não acessa mais o admin)
+ - Corrigir logo do Blum que não está sendo exibida...
  - Integrar com um gateway de pagamentos (ASAAS).
  - Revisar PR do campo "moeda-br" enviada por `Rodrigo Medeiros`.
  - Dashboards, Relatórios, Gráficos, ETECETARASS!!!!
