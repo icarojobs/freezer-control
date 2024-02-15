@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
-use App\Filament\Resources\OrderResource;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
-use Filament\Resources\Pages\Concerns\HasWizard;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Section;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\OrderResource;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\Concerns\HasWizard;
 
 class CreateOrder extends CreateRecord
 {
@@ -20,14 +22,24 @@ class CreateOrder extends CreateRecord
 
     protected static string $resource = OrderResource::class;
 
-    protected function beforeCreate(): void
-    {
-        foreach ($this->data['items'] as $item) {
-            $this->data['total'] += ($item['quantity'] * $item['unit_price']);
-        }
 
-        // todo: entender porque não está adicionando o campo 'total' na hora de salvar no banco...
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data = [
+            'customer_id' => $this->data['customer_id'],
+            'items' => $this->data['items'],
+            'total' => $this->data['total'],
+
+        ];
+        return $data;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+
 
     public function form(Form $form): Form
     {
@@ -61,20 +73,23 @@ class CreateOrder extends CreateRecord
                                 ->label('Cliente')
                                 ->disabled()
                                 ->columnSpan(1),
-                            TextInput::make('total')
+                            TextInput::make('placeholder_total')
                                 ->label('Valor total da compra')
                                 ->disabled()
                                 ->prefix('R$')
-                                ->placeholder(function ($get) {
+                                ->placeholder(function ($get, $set) {
                                     $fields = $get('items');
                                     $sum = 0.0;
                                     foreach ($fields as $field) {
-
                                         $sum += floatval($field['sub_total']);
                                     }
-                                    return number_format($sum, 2, '.', '');
+                                    $sum = number_format($sum, 2, '.', '');
+                                    $set('total', $sum);
+                                    return $sum;
                                 })
                                 ->columnSpan(1),
+                            Hidden::make('total')
+                                ->default(0.0),
                             Section::make()
                                 ->schema([
                                     OrderResource::getItemsRepeater()
