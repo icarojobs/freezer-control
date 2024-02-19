@@ -31,9 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName(config('app.name'))
-            ->darkModeBrandLogo(fn(): View => view('filament.partials.logo.brand-logo-dark'))
-            ->brandLogo(fn(): View => view('filament.partials.logo.brand-logo'))
-            ->favicon(asset('brands/icon-340.png'))
+            ->favicon(asset('images/brands/icon-340.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])
