@@ -15,13 +15,26 @@ prepare:
 up:
 	@echo "--> Starting all docker containers..."
 	@./vendor/bin/sail up --force-recreate -d
+	@./vendor/bin/sail art storage:link
 
 .PHONY: key-generate
 key-generate:
 	@echo "--> Generating new laravel key..."
 	@./vendor/bin/sail art key:generate
 
-.PHONE: populate
+.PHONY: populate
 populate:
 	@echo "--> Populating all table and data of project..."
 	@./vendor/bin/sail art migrate:fresh --seed
+
+.PHONY:	down
+down:
+	@echo "--> Stopping all docker containers..."
+	@./vendor/bin/sail down
+
+.PHONY:	restart
+restart:	down up
+
+.PHONY:	play
+play:
+	@./vendor/bin/sail art play

@@ -32,6 +32,7 @@ Agora, basta acessar a URL `http://laravel.test`
  - Revisar PR do campo "moeda-br" enviada por `Rodrigo Medeiros`.
  - Dashboards, Relatórios, Gráficos, ETECETARASS!!!!
  - Melhorias: Traduzir ENUMS para portugues (usando json)
+ - Adicionar validação de maioridade na tela de vendas (ao adicionar novo cliente).
 
 ### PARTE 02
  - Criar APIs para aplicativo Mobile (sanctum).
