@@ -7,6 +7,8 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -32,6 +34,20 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName(config('app.name'))
             ->favicon(asset('images/brands/icon-340.png'))
+            ->navigationItems([
+                NavigationItem::make('Links externo')
+                    ->url('https://github.com/icarojobs/freezer-control')
+                    ->icon('heroicon-o-link')
+                    ->group('Fornecedores')
+                    ->sort(5)
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Configurações')
+                    ->url('')
+                    ->icon('heroicon-o-cog-6-tooth'),
+                'logout' => MenuItem::make()->label('Sair')
+            ])
             ->colors([
                 'primary' => Color::Amber,
             ])
