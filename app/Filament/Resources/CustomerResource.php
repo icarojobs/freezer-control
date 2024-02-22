@@ -17,9 +17,13 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $modelLabel = 'Cliente';
+    protected static ?string $navigationGroup = "Carteira de clientes";
+    protected static ?string $activeNavigationIcon = 'heroicon-o-wallet';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = "Clientes";
+    protected static ?string $modelLabel = "Cliente";
+
+    protected static ?string $navigationIcon = 'heroicon-o-wallet';
 
     public static function form(Form $form): Form
     {
@@ -114,5 +118,10 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

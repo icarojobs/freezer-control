@@ -17,13 +17,13 @@ class ProductTransactionResource extends Resource
 {
     protected static ?string $model = ProductTransaction::class;
 
-    protected static ?string $label = 'Movimentação';
+    protected static ?string $navigationGroup = "Logística";
+    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
 
-    protected static ?string $pluralLabel = 'Movimentações';
+    protected static ?string $pluralModelLabel = "Movimentações";
+    protected static ?string $modelLabel = "Movimentação";
 
-    protected static ?string $navigationLabel = 'Movimentações';
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     public static function form(Form $form): Form
     {
