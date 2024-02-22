@@ -8,7 +8,7 @@ use App\Services\AsaasPhp\Concerns\AsaasClient;
 use App\Services\AsaasPhp\Contracts\AsaasPaymentInterface;
 use Illuminate\Support\Facades\Http;
 
-class CustomerList implements AsaasPaymentInterface
+class CustomerCreate implements AsaasPaymentInterface
 {
     use AsaasClient;
 
@@ -16,7 +16,7 @@ class CustomerList implements AsaasPaymentInterface
     {
         try {
             return Http::withHeader('access_token', $this->token)
-                ->get("{$this->url}/customers")
+                ->post("{$this->url}/customers", $this->data)
                 ->throw()
                 ->json();
         } catch (\Exception $exception) {

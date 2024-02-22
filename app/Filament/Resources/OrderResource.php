@@ -224,11 +224,13 @@ class OrderResource extends Resource
 
     public static function getItemsRepeater(): Repeater
     {
+        $product = Product::all();
+        
         return Repeater::make('items')
             ->schema([
                 Select::make('product_id')
                     ->label('Item')
-                    ->options(Product::all()->pluck('name', 'id'))
+                    ->options($product->pluck('name', 'id'))
                     ->searchable()
                     ->preload()
                     ->required()
@@ -248,7 +250,6 @@ class OrderResource extends Resource
                     ->reactive()
                     ->minValue(1)
                     ->hint(function ($get) {
-
                         $stock = Product::find($get('product_id'))?->in_stock;
 
                         if (!is_null($stock)) return "{$stock} em estoque";
@@ -278,6 +279,7 @@ class OrderResource extends Resource
                     ->columnSpan(1),
             ])
             ->addActionLabel('Adicionar item')
+            ->maxItems($product->count())
             ->columns(7)
             ->columnSpanFull();
     }

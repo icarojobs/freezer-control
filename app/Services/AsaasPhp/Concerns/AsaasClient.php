@@ -8,6 +8,7 @@ trait AsaasClient
         protected ?string $environment = null,
         protected ?string $token = null,
         protected ?string $url = null,
+        protected array $data = [],
     ) {
         $this->environment = app()->isLocal() ? 'sandbox' : 'production';
         $this->token = config("asaas.{$this->environment}.token");

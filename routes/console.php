@@ -5,7 +5,14 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Artisan;
 
 Artisan::command('play', function () {
-    $customers = (new App\Services\AsaasPhp\Customer\CustomerList)->list();
+    $data = [
+        'name' => 'Rick Tortorelli',
+        'cpfCnpj' => '21115873709',
+        'email' => 'rick@test.com.br',
+        'mobilePhone' => '16992222222',
+    ];
 
-    dd($customers);
+    $customer = (new App\Services\AsaasPhp\Customer\CustomerCreate(data: $data))->handle();
+
+    dd($customer);
 });

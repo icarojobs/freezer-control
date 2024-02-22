@@ -19,8 +19,6 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationGroup = "Carteira de clientes";
     protected static ?string $activeNavigationIcon = 'heroicon-o-wallet';
-
-    protected static ?string $pluralModelLabel = "Clientes";
     protected static ?string $modelLabel = "Cliente";
 
     protected static ?string $navigationIcon = 'heroicon-o-wallet';
@@ -122,6 +120,6 @@ class CustomerResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return (string) static::getModel()::count();
     }
 }

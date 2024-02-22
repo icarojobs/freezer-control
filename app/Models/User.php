@@ -54,15 +54,12 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($this->panel === PanelTypeEnum::ADMIN) {
-            return true;
-        }
+        if ($this->panel === PanelTypeEnum::APP && $panel->getId() === PanelTypeEnum::ADMIN->value) {
 
-        if ($this->panel === PanelTypeEnum::APP) {
-            return true;
+            return false;
         }
+        return true;
 
-        return false;
     }
 
     public function customer(): HasOne
