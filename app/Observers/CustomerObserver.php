@@ -16,16 +16,18 @@ class CustomerObserver
     public function created(Customer $customer): void
     {
         $password = Str::password(8);
+        $panel = PanelTypeEnum::APP;
 
         if (app()->isLocal() && $customer->email === 'admin@admin.com') {
             $password = 'password';
+            $panel = PanelTypeEnum::ADMIN;
         }
 
         $user = User::create([
             'name' => $customer->name,
             'email' => $customer->email,
-            'panel' => PanelTypeEnum::APP,
             'password' => bcrypt($password),
+            'panel' => $panel,
         ]);
 
         $customer->user_id = $user->id;

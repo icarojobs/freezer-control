@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Enums\PanelTypeEnum;
 use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
