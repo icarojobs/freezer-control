@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class UserResource extends Resource
@@ -28,18 +29,25 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nome')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
+                    ->label('E-mail')
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('panel')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('app'),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\Select::make('panel')
+                    ->label('Tipo de acesso')
+                    ->options(PanelTypeEnum::class)
+                    ->default('app')
+                    ->searchable()
+                    ->preload()
+                    ->reactive()
+                    ->distinct(),
+
                 Forms\Components\TextInput::make('password')
+                    ->label('Senha')
                     ->password()
                     ->required()
                     ->maxLength(255),
@@ -50,23 +58,17 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
+                    ->description(function (User $record) {
+                        return ($record->panel->value === "admin" ? 'Acesso administrativo':'acesso aplicativo');
+                    })
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+
+                TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('panel')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('panel')
+                    ->searchable()->badge(),
             ])
             ->filters([
                 //
