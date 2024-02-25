@@ -40,25 +40,84 @@ Agora, basta acessar a URL `http://laravel.test`
  - Correr pro abraço!
 
 ### INTEGRAÇÃO COM GATEWAY DE PAGAMENTOS
-Listar Clientes:
-```php
-$customers = (new App\Services\AsaasPhp\Customer\CustomerList)->handle();
-
-dd($customers);
+Instanciar o conector (adapter) do gateway de pagamento que deseja
+```bash
+$adapter = new App\Services\Gateway\Connectors\AsaasConnector();
 ```
 
-Criar Novo Cliente:
+Instanciar o cliente Gateway usando a do adapter cirado préviamente
+```bash
+$gateway = new App\Services\Gateway\Gateway($adapter);
+```
+
+
+Clientes:
 ```php
+// Insere um novo cliente
 $data = [
-    'name' => 'Rick Tortorelli',
+    'name' => 'Fabiano Fernandes',
     'cpfCnpj' => '21115873709',
-    'email' => 'rick@test.com.br',
+    'email' => 'fabianofernandes@test.com.br',
     'mobilePhone' => '16992222222',
 ];
 
-$customer = (new App\Services\AsaasPhp\Customer\CustomerCreate(data: $data))->handle();
+$customer = $gateway->customer()->create($data);
 
-dd($customer);
+// Atualizar um cliente
+$newData = [
+    'name' => 'Tio Jobs',
+    'cpfCnpj' => '21115873709',
+    'email' => 'tiojobs@test.com.br',
+    'mobilePhone' => '16992222222',
+];
+$customer = $gateway->customer()->update('cus_000005891625', $newData);
+
+// Retorna a listagem de clientes
+$customers = $gateway->customer()->list();
+
+// Retorna clientes utilizando filtros
+$customers = $gateway->customer()->list(['cpfCnpj' => '21115873709']);
+    
+// Remove um cliente
+$customer = $gateway->customer()->delete('cus_000005891625');
+```
+
+Cobrança:
+```php
+// Criar uma nova cobrança
+ $data = [
+        "billingType" => "BOLETO", // "CREDIT_CARD", "PIX", "BOLETO"
+        "discount" => [
+            "value" => 10,
+            "dueDateLimitDays" => 0
+        ],
+        "interest" => [
+            "value" => 2
+        ],
+        "fine" => [
+            "value" => 1
+        ],
+        "customer" => "cus_000005891625",
+        "dueDate" => "2024-02-29",
+        "value" => 100,
+        "description" => "Pedido 056984",
+        "daysAfterDueDateToCancellationRegistration" => 1,
+        "externalReference" => "056984",
+        "postalService" => false
+    ];
+$payment = $gateway->payment()->create($data);
+
+// Atualiza uma cobrança
+$payment = $gateway->payment()->update('cus_000005891625', $newData);
+
+// Retorna a listagem de cobranças
+$payments = $gateway->payment()->list();
+
+// Retorna cobranças utilizando filtros
+$payments = $gateway->payment()->list(['customer' => 'cus_000005891625', 'status' => 'RECEIVED']);
+
+// Remove uma cobrança
+$customer = $gateway->payment()->delete('cus_000005891625');
 ```
 
 ### PARTE 02
