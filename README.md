@@ -45,7 +45,7 @@ Instanciar o conector (adapter) do gateway de pagamento que deseja
 $adapter = new App\Services\Gateway\Connectors\AsaasConnector();
 ```
 
-Instanciar o cliente Gateway usando a do adapter cirado préviamente
+Instanciar o cliente Gateway utilizando o adapter criado préviamente
 ```bash
 $gateway = new App\Services\Gateway\Gateway($adapter);
 ```
