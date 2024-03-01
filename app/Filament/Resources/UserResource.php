@@ -42,6 +42,7 @@ class UserResource extends Resource
                     ->options(PanelTypeEnum::class)
                     ->default('app')
                     ->searchable()
+                    ->badge()
                     ->preload()
                     ->reactive()
                     ->distinct(),
