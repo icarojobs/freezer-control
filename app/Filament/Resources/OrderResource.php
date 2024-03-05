@@ -26,7 +26,10 @@ use LaraZeus\Quantity\Components\Quantity;
 use App\Filament\Forms\Components\PtbrMoney;
 use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\OrderResource\Pages;
+use Carbon\Carbon as CarbonCarbon;
+use Filament\Forms\Get;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 class OrderResource extends Resource
 {
@@ -123,6 +126,16 @@ class OrderResource extends Resource
                                         $set('customer_name', $customer->name);
                                         $set('customer_email', $customer->email);
                                         $set('customer_birthdate', $customer->birthdate->format('d/m/Y'));
+                                    }
+
+                                    if ($customer->birthdate->age < 18) {
+                                        Notification::make()
+                                        ->danger()
+                                        ->title('Pedidos só podem ser realizados para clientes maiores de 18 anos.')
+                                        ->duration(8000)
+                                        ->send();
+
+                                        $set('customer_id', null);
                                     }
                                 })
                                 ->searchable()

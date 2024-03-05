@@ -40,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-link')
                     ->group('Fornecedores')
                     ->sort(5)
+                    ->openUrlInNewTab()
             ])
             ->userMenuItems([
                 MenuItem::make()
@@ -58,8 +59,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+//                Widgets\AccountWidget::class,
+//                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

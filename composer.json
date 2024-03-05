@@ -15,6 +15,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "laravellegends/pt-br-validator": "^10.0",
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
@@ -34,7 +35,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/custom-helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
