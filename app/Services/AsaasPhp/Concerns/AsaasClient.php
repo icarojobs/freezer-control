@@ -2,6 +2,8 @@
 
 namespace App\Services\AsaasPhp\Concerns;
 
+use App\Models\Customer;
+
 trait AsaasClient
 {
     public function __construct(
@@ -15,3 +17,5 @@ trait AsaasClient
         $this->url = config("asaas.{$this->environment}.url");
     }
 }
+
+
