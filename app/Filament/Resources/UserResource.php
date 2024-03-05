@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Enums\PanelTypeEnum;
 
 class UserResource extends Resource
 {

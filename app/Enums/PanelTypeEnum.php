@@ -3,11 +3,13 @@
 declare(strict_types=1);
 
 namespace App\Enums;
+use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasColor;
 
-enum PanelTypeEnum: string
+enum PanelTypeEnum: string implements HasLabel, HasColor
 {
-case ADMIN  =   "admin";
-case APP    =   "app";
+    case ADMIN  =   "admin";
+    case APP    =   "app";
 
 
 
