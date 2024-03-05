@@ -40,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-link')
                     ->group('Fornecedores')
                     ->sort(5)
+                    ->openUrlInNewTab()
             ])
             ->userMenuItems([
                 MenuItem::make()
