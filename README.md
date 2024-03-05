@@ -1,5 +1,26 @@
-# Freezer Control 1.0
-Sistema de gestão de freezers
+<p align="center">
+	<a href="#"  target="_blank" title="Sistema de gestão de freezers">
+		<img src="/public/images/brands/logo-v-1024.png" alt="Sistema de gestão de freezers" width="340px">
+	</a>
+</p>
+
+<br>
+
+<p align="center">:rocket: Revolucionando a forma como você compra bebidas :sparkles: <a href="https://github.com/icarojobs/freezer-control">Freezer Control</a></p>
+
+<p align="center">
+	<img src="https://img.shields.io/badge/version project-1.0-brightgreen" alt="version project">
+    <img src="https://img.shields.io/badge/Php-8.3.3-informational" alt="stack php">
+    <img src="https://img.shields.io/badge/Laravel-10.46-informational&color=brightgreen" alt="stack laravel">
+    <img src="https://img.shields.io/badge/Filament-3.2-informational" alt="stack Filament">
+    <img src="https://img.shields.io/badge/TailwindCss-3.1-informational" alt="stack Tailwind">
+	<a href="https://opensource.org/licenses/GPL-3.0">
+		<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GPLv3 License">
+	</a>
+</p>
+
+<br>
+
 
 ## *** TEM PR PARA ACEITAR!!! ***
 
@@ -71,4 +92,19 @@ https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
 
 ---
 ### CONSTRIBUIÇÕES
- - Checkout by @fabianosfbr
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/fabianosfbr">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/4691302?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Fabiano Fernandes</b></sub></a></td>
+    <td align="center"><a href="https://github.com/RafaelBlum">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/41844692?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Rafael Blum</b></sub></a></td>   
+    <td align="center"><a href="https://github.com/wesleysouza-dev">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/52400075?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Wesley</b></sub></a></td>   
+    <td align="center"><a href="https://github.com/Deathpk">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/40901963?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Michel Versiani</b></sub></a></td>
+  </tr>
+</table>
