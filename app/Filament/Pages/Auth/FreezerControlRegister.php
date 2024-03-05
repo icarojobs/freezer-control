@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Pages\Auth;
 
 use App\Models\Customer;
+use Closure;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DomainException;
 use Filament\Forms\Components\DatePicker;
@@ -13,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Register;
+use Filament\Support\RawJs;
 use Override;
 
 class FreezerControlRegister extends Register
@@ -31,7 +33,11 @@ class FreezerControlRegister extends Register
                 TextInput::make('document')
                     ->label('CPF')
                     ->required()
-                    ->maxLength(15),
+                    ->mask(RawJs::make(<<<'JS'
+                        '999.999.999-99'
+                    JS
+                    ))
+                    ->rule('cpf_ou_cnpj'),
 
                 TextInput::make('email')
                     ->label('Email')
@@ -47,6 +53,15 @@ class FreezerControlRegister extends Register
 
                 DatePicker::make('birthdate')
                     ->label('Data de Nascimento')
+                    ->rules([
+                        function () {
+                            return function (string $attribute, $value, Closure $fail) {
+                                if (now()->parse($value)->age < 18) {
+                                    $fail('A data de nascimento deve ser maior que 18 anos.');
+                                }
+                            };
+                        }
+                    ])
                     ->required(),
             ]);
     }
@@ -59,9 +74,9 @@ class FreezerControlRegister extends Register
 
             $this->data = $this->form->getState();
 
-            if (! $this->checkIfCustomerHasMore18YearsOld()) {
-                throw new DomainException('Infelizmente, você não tem idade para se cadastrar no '.config('app.name'));
-            }
+//            if (! $this->checkIfCustomerHasMore18YearsOld()) {
+//                throw new DomainException('Infelizmente, você não tem idade para se cadastrar no '.config('app.name'));
+//            }
         } catch (TooManyRequestsException $exception) {
             Notification::make()
                 ->title(__('filament-panels::pages/auth/register.notifications.throttled.title', [
@@ -99,9 +114,9 @@ class FreezerControlRegister extends Register
         return null;
     }
 
-    private function checkIfCustomerHasMore18YearsOld(): bool
-    {
-        return now()->parse($this->data['birthdate'])->age >= 18;
-        //return (now()->diffInDays($this->data['birthdate']) / 365) >= 18;
-    }
+//    private function checkIfCustomerHasMore18YearsOld(): bool
+//    {
+//        return now()->parse($this->data['birthdate'])->age >= 18;
+//        //return (now()->diffInDays($this->data['birthdate']) / 365) >= 18;
+//    }
 }
