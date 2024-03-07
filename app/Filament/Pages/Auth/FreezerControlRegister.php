@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Filament\Pages\Auth;
 
 use App\Models\Customer;
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
 use Closure;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DomainException;
@@ -15,6 +17,7 @@ use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Register;
 use Filament\Support\RawJs;
+use Illuminate\Support\Str;
 use Override;
 
 class FreezerControlRegister extends Register
@@ -33,6 +36,7 @@ class FreezerControlRegister extends Register
                 TextInput::make('document')
                     ->label('CPF')
                     ->required()
+                    ->unique()
                     ->mask(RawJs::make(<<<'JS'
                         '999.999.999-99'
                     JS
@@ -69,14 +73,38 @@ class FreezerControlRegister extends Register
     #[Override]
     public function register(): ?RegistrationResponse
     {
+        $this->rateLimit(2);
+
+        $this->data = $this->form->getState();
+
         try {
-            $this->rateLimit(2);
+            $adapter = new AsaasConnector();
+            $gateway = new Gateway($adapter);
 
-            $this->data = $this->form->getState();
+            $data = [
+                'name' => $this->data['name'],
+                'cpfCnpj' => sanitize($this->data['document']),
+                'email' => $this->data['email'],
+                'mobilePhone' => sanitize($this->data['mobile']),
+            ];
 
-//            if (! $this->checkIfCustomerHasMore18YearsOld()) {
-//                throw new DomainException('Infelizmente, você não tem idade para se cadastrar no '.config('app.name'));
-//            }
+            $customer = $gateway->customer()->create($data);
+
+            if (!isset($customer['id'])) {
+                $message = str('')
+                    ->append("Não foi possível criar o ID do Cliente: ")
+                    ->append($customers['errors'][0]['description'] ?? 'Erro inesperado')
+                    ->toString();
+
+                Notification::make('register_error')
+                    ->title('Erro ao criar cliente')
+                    ->body($message)
+                    ->danger()
+                    ->persistent()
+                    ->send();
+
+                return null;
+            }
         } catch (TooManyRequestsException $exception) {
             Notification::make()
                 ->title(__('filament-panels::pages/auth/register.notifications.throttled.title', [
@@ -91,7 +119,7 @@ class FreezerControlRegister extends Register
                 ->send();
 
             return null;
-        } catch (DomainException $domainException) {
+        } catch (\DomainException|\Exception $domainException) {
             Notification::make()
                 ->title('Erro ao realizar cadastro')
                 ->body($domainException->getMessage())
@@ -101,6 +129,7 @@ class FreezerControlRegister extends Register
             return null;
         }
 
+        $this->data['customer_id'] = $customer['id'];
         Customer::create($this->data);
 
         Notification::make()
@@ -113,10 +142,4 @@ class FreezerControlRegister extends Register
 
         return null;
     }
-
-//    private function checkIfCustomerHasMore18YearsOld(): bool
-//    {
-//        return now()->parse($this->data['birthdate'])->age >= 18;
-//        //return (now()->diffInDays($this->data['birthdate']) / 365) >= 18;
-//    }
 }
