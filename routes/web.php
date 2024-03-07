@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Console\Commands\NormalizeCustomerIdCommand;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,9 +15,7 @@ Route::get('/qr-code', App\Http\Controllers\Frontend\QrCodeController::class)
     ->name('frontend.qr-code');
 
 Route::get('/teste', function () {
-    $teste = 123;
-
-    dd($teste);
+    (new NormalizeCustomerIdCommand())->handle();
 });
 
 Route::fallback(function () {
