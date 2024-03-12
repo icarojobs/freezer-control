@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Enums\PaymentTypeEnum;
 use Filament\Tables;
 use App\Models\Order;
 use App\Models\Product;
@@ -221,8 +222,14 @@ class OrderResource extends Resource
                 ->schema([
                     Section::make()
                         ->schema([
-                            Placeholder::make('Formulário de pagamento')
-                                ->content('Under construction'),
+                            Select::make('billingType')
+                                ->label('Forma de Pagamento')
+                                ->options(PaymentTypeEnum::class)
+                                ->preload()
+                                ->searchable(),
+
+//                            Placeholder::make('Formulário de pagamento')
+//                                ->content(view('checkout.payment')),
                         ])
                         ->columnSpan(2),
                     Section::make()

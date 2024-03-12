@@ -47,6 +47,7 @@ class CreateOrder extends CreateRecord
             ->schema([
                 Wizard::make($this->getSteps())
                     ->startOnStep($this->getStartStep())
+                    //->startOnStep(3) // todo: remover após implementação do checkout
                     ->cancelAction($this->getCancelFormAction())
                     ->submitAction($this->getSubmitFormAction())
                     ->skippable($this->hasSkippableSteps())
@@ -125,5 +126,40 @@ class CreateOrder extends CreateRecord
                         ->schema(OrderResource::getPaymentFormDetails()),
                 ]),
         ];
+    }
+
+    protected function beforeCreate(): void
+    {
+        dd($this->data);
+
+        // 1. Prepara os dados necessários para a cobrança
+        $data = [
+            "billingType" => "PIX", // "CREDIT_CARD", "PIX", "BOLETO"
+            "discount" => [
+                "value" => 10,
+                "dueDateLimitDays" => 0
+            ],
+            "interest" => [
+                "value" => 2
+            ],
+            "fine" => [
+                "value" => 1
+            ],
+            "customer" => "cus_000005891625",
+            "dueDate" => now()->format('Y-m-d'),
+            "value" => 100,
+            "description" => "Pedido 056984",
+            "daysAfterDueDateToCancellationRegistration" => 1,
+            "externalReference" => "056984",
+            "postalService" => false,
+        ];
+
+
+        // 2. Realiza a cobrança
+        $payment = $gateway->payment()->create($data);
+
+        // 3.1 Se sucesso, armazena as informações necessárias em 'order_transactions'
+
+        // 3.2 Se erro, exibir notoficação em tela.
     }
 }
