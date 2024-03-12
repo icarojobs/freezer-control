@@ -7,10 +7,13 @@ namespace App\Filament\Resources;
 use Filament\Tables;
 use App\Models\Order;
 use App\Models\Product;
+use Filament\Forms\Get;
 use App\Models\Customer;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
+use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -22,14 +25,11 @@ use Filament\Infolists\Components\Group;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
-use LaraZeus\Quantity\Components\Quantity;
 use App\Filament\Forms\Components\PtbrMoney;
 use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\OrderResource\Pages;
-use Carbon\Carbon as CarbonCarbon;
-use Filament\Forms\Get;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Support\Carbon;
+
 
 class OrderResource extends Resource
 {
@@ -130,10 +130,10 @@ class OrderResource extends Resource
 
                                     if ($customer->birthdate->age < 18) {
                                         Notification::make()
-                                        ->danger()
-                                        ->title('Pedidos só podem ser realizados para clientes maiores de 18 anos.')
-                                        ->duration(8000)
-                                        ->send();
+                                            ->danger()
+                                            ->title('Pedidos só podem ser realizados para clientes maiores de 18 anos.')
+                                            ->duration(8000)
+                                            ->send();
 
                                         $set('customer_id', null);
                                     }
@@ -238,7 +238,7 @@ class OrderResource extends Resource
     public static function getItemsRepeater(): Repeater
     {
         $product = Product::all();
-        
+
         return Repeater::make('items')
             ->schema([
                 Select::make('product_id')
@@ -258,8 +258,11 @@ class OrderResource extends Resource
                     ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                     ->columnSpan(3),
 
-                Quantity::make('quantity')
+
+
+                TextInput::make('quantity')
                     ->label('Quantidade')
+                    ->numeric()
                     ->reactive()
                     ->minValue(1)
                     ->hint(function ($get) {
