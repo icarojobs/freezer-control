@@ -26,16 +26,14 @@
 <br>
 
 
-## *** TEM PR PARA ACEITAR!!! ***
-
 ---
-### DEPENDENCIAS DO PROJETO
+### :package: dependências do projeto
  - Docker + docker-compose
  - curl
  - Make 4.x
 
 ---
-### CONFIGURANDO PROJETO EM UM NOVO AMBIENTE
+### :books: Configurando o projeto em um novo ambiente
 Simplesmente execute o comando `make` no seu terminal:
 ```bash
 make
@@ -43,14 +41,14 @@ make
 
 Agora, basta acessar a URL `http://laravel.test`
 
-*OBS.:* Verifique se no seu arquivo `hosts` existe o alias para `127.0.0.1 laravel.test`.
+> *OBS.:* Verifique se no seu arquivo `hosts` existe o alias para `127.0.0.1 laravel.test`.
 
 ---
-### LINK DO ANTEPROJETO
-[https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2](https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2)
+### :sparkles: Link do projeto anterior
+:wrench: [Versão antiga](https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2)
 
 ---
-### PENDENCIAS
+### :recycle: Pendências
  - Ao criar um novo customer, verificar se ele não está cadastrado no asaas. Se não tiver, cadastrar e adicionar o "customerId" no nosso banco.
    - Criar a coluna "customerId" na tabela customers
    - Sincronizar o cliente com o ASAAS no observer que já temos (em todos os métodos do CRUD)
@@ -64,7 +62,8 @@ Agora, basta acessar a URL `http://laravel.test`
  - Testes finais
  - Correr pro abraço!
 
-### INTEGRAÇÃO COM GATEWAY DE PAGAMENTOS
+### :bricks: Como integrar com gateway de pagamento
+
 Instanciar o conector (adapter) do gateway de pagamento que deseja
 ```bash
 $adapter = new App\Services\Gateway\Connectors\AsaasConnector();
@@ -145,18 +144,21 @@ $payments = $gateway->payment()->list(['customer' => 'cus_000005891625', 'status
 $customer = $gateway->payment()->delete('cus_000005891625');
 ```
 
-### PARTE 02
+### :soon: Parte 02
  - Criar APIs para aplicativo Mobile (sanctum).
 
-### PARTE 03
+### :soon: Parte 03
  - Criar Aplicativo Mobile (Administrador + Consumidor)
 
 https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
 
 ---
-### CONSTRIBUIÇÕES
+### :sparkles: Contribuidores
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/icarojobs">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/16943171?v" width="100px;" alt=""/>
+    <br /><sub><b>Icaro William</b></sub></a></td>
     <td align="center"><a href="https://github.com/fabianosfbr">
         <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/4691302?v=4" width="100px;" alt=""/>
     <br /><sub><b>Fabiano Fernandes</b></sub></a></td>
