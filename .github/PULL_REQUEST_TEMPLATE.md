@@ -22,6 +22,6 @@ Em caso afirmativo, descreva o impacto e o caminho de migração para aplicativo
 
 - [ ] Ao resolver um problema específico, ele é referenciado no título do PR (por exemplo, `fix: #xxx[,#xxx]`, onde "xxx" é o número do problema)
 - [ ] TO código proposto aqui foi coberto por testes.
-- [ ] Qualquer documentação necessária foi adicionada ou atualizada nos documentos ou explicada na descrição do PR.
+- [ ] Qualquer documentação necessária foi adicionada ou atualizada na documentação, ou explicada na descrição do PR.
 
 **Outras Informações:**
