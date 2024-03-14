@@ -234,8 +234,16 @@ class OrderResource extends Resource
                         ->columnSpan(2),
                     Section::make()
                         ->schema([
-                            Placeholder::make('Resumo da compra')
-                                ->content('Under construction'),
+                            Placeholder::make('sale_resume')
+                                ->label('Resumo do pedido')
+                                ->content(function ($get) {
+                                    return new HtmlString(
+                                        view(
+                                            view: 'orders.order-resume',
+                                            data: ['items' => $get('items')]
+                                        )->render()
+                                    );
+                                }),
                         ])
                         ->columnSpan(1)
                 ])
@@ -256,9 +264,10 @@ class OrderResource extends Resource
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, $set) {
-                        $price = Product::find($state)?->sale_price;
-                        $set('unit_price', $price ?? 0);
-                        $set('sub_total', $price ?? 0);
+                        $product = Product::find($state);
+                        $set('name', $product->name ?? '');
+                        $set('unit_price', $product->sale_price ?? 0);
+                        $set('sub_total', $product->sale_price ?? 0);
                         $set('quantity', 1);
                     })
                     ->distinct()
