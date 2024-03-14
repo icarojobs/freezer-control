@@ -16,6 +16,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravellegends/pt-br-validator": "^10.0",
+        "rupadana/filament-api-service": "^3.1",
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
