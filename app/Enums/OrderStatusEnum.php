@@ -6,8 +6,9 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasIcon;
 
-enum OrderStatusEnum: string implements HasLabel, HasColor
+enum OrderStatusEnum: string implements HasLabel, HasColor, HasIcon
 {
     case PENDING = 'PENDING';
     case PAID = 'PAID';
@@ -30,6 +31,16 @@ enum OrderStatusEnum: string implements HasLabel, HasColor
             self::PENDING => 'warning',
             self::PAID => 'success',
             self::FAILED => 'danger',
+        };
+    }
+
+    public function getIcon(): ?string
+    {
+        return match($this)
+        {
+            self::PENDING => 'heroicon-o-bell-alert',
+            self::PAID => 'heroicon-o-check-badge',
+            self::FAILED => 'heroicon-o-x-circle',
         };
     }
 }

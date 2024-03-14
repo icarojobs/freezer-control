@@ -171,6 +171,9 @@ https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
     <td align="center"><a href="https://github.com/Deathpk">
         <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/40901963?v=4" width="100px;" alt=""/>
     <br /><sub><b>Michel Versiani</b></sub></a></td>
+    <td align="center"><a href="https://github.com/TiagoLemosNeitzke">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/75308967?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Tiago Lemos Neitzke</b></sub></a></td>
   </tr>
 </table>
 
