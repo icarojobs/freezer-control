@@ -149,6 +149,7 @@ $customer = $gateway->payment()->delete('cus_000005891625');
 
 ### :soon: Parte 03
  - Criar Aplicativo Mobile (Administrador + Consumidor)
+ - API: [https://filamentphp.com/plugins/rupadana-api-service](https://filamentphp.com/plugins/rupadana-api-service)
 
 https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
 
