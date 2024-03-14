@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "calebporzio/sushi": "^2.5",
         "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "lara-zeus/quantity": "^1.0",
