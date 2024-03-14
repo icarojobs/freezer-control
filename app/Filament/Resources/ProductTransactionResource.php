@@ -67,6 +67,7 @@ class ProductTransactionResource extends Resource
 
                 Tables\Columns\TextColumn::make('type')
                     ->label('Tipo de Movimentação')
+                    ->badge()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('quantity')
