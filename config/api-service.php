@@ -9,7 +9,7 @@ return [
             'token' => 'User',
         ],
         'token' => [
-            'group' => 'User',
+            'group' => 'Funções Administrativas',
             'sort' => -1,
             'icon' => 'heroicon-o-key',
         ],
