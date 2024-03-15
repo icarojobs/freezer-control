@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Enums\PaymentTypeEnum;
 use Filament\Tables;
 use App\Models\Order;
 use App\Models\Product;
@@ -12,13 +11,16 @@ use Filament\Forms\Get;
 use App\Models\Customer;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Enums\PaymentTypeEnum;
 use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
 use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ViewField;
@@ -27,6 +29,7 @@ use Filament\Notifications\Notification;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
 use App\Filament\Forms\Components\PtbrMoney;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\OrderResource\Pages;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -222,14 +225,49 @@ class OrderResource extends Resource
                 ->schema([
                     Section::make()
                         ->schema([
-                            Select::make('billingType')
-                                ->label('Forma de Pagamento')
-                                ->options(PaymentTypeEnum::class)
-                                ->preload()
-                                ->searchable(),
 
-//                            Placeholder::make('Formulário de pagamento')
-//                                ->content(view('checkout.payment')),
+                            ToggleButtons::make('payment_method')
+                                ->label('Forma de Pagamento')
+                                ->inline()
+                                ->reactive()
+                                ->required()
+                                ->default(PaymentTypeEnum::CREDIT_CARD->value)
+                                ->options(PaymentTypeEnum::class)
+                                ->icons([
+                                    'PIX' => 'fab-pix',
+                                    'CREDIT_CARD' => 'heroicon-s-credit-card',
+                                ]),
+
+                            Fieldset::make('credit_card')
+                                ->label('Cartão de Crédito')
+                                ->visible(fn ($get): bool => $get('payment_method') === 'credit_card')
+                                ->schema([
+                                    TextInput::make('card_number')
+                                        ->label('Número do Cartão de Crédito')
+                                        ->required()
+                                        ->extraAlpineAttributes(['x-mask' => '9999-9999-9999-9999']),
+                                    TextInput::make('name_on_card')
+                                        ->label('Nome no Cartão')
+                                        ->required(),
+                                    TextInput::make('expiration_date')
+                                        ->label('Validade')
+                                        ->required()
+                                        ->extraAlpineAttributes(['x-mask' => '99/99']),
+                                    TextInput::make('cvv')
+                                        ->label('CVV')
+                                        ->required()
+                                        ->extraAlpineAttributes(['x-mask' => '999']),
+                                ]),
+
+                            Fieldset::make('pix')
+                                ->label('Pix')
+                                ->visible(fn ($get): bool => $get('payment_method') === 'pix')
+                                ->schema([
+                                    ViewField::make('pix_qr_code')
+                                        ->view('orders.qr-code-generate')
+                                        ->columnSpanFull(),
+
+                                ]),
                         ])
                         ->columnSpan(2),
                     Section::make()
@@ -249,6 +287,7 @@ class OrderResource extends Resource
                 ])
         ];
     }
+
 
     public static function getItemsRepeater(): Repeater
     {

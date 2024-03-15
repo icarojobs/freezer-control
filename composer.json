@@ -17,6 +17,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravellegends/pt-br-validator": "^10.0",
+        "owenvoke/blade-fontawesome": "^2.6",
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
