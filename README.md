@@ -66,7 +66,7 @@ Agora, basta acessar a URL `http://laravel.test`
 
 Instanciar o conector (adapter) do gateway de pagamento que deseja
 ```bash
-$adapter = new App\Services\PaymentGateway\Connectors\AsaasConnector;);
+$adapter = new App\Services\PaymentGateway\Connectors\AsaasConnector);
 ```
 
 Instanciar o cliente Gateway utilizando o adapter criado préviamente
