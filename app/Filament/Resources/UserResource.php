@@ -7,12 +7,16 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use App\Enums\PanelTypeEnum;
+use Illuminate\Database\Eloquent\Model;
 
 class UserResource extends Resource
 {
@@ -75,7 +79,41 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+
+                    Action::make('Editar tipo')
+                        ->icon('heroicon-o-pencil-square')
+                        ->form([
+                            Select::make('panel')
+                                ->options(PanelTypeEnum::class)
+                                ->default(function (User $user){
+                                    $panel = null;
+
+                                    if($user->panel->value === 'admin'){
+                                        $panel = PanelTypeEnum::ADMIN->value;
+                                    }else{
+                                        $panel = PanelTypeEnum::APP->value;
+                                    }
+
+                                    return $panel;
+                                })
+                        ])
+                        ->action(function (User $user, array $data): void
+                        {
+                            $user->panel = $data['panel'];
+                            $user->save();
+
+                            Notification::make()
+                                ->title('Alteração de status')
+                                ->body("O tipo do usuário " . $user->name . " foi modificado com sucesso!")
+                                ->icon('heroicon-o-shield-check')
+                                ->color('success')
+                                ->send();
+                        }),
+
+                ])
+                    ->tooltip("Menu")
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
