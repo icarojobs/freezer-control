@@ -144,11 +144,42 @@ $payments = $gateway->payment()->list(['customer' => 'cus_000005891625', 'status
 $customer = $gateway->payment()->delete('cus_000005891625');
 ```
 
+### CRIAÇÃO DE ROTAS API
+Estamos utilizando um plugin chamado `API Service`, encontrando no link: [https://filamentphp.com/plugins/rupadana-api-service](https://filamentphp.com/plugins/rupadana-api-service)
+Esse pacote também depende do plugin `Filament Shield`, encontrado no link [https://filamentphp.com/plugins/bezhansalleh-shield#installation](https://filamentphp.com/plugins/bezhansalleh-shield#installation)
+```bash
+sail art make:filament-api-service BlaBlaBlaResource
+```
+
+Estrutura de Rotas Necessárias:
+```
+// ---------------- PAINEL ADMIN --------------------------
+// Cadastro de usuário (sem autenticação)
+// Login de usuário (sem autenticação)
+// Informações de dashboard - mais informações do que no painel /app (logado)
+// Atualização cadastral de clientes [customer] (nome, email [caso não exista], celular
+//  - Já atualizar o email dele também ta tabela users (caso aplicável)
+
+// Inventário (logado)
+// Venda (venda)
+
+
+// ---------------- PAINEL APP --------------------------
+// Cadastro de usuário (sem autenticação)
+// Login de usuário (sem autenticação)
+// Informações de dashboard (logado)
+// Atualização cadastral [customer] (nome, email [caso não exista], celular
+//  - Já atualizar o email dele também ta tabela users (caso aplicável)
+
+```
+
+---
 ### :soon: Parte 02
  - Criar APIs para aplicativo Mobile (sanctum).
 
 ### :soon: Parte 03
  - Criar Aplicativo Mobile (Administrador + Consumidor)
+ - API: [https://filamentphp.com/plugins/rupadana-api-service](https://filamentphp.com/plugins/rupadana-api-service)
 
 https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
 
