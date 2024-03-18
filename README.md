@@ -39,6 +39,16 @@ Simplesmente execute o comando `make` no seu terminal:
 make
 ```
 
+### :books: Como rodar o projeto em novo ambiente `SEM` o `make`
+```comandos
+# Depois que você realizar o clone faça os seguintes comandos
+    php artisan storage:link
+    php artisan migrate:fresh --seed
+    php artisan shield:instal
+```
+> Usuário de acesso `admin@admin.com` e senha `password`
+
+
 Agora, basta acessar a URL `http://laravel.test`
 
 > *OBS.:* Verifique se no seu arquivo `hosts` existe o alias para `127.0.0.1 laravel.test`.
@@ -147,6 +157,7 @@ $customer = $gateway->payment()->delete('cus_000005891625');
 ### CRIAÇÃO DE ROTAS API
 Estamos utilizando um plugin chamado `API Service`, encontrando no link: [https://filamentphp.com/plugins/rupadana-api-service](https://filamentphp.com/plugins/rupadana-api-service)
 Esse pacote também depende do plugin `Filament Shield`, encontrado no link [https://filamentphp.com/plugins/bezhansalleh-shield#installation](https://filamentphp.com/plugins/bezhansalleh-shield#installation)
+
 ```bash
 sail art make:filament-api-service BlaBlaBlaResource
 ```
