@@ -62,6 +62,9 @@ class OrderResource extends Resource
                 return $query->orderBy('created_at', 'desc');
             })
             ->columns([
+                Tables\Columns\TextColumn::make('transaction.charge_id')
+                    ->label('ASAAS ID'),
+
                 Tables\Columns\TextColumn::make('customer.name')
                     ->label('Nome do cliente')
                     ->description(function (Order $record) {
