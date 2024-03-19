@@ -33,6 +33,10 @@ class CustomerResource extends Resource
 //                    ->relationship('user', 'name')
 //                    ->required(),
 
+                Forms\Components\TextInput::make('customer_id')
+                    ->label('ASAAS ID')
+                    ->disabled(),
+
                 Forms\Components\TextInput::make('name')
                     ->label('Nome Completo')
                     ->required()
@@ -63,6 +67,10 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('customer_id')
+                    ->label('ASAAS ID')
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Usuário')
                     ->searchable()
