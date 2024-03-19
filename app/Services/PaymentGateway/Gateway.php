@@ -6,6 +6,7 @@ namespace App\Services\PaymentGateway;
 
 use App\Services\PaymentGateway\Connectors\Asaas\Customer;
 use App\Services\PaymentGateway\Connectors\Asaas\Payment;
+use App\Services\PaymentGateway\Connectors\Asaas\WebHook;
 use App\Services\PaymentGateway\Contracts\AdapterInterface;
 
 class Gateway
@@ -24,5 +25,10 @@ class Gateway
     public function payment(): Payment
     {
         return new Payment($this->adapter);
+    }
+
+    public function webhook(): WebHook
+    {
+        return new WebHook($this->adapter);
     }
 }

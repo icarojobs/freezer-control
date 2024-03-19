@@ -6,11 +6,13 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasIcon;
 
-enum PaymentTypeEnum: string implements HasLabel, HasColor
+enum PaymentTypeEnum: string implements HasLabel, HasColor, HasIcon
 {
-    case PIX = 'PIX';
-    case CREDIT_CARD = 'CREDIT_CARD';
+    case CREDIT_CARD = 'credit_card';
+    case PIX = 'pix';
+
 
     public function getColor(): string|array|null
     {
@@ -25,6 +27,15 @@ enum PaymentTypeEnum: string implements HasLabel, HasColor
         return match ($this) {
             self::PIX => 'Pix',
             self::CREDIT_CARD => 'Cartão de Crédito',
+        };
+    }
+
+    public function getIcon(): ?string
+    {
+        return match($this)
+        {
+            self::PIX => 'fab-pix',
+            self::CREDIT_CARD => 'heroicon-s-credit-card',
         };
     }
 }
