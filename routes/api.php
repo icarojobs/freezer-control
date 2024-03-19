@@ -11,4 +11,4 @@ use Illuminate\Support\Facades\Route;
 
 // [POST] https://freezercontrol.com.br/api/asaas/webhook
 // [POST] http://laravel.test/api/asaas/webhook
-//Route::post('/asaas/webhook', AsaasWehookController::class);
+//Route::post('/asaas/webhook', AsaasWehookController::class); // sempre retorno HTTP 200,
