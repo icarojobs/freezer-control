@@ -12,15 +12,8 @@ class AsaasWebhookController extends Controller
 
     public function __invoke(Request $request)
     {
-        $environment = app()->isLocal() ? 'sandbox' : 'production';
-        $token = config("asaas.{$environment}.webhook");
-
-        $isValid = $request->header('asaas-access-token') === $token;
-
-        if (!$isValid) return response('Unauthorized', 401);
 
         $data = $request->all();
-
 
         //Tio, para garantir a atomiciade da operação, se for o caso.
         DB::beginTransaction();

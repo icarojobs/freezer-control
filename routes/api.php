@@ -19,4 +19,4 @@ use App\Http\Controllers\AsaasWebhookController;
 // ficando dessa maneira: http://laravel.test/api/api/asaas/webhook
 
 
-Route::post('/asaas/webhook', AsaasWebhookController::class);
+Route::post('/asaas/webhook', AsaasWebhookController::class)->middleware('asaas.webhook');
