@@ -22,6 +22,7 @@
         "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.12",
         "captainhook/captainhook": "^5.21",
         "fakerphp/faker": "^1.9.1",
         "larastan/larastan": "^2.0",

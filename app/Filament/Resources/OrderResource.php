@@ -371,8 +371,6 @@ class OrderResource extends Resource
             ->columnSpanFull();
     }
 
-
-
     public static function getSelectedCustomer(string|int $customerId): array
     {
 

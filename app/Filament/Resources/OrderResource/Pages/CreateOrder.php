@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
-use App\Models\OrderTransaction;
-use Filament\Forms\Form;
 use App\Enums\OrderStatusEnum;
-use Illuminate\Support\HtmlString;
+use App\Filament\Resources\OrderResource;
+use App\Models\OrderTransaction;
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Wizard;
-use Filament\Support\Exceptions\Halt;
-use Illuminate\Support\Facades\Blade;
 use Filament\Forms\Components\Section;
-use Illuminate\Database\Eloquent\Model;
-use App\Services\PaymentGateway\Gateway;
 use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use App\Filament\Resources\OrderResource;
+use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Concerns\HasWizard;
-use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Support\Exceptions\Halt;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateOrder extends CreateRecord
 {
@@ -47,7 +45,6 @@ class CreateOrder extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
-
 
 
     public function form(Form $form): Form
@@ -150,7 +147,6 @@ class CreateOrder extends CreateRecord
     }
 
 
-
     protected function beforeCreate(): void
     {
     }
@@ -246,5 +242,40 @@ class CreateOrder extends CreateRecord
     protected function getCreatedNotificationTitle(): ?string
     {
         return 'Venda realizada com sucesso!';
+    }
+
+    public function chargePix(): void
+    {
+        // 1. Gerar cobrança
+        $data = [
+            "billingType" => "PIX",
+            "customer" => $this->data['customer_external_id'],
+            "dueDate" => now()->format('Y-m-d'),
+            "value" => $this->data['total'],
+            "description" => "Compra de bebidas realizada na " . config('app.name'),
+            "daysAfterDueDateToCancellationRegistration" => 1,
+        ];
+
+        $adapter = app(AsaasConnector::class);
+        $gateway = app(Gateway::class, ['adapter' => $adapter]);
+
+        $payment = $gateway->payment()->create($data);
+
+        /*
+        $payment['id'],
+        $payment['status'],
+        $this->qrCodeData = [
+            "success" => true,
+            "encodedImage" => "iVBORw0KGgoAAAANSUhEUgAAAYsAAAGLCAIAAAC5gin...",
+            "payload" => "00020101021226820014br...",
+            "expirationDate" => "2024-03-21 23:59:59",
+        ];
+        */
+
+        // 2. Obter QRCode + COPIA/COLA de pagamento.
+        // todo: Mandar essas informações para o frontend, na view 'qr-code-generate.blade.php'
+//        $qrCodeData = $gateway->payment()->getPixQrCode($payment['id']);
+//        $paymentId =  $payment['id'];
+//        $paymentStatus = $payment['status'];
     }
 }
