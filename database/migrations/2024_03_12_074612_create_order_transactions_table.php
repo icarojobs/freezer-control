@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use OrderTransactionsEnum;
+use OrderTransactionsStatusEnum;
 
 return new class extends Migration
 {
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->float('value', 10);
             $table->date('due_date');
             $table->string('description')->nullable();
-            $table->string('status')->default(OrderTransactionsEnum::PENDING);
+            $table->string('status')->default(OrderTransactionsStatusEnum::PENDING);
 
             $table->string('pix_url')->nullable();
             $table->longText('pix_qrcode')->nullable();
