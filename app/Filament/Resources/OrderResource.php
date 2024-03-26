@@ -34,6 +34,7 @@ use Filament\Forms\Components\Actions\Action;
 use App\Filament\Resources\OrderResource\Pages;
 use Filament\Forms\Components\Hidden;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Livewire\Attributes\On;
 
 
 class OrderResource extends Resource

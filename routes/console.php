@@ -12,34 +12,6 @@ Artisan::command('play', function () {
 
     $gateway = new Gateway($adapter);
 
-    // Insere um novo cliente
-    $customer = $gateway->customer()->create([
-        'name' => 'Fabiano Fernandes',
-        'cpfCnpj' => '21115873709',
-        'email' => 'fabianofernandes@test.com.br',
-        'mobilePhone' => '16992222222',
-    ]);
-
-    dd($customer);
-    // Atualizar um cliente
-    $customer = $gateway->customer()->update('cus_000005892683', [
-        'name' => 'Tio Jobs',
-        'cpfCnpj' => '21115873709',
-        'email' => 'tiojobs@test.com.br',
-        'mobilePhone' => '16992222222',
-    ]);
-
-    dd($customer);
-
-    // Retorna a listagem de clientes
-    $customers = $gateway->customer()->list();
-
-    // Retorna clientes utilizando filtros
-    $customers = $gateway->customer()->list(['cpfCnpj' => '21115873709']);
-
-    // Remove um cliente
-    $customer = $gateway->customer()->delete('cus_000005892683');
-
     // Criar uma nova cobrança
     $data = [
         "billingType" => "PIX", // "CREDIT_CARD", "PIX", "BOLETO
@@ -53,8 +25,8 @@ Artisan::command('play', function () {
         "fine" => [
             "value" => 1
         ],
-        "customer" => "cus_000005892683",
-        "dueDate" => "2024-02-29",
+        "customer" => "cus_000005908684",
+        "dueDate" => "2024-03-27",
         "value" => 100,
         "description" => "Pedido 056984",
         "daysAfterDueDateToCancellationRegistration" => 1,
@@ -63,6 +35,8 @@ Artisan::command('play', function () {
     ];
 
     $payment = $gateway->payment()->create($data);
+
+    dd($payment);
 
     // Retorna a listagem de cobranças
     $payments = $gateway->payment()->list(['customer' => 'cus_000005892683']);

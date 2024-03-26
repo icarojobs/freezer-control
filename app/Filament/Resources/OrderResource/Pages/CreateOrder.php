@@ -22,6 +22,7 @@ use Filament\Resources\Pages\Concerns\HasWizard;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Exceptions\Halt;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class CreateOrder extends CreateRecord
 {
@@ -246,8 +247,9 @@ class CreateOrder extends CreateRecord
 
     public function chargePix(): void
     {
+
         // 1. Gerar cobrança
-        $data = [
+      $data = [
             "billingType" => "PIX",
             "customer" => $this->data['customer_external_id'],
             "dueDate" => now()->format('Y-m-d'),
@@ -261,21 +263,37 @@ class CreateOrder extends CreateRecord
 
         $payment = $gateway->payment()->create($data);
 
+        if (!isset($payment['id'])) {
+            dd('Deu merda!!!', $payment);
+        }
+
+        $qrCodeData = $gateway->payment()->getPixQrCode($payment['id']);
+
+        session()->put('session_'.Auth::id(), [
+            'payment_id' => $payment['id'],
+            'payment_status' => $payment['status'],
+            'qrcode_image' => $qrCodeData['encodedImage'],
+            'qrcode_link' => $qrCodeData['payload'],
+        ]);
+    }
+
+    public function checkPayment(): void
+    {
+        // vai verificar o status do recebimento lá no asaas.
         /*
-        $payment['id'],
-        $payment['status'],
-        $this->qrCodeData = [
-            "success" => true,
-            "encodedImage" => "iVBORw0KGgoAAAANSUhEUgAAAYsAAAGLCAIAAAC5gin...",
-            "payload" => "00020101021226820014br...",
-            "expirationDate" => "2024-03-21 23:59:59",
-        ];
+        ficar consultando a cobrança (cada 3s) e, caso o status seja !== "PENDENTE", redirecionar para sucesso.
         */
 
-        // 2. Obter QRCode + COPIA/COLA de pagamento.
-        // todo: Mandar essas informações para o frontend, na view 'qr-code-generate.blade.php'
-//        $qrCodeData = $gateway->payment()->getPixQrCode($payment['id']);
-//        $paymentId =  $payment['id'];
-//        $paymentStatus = $payment['status'];
+        Notification::make()
+            ->title('Por favor, aguarde...')
+            ->body('Buscando informações no gateway')
+            ->info()
+            ->send();
+    }
+
+    public function mount(): void
+    {
+        parent::mount();
+        session()->forget('session_'.Auth::id());
     }
 }
