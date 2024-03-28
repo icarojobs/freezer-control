@@ -22,6 +22,11 @@ class Payment implements PaymentInterface
         return $this->http->get('/payments' . $this->filter($filters));
     }
 
+    public function get(int|string $id): array
+    {
+        return $this->http->get("/payments/{$id}");
+    }
+
     public function create(array $data): array
     {
         return $this->http->post('/payments', $data);

@@ -9,18 +9,19 @@ use Filament\Support\Contracts\HasLabel;
 enum OrderTransactionsStatusEnum: string implements HasLabel
 {
     case PENDING = 'PENDING';
+    case RECEIVED = 'RECEIVED';
     case RECE = 'RECE';
-    case CONFIRMED = 'CONFIRMED'; 
-    case OVERDUE = 'OVERDUE'; 
+    case CONFIRMED = 'CONFIRMED';
+    case OVERDUE = 'OVERDUE';
     case REFUNDED = 'REFUNDED';
-    case RECEIVED_IN_CASH = 'RECEIVED_IN_CASH'; 
-    case REFUND_REQUESTED = 'REFUND_REQUESTED'; 
-    case REFUND_IN_PROGRESS = 'REFUND_IN_PROGRESS'; 
-    case CHARGEBACK_REQUESTED = 'CHARGEBACK_REQUESTED'; 
-    case CHARGEBACK_DISPUTE = 'CHARGEBACK_DISPUTE'; 
-    case AWAITING_CHARGEBACK_REVERSAL = 'AWAITING_CHARGEBACK_REVERSAL'; 
-    case DUNNING_REQUESTED = 'DUNNING_REQUESTED'; 
-    case DUNNING_RECEIVED = 'DUNNING_RECEIVED'; 
+    case RECEIVED_IN_CASH = 'RECEIVED_IN_CASH';
+    case REFUND_REQUESTED = 'REFUND_REQUESTED';
+    case REFUND_IN_PROGRESS = 'REFUND_IN_PROGRESS';
+    case CHARGEBACK_REQUESTED = 'CHARGEBACK_REQUESTED';
+    case CHARGEBACK_DISPUTE = 'CHARGEBACK_DISPUTE';
+    case AWAITING_CHARGEBACK_REVERSAL = 'AWAITING_CHARGEBACK_REVERSAL';
+    case DUNNING_REQUESTED = 'DUNNING_REQUESTED';
+    case DUNNING_RECEIVED = 'DUNNING_RECEIVED';
     case AWAITING_RISK_ANALYSIS = 'AWAITING_RISK_ANALYSIS';
 
 
@@ -28,6 +29,7 @@ enum OrderTransactionsStatusEnum: string implements HasLabel
     {
         return match ($this) {
             self::PENDING => 'Pendente',
+            self::RECEIVED => 'Recebido',
             self::RECE => 'Receber',
             self::CONFIRMED => 'Confirmado',
             self::OVERDUE => 'Atrasada',
@@ -42,5 +44,17 @@ enum OrderTransactionsStatusEnum: string implements HasLabel
             self::DUNNING_RECEIVED => 'Cobrança Recebida',
             self::AWAITING_RISK_ANALYSIS => 'Aguardando Análise de Risco',
         };
+    }
+
+    public static function values(): array
+    {
+        $values = [];
+        $cases = self::cases();
+
+        foreach ($cases as $case) {
+            $values[] = $case->value;
+        }
+
+        return $values;
     }
 }

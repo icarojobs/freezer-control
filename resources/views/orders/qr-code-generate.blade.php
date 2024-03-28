@@ -1,5 +1,5 @@
 @if(session()->has('session_' . \Auth::id()))
-    <div class="flex justify-center" wire:poll.3000ms="checkPayment">
+    <div class="flex justify-center" wire:poll.10000ms="checkPayment">
 @else
     <div class="flex justify-center">
 @endif

@@ -6,6 +6,7 @@ namespace App\Filament\Resources\OrderResource\Pages;
 
 use App\Enums\OrderStatusEnum;
 use App\Filament\Resources\OrderResource;
+use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Services\PaymentGateway\Connectors\AsaasConnector;
 use App\Services\PaymentGateway\Gateway;
@@ -22,7 +23,9 @@ use Filament\Resources\Pages\Concerns\HasWizard;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Exceptions\Halt;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CreateOrder extends CreateRecord
 {
@@ -277,18 +280,61 @@ class CreateOrder extends CreateRecord
         ]);
     }
 
-    public function checkPayment(): void
+    public function checkPayment()
     {
-        // vai verificar o status do recebimento lá no asaas.
-        /*
-        ficar consultando a cobrança (cada 3s) e, caso o status seja !== "PENDENTE", redirecionar para sucesso.
-        */
+        $chargeId = session('session_'.Auth::id())['payment_id'];
 
-        Notification::make()
-            ->title('Por favor, aguarde...')
-            ->body('Buscando informações no gateway')
-            ->info()
-            ->send();
+        $adapter = app(AsaasConnector::class);
+        $gateway = new Gateway($adapter);
+
+        $payment = $gateway->payment()->get($chargeId);
+
+        if (
+            in_array(
+                $payment['status'],
+                collect(\App\Enums\OrderTransactionsStatusEnum::values())->only([1, 3])->toArray()
+            )
+        ) {
+            $this->storeCharge();
+
+            Notification::make('charge_success')
+                ->title('Cobrança recebida!')
+                ->body("A cobrança {$chargeId} foi recebida com sucesso!")
+                ->success()
+                ->persistent()
+                ->send();
+
+            return to_route('filament.admin.resources.orders.index');
+        }
+    }
+
+    private function storeCharge(): void
+    {
+        DB::transaction(function () {
+            // todo: Adicionar os respectivos valores
+            $order = Order::create([
+                "customer_id" => "",
+                "items" => "",
+                "total" => "",
+                "status" => "",
+            ]);
+
+            // todo: Adicionar os respectivos valores
+            OrderTransaction::create([
+                "order_id" => $order->id,
+                "billing_type" => "",
+                "charge_id" => "",
+                "value" => "",
+                "due_date" => "",
+                "description" => "",
+                "status" => "",
+                "pix_url" => "",
+                "pix_qrcode" => "",
+                "installment_count" => "",
+                "installment_value" => "",
+                "remote_ip" => "",
+            ]);
+        }, 3);
     }
 
     public function mount(): void
