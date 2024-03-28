@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+use App\Enums\Traits\Valuable;
 use Filament\Support\Contracts\HasLabel;
 
 enum OrderTransactionsStatusEnum: string implements HasLabel
 {
+    use Valuable;
+
     case PENDING = 'PENDING';
     case RECEIVED = 'RECEIVED';
     case RECE = 'RECE';
@@ -44,17 +47,5 @@ enum OrderTransactionsStatusEnum: string implements HasLabel
             self::DUNNING_RECEIVED => 'Cobrança Recebida',
             self::AWAITING_RISK_ANALYSIS => 'Aguardando Análise de Risco',
         };
-    }
-
-    public static function values(): array
-    {
-        $values = [];
-        $cases = self::cases();
-
-        foreach ($cases as $case) {
-            $values[] = $case->value;
-        }
-
-        return $values;
     }
 }
