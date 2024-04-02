@@ -13,7 +13,6 @@ enum OrderTransactionsStatusEnum: string implements HasLabel
 
     case PENDING = 'PENDING';
     case RECEIVED = 'RECEIVED';
-    case RECE = 'RECE';
     case CONFIRMED = 'CONFIRMED';
     case OVERDUE = 'OVERDUE';
     case REFUNDED = 'REFUNDED';

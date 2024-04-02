@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
+use App\Enums\BillingTypeEnum;
 use App\Enums\OrderStatusEnum;
+use App\Enums\OrderTransactionsStatusEnum;
 use App\Filament\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\OrderTransaction;
@@ -32,6 +34,10 @@ class CreateOrder extends CreateRecord
     use HasWizard;
 
     protected static string $resource = OrderResource::class;
+
+    public int $chargeTries = 0;
+
+    public string $paymentStatus = '';
 
 
     protected function mutateFormDataBeforeCreate(array $data): array
@@ -148,11 +154,6 @@ class CreateOrder extends CreateRecord
                         ->schema(OrderResource::getPaymentFormDetails()),
                 ]),
         ];
-    }
-
-
-    protected function beforeCreate(): void
-    {
     }
 
     protected function handleRecordCreation(array $data): Model
@@ -289,10 +290,21 @@ class CreateOrder extends CreateRecord
 
         $payment = $gateway->payment()->get($chargeId);
 
+        $this->setStatus($payment);
+
+        if (app()->isLocal()) {
+            $this->chargeTries += 1;
+
+            if ($this->chargeTries == 2) {
+                $this->paymentStatus = OrderTransactionsStatusEnum::RECEIVED->value;
+            }
+        }
+
+
         if (
             in_array(
-                $payment['status'],
-                collect(\App\Enums\OrderTransactionsStatusEnum::values())->only([1, 3])->toArray()
+                $this->paymentStatus,
+                collect(\App\Enums\OrderTransactionsStatusEnum::values())->only([1, 2])->toArray()
             )
         ) {
             $this->storeCharge();
@@ -308,31 +320,36 @@ class CreateOrder extends CreateRecord
         }
     }
 
+    private function setStatus(array $payment = []): void
+    {
+        if (isset($payment['status'])) {
+            $this->paymentStatus = $payment['status'];
+        }
+    }
+
     private function storeCharge(): void
     {
-        DB::transaction(function () {
-            // todo: Adicionar os respectivos valores
+        $sessionData = session('session_'.Auth::id());
+
+        DB::transaction(function () use ($sessionData) {
             $order = Order::create([
-                "customer_id" => "",
-                "items" => "",
-                "total" => "",
-                "status" => "",
+                "customer_id" => $this->data['customer_id'],
+                "items" => $this->data['items'],
+                "total" => $this->data['total'],
+                "status" => OrderStatusEnum::PAID,
             ]);
 
-            // todo: Adicionar os respectivos valores
             OrderTransaction::create([
                 "order_id" => $order->id,
-                "billing_type" => "",
-                "charge_id" => "",
-                "value" => "",
-                "due_date" => "",
-                "description" => "",
-                "status" => "",
-                "pix_url" => "",
-                "pix_qrcode" => "",
-                "installment_count" => "",
-                "installment_value" => "",
-                "remote_ip" => "",
+                "billing_type" => BillingTypeEnum::PIX,
+                "charge_id" => $sessionData['payment_id'],
+                "value" => $this->data['total'],
+                "due_date" => now(),
+                "description" => "Venda ref. ao pedido {$order->id} para o cliente {$this->data['customer_id']}",
+                "status" => $this->paymentStatus,
+                "pix_url" => $sessionData['qrcode_link'],
+                "pix_qrcode" => $sessionData['qrcode_image'],
+                "remote_ip" => request()->ip(),
             ]);
         }, 3);
     }
