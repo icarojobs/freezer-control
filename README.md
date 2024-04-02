@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="#"  target="_blank" title="Sistema de gestão de freezers">
-		<img src="/public/images/brands/logo-v-1024.png" alt="Sistema de gestão de freezers" width="340px">
+		<img src="public/images/brands/logo-v-1024.png" alt="Sistema de gestão de freezers" width="340px">
 	</a>
 </p>
 
@@ -19,18 +19,55 @@
 	</a>
 </p>
 
-<h4 align="center"> 
-	🚧  Projeto 🚀 em construção...  🚧
-</h4>
+
+### :books: Contextualização e objetivo do Projeto
+
+O projeto intitulado `Freezer Control` foi concebido para abordar um problema particular enfrentado por uma empresa 
+de bebidas em pequena escala durante a realização de seus eventos. Nestas ocasiões, um freezer é disponibilizado para permitir 
+que todos os participantes adquiram suas bebidas. Contudo, o procedimento atual de registro de cada venda é conduzido manualmente, 
+cada cliente é incumbido de registrar cada item retirado em um caderno posicionado ao lado do freezer. Esta abordagem 
+possui várias falhas, incluindo o esquecimento de fazer as anotações, a perda da caneta de anotação e registros efetuados 
+em locais inadequados.
+<br/>
+O projeto `Freezer Control` visa resolver essas questões de maneira prática e eficaz, através da `implementação de um sistema 
+digital que revoluciona a forma como as bebidas são adquiridas`. Este inovador sistema, munido das mais recentes tecnologias 
+do mercado, fornecerá uma interface rápida para a aquisição de bebidas, resultando em uma operação comercial mais segura 
+e lucrativa para os proprietários da empresa. Além disso, o sistema propiciará o `controle de estoque`, a `gestão de usuários` 
+e o `monitoramento de vendas`.
+
+
+<p align="center" style="margin-top: 40px">
+	<a href="#"  target="_blank" title="Sistema de gestão de freezers">
+		<img src="public/images/info_images/infografic.png" alt="info grafic" width="90%">
+	</a>
+</p>
+
+### :books: `DER` Diagramação base do projeto
+> As classes do sistema estão claramente definidas em um diagrama de classes.
+
+<p align="center" style="margin-top: 30px">
+	<a href="#"  target="_blank" title="Sistema de gestão de freezers">
+		<img src="public/images/info_images/diagram-der.png" alt="info grafic" width="90%">
+	</a>
+</p
 
 <br>
 
 
 ---
-### :package: dependências do projeto
+### :package: Dependências do projeto
  - Docker + docker-compose
  - curl
  - Make 4.x
+ - filament-shield
+ - filament-api-service
+ - simplesoftwareio/simple-qrcode
+ - lara-zeus/quantity
+ - pt-br-validator
+ - blade-fontawesome
+ - laravel-debugbar
+ - captainhook/captainhook
+ - mockery/mockery
 
 ---
 ### :books: Configurando o projeto em um novo ambiente
@@ -47,6 +84,17 @@ make
     php artisan shield:instal
 ```
 > Usuário de acesso `admin@admin.com` e senha `password`
+
+
+### :books: Como contribuir para o projeto
+1. Faça o fork do projeto.
+2. Crie uma nova Branch com as suas alterações: `git checkout -b my-feature`
+3. Salve as alterações e crie uma mensagem de commit contando o que fez: `git commit -m ":sparkles: feat: my new feature`
+4. Envie suas alterações: `git push origin my-feature`
+
+> Caso tenha dúvidas, acesse o link do [vídeo do Tio Jobs](https://www.youtube.com/watch?v=8KsHhQ6GcBg&t=193s) de como 
+> contribuir em um projeto open source ou na [documentação do github](https://docs.github.com/pt/get-started/exploring-projects-on-github/contributing-to-a-project).
+
 
 
 Agora, basta acessar a URL `http://laravel.test`
@@ -216,6 +264,9 @@ https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
     <td align="center"><a href="https://github.com/TiagoLemosNeitzke">
         <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/75308967?v=4" width="100px;" alt=""/>
     <br /><sub><b>Tiago Lemos Neitzke</b></sub></a></td>
+    <td align="center"><a href="https://github.com/rodrigomedeirosbrazil">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/16216347?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Rodrigo Medeiros</b></sub></a></td>
   </tr>
 </table>
 
