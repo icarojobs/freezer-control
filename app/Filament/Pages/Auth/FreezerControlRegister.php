@@ -91,10 +91,29 @@ class FreezerControlRegister extends Register
             $customer = $gateway->customer()->create($data);
 
             if (!isset($customer['id'])) {
-                $message = str('')
-                    ->append("Não foi possível criar o ID do Cliente: ")
-                    ->append($customers['errors'][0]['description'] ?? 'Erro inesperado')
-                    ->toString();
+                // Checks if 'error' exists and if it is a string
+                if (isset($customer['error']) && is_string($customer['error'])) {
+                    // Removes extra whitespace and the prefix "HTTP request returned status code 400:"
+                    $jsonString = trim(substr($customer['error'], strpos($customer['error'], '{')));
+
+                    // Decode JSON string to an associative array
+                    $errorArray = json_decode($jsonString, true);
+
+                    // Checks whether JSON decoding occurred without errors
+                    if ($errorArray !== null && isset($errorArray['errors']) && is_array($errorArray['errors']) && !empty($errorArray['errors'])) {
+                        // Get the first error message
+                        $errorCode = $errorArray['errors'][0]['description'];
+                    } else {
+                        // Sif there are problems with decoding the JSON or the structure is not as expected, gives a standard error message
+                        $errorCode = 'Erro inesperado ao processar a resposta.';
+                    }
+                } else {
+                    // If 'error' is not defined or is not a string, gives a default error message
+                    $errorCode = 'Erro inesperado.';
+                }
+
+                // Builds the error message
+                $message = "Não foi possível criar o ID do Cliente: " . $errorCode;
 
                 Notification::make('register_error')
                     ->title('Erro ao criar cliente')
