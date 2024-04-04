@@ -59,15 +59,15 @@ e o `monitoramento de vendas`.
  - Docker + docker-compose
  - curl
  - Make 4.x
- - filament-shield
- - filament-api-service
- - simplesoftwareio/simple-qrcode
- - lara-zeus/quantity
- - pt-br-validator
- - blade-fontawesome
- - laravel-debugbar
- - captainhook/captainhook
- - mockery/mockery
+ - [filament-shield](https://github.com/bezhansalleh/filament-shield)
+ - [filament-api-service](https://github.com/rupadana/filament-api-service)
+ - [simplesoftwareio/simple-qrcode](https://github.com/simplesoftwareio/simple-qrcode)
+ - [lara-zeus/quantity](https://github.com/lara-zeus/quantity)
+ - [pt-br-validator](https://github.com/LaravelLegends/pt-br-validator)
+ - [blade-fontawesome](https://github.com/owenvoke/blade-fontawesome)
+ - [laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
+ - [captainhook/captainhook](https://github.com/captainhookphp/captainhook)
+ - [mockery/mockery](https://github.com/mockery/mockery)
 
 ---
 ### :books: Configurando o projeto em um novo ambiente
