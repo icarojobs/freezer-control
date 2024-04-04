@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use App\Enums\OrderTransactionsStatusEnum;
 use Illuminate\Database\Migrations\Migration;
+use App\Enums\OrderTransactionsStatusEnum;
+
 
 return new class extends Migration
 {
