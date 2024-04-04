@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilo para a div que contém o QR code */
+.qr-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o SVG dentro da div width="897px" height="452px"  */
+.qr-code-container svg {
+    width: 897px;
+    height: 452px;
+}
+
+#bg-cover{
+    @apply h-screen pb-14 bg-right bg-cover;
+    background-image: url('../images/bg.svg');
+}

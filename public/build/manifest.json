@@ -1,0 +1,16 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BgsvKsgT.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/images/bg.svg": {
+    "file": "assets/bg-m0BkaWdU.svg",
+    "src": "resources/images/bg.svg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-ewACTHFa.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
