@@ -107,6 +107,7 @@ Agora, basta acessar a URL `http://laravel.test`
 
 ---
 ### :recycle: Pendências
+ - Quando realizar uma venda, baixar itens vendidos do Estoque.
  - Dashboards, Relatórios, Gráficos, ETECETARASS!!!!
  - Criar painel APP com a tela de "Venda" (que pode chamar "Comprar")
  - Criar um globalScope/policies para que um cliente não tenha acesso a informações de outro.
