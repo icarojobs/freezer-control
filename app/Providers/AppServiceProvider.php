@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
@@ -23,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             LoginResponse::class,
             \App\Http\Responses\LoginResponse::class
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::HEAD_START,
+            fn (): View => view('partials.favicon'),
         );
     }
 

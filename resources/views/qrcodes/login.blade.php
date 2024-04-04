@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    {{--  --}}
+    @include('partials.favicon')
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--LOGO ICON -->
-    <link rel="icon" href="{{asset('images/brands/icon-340.png')}}">
     <title>{{env('app_name')}}</title>
     <meta name="description" content="Sistema de gestão de freezers - Revolucionando a forma como você compra bebidas">
 
