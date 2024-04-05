@@ -94,17 +94,14 @@ class FreezerControlRegister extends Register
                 // Checks if 'error' exists and if it is a string
                 if (isset($customer['error']) && is_string($customer['error'])) {
 
-                    $jsonData = json_decode($customer['error']);
+                    $errorArray = json_decode($customer['error'], true);
                     
-                    if ($jsonData === null && json_last_error() !== JSON_ERROR_NONE) {
+                    if ($errorArray === null && json_last_error() !== JSON_ERROR_NONE) {
                         $errorCode = $customer['error'];
                     } else {
                         // Removes extra whitespace and the prefix "HTTP request returned status code 400:"
                         $jsonString = trim(substr($customer['error'], strpos($customer['error'], '{')));
-
-                        // Decode JSON string to an associative array
-                        $errorArray = json_decode($jsonString, true);
-
+                      
                         // Checks whether JSON decoding occurred without errors
                         if ($errorArray !== null && isset($errorArray['errors']) && is_array($errorArray['errors']) && !empty($errorArray['errors'])) {
                             // Get the first error message
