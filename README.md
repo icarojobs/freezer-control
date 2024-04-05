@@ -118,12 +118,12 @@ Agora, basta acessar a URL `http://laravel.test`
 ### :bricks: Como integrar com gateway de pagamento
 
 Instanciar o conector (adapter) do gateway de pagamento que deseja
-```bash
-$adapter = new App\Services\PaymentGateway\Connectors\AsaasConnector);
+```php
+$adapter = new App\Services\PaymentGateway\Connectors\AsaasConnector();
 ```
 
 Instanciar o cliente Gateway utilizando o adapter criado préviamente
-```bash
+```php
 $gateway = new App\Services\PaymentGateway\Gateway($adapter);
 ```
 
