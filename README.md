@@ -47,7 +47,7 @@ e o `monitoramento de vendas`.
 
 <p align="center" style="margin-top: 30px">
 	<a href="#"  target="_blank" title="Sistema de gestão de freezers">
-		<img src="public/images/info_images/diagram-der.png" alt="info grafic" width="90%">
+		<img src="public/images/info_images/diagram-der.png" alt="diagram class" width="80%">
 	</a>
 </p
 
@@ -102,11 +102,11 @@ Agora, basta acessar a URL `http://laravel.test`
 > *OBS.:* Verifique se no seu arquivo `hosts` existe o alias para `127.0.0.1 laravel.test`.
 
 ---
-### :sparkles: Link do projeto anterior
-:wrench: [Versão antiga](https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2)
+### :sparkles: Tutorial de desenvolvimento no Canal do [Tio Jobs](https://www.youtube.com/@TioJobs)
+:ok_hand: [PlayList completa do projeto](https://www.youtube.com/watch?v=-Jf9hgt-Fj4&list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&index=2)
 
 ---
-### :recycle: Pendências
+### :construction: Pendências
  - Quando realizar uma venda, baixar itens vendidos do Estoque.
  - Dashboards, Relatórios, Gráficos, ETECETARASS!!!!
  - Criar painel APP com a tela de "Venda" (que pode chamar "Comprar")
@@ -115,7 +115,8 @@ Agora, basta acessar a URL `http://laravel.test`
  - Testes finais
  - Correr pro abraço!
 
-### :bricks: Como integrar com gateway de pagamento
+
+### :package: Como integrar com gateway de pagamento
 
 Instanciar o conector (adapter) do gateway de pagamento que deseja
 ```bash
@@ -256,12 +257,24 @@ https://youtu.be/-Jf9hgt-Fj4?list=PLbjKo3xK3gjcOz9Ocn3H6aTtTRBypCAaA&t=509
     <td align="center"><a href="https://github.com/Deathpk">
         <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/40901963?v=4" width="100px;" alt=""/>
     <br /><sub><b>Michel Versiani</b></sub></a></td>
+  </tr>
+
+  <tr>
     <td align="center"><a href="https://github.com/TiagoLemosNeitzke">
         <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/75308967?v=4" width="100px;" alt=""/>
     <br /><sub><b>Tiago Lemos Neitzke</b></sub></a></td>
     <td align="center"><a href="https://github.com/rodrigomedeirosbrazil">
         <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/16216347?v=4" width="100px;" alt=""/>
     <br /><sub><b>Rodrigo Medeiros</b></sub></a></td>
+    <td align="center"><a href="https://github.com/norbberto">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/38307358?v=4" width="100px;" alt=""/>
+    <br /><sub><b>NORBERTO CORDEIRO</b></sub></a></td>
+    <td align="center"><a href="https://github.com/arthurfabiano">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/6460621?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Arthur Fabiano</b></sub></a></td>
+    <td align="center"><a href="https://github.com/jeffersonsimaogoncalves">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/411493?v=4" width="100px;" alt=""/>
+    <br /><sub><b>Jèfferson Gonçalves</b></sub></a></td>
   </tr>
 </table>
 
