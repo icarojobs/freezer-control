@@ -34,11 +34,16 @@ class NewCustomerMail extends Mailable implements ShouldQueue
 
     public function content(): Content
     {
+        $logoPath = asset('images/brands/logo-v-720.png');
+        $mail = env('mail_from_address');
+
         return new Content(
             view: 'emails.new-customer',
             with: [
-                'customer' => $this->customer,
-                'secret' => $this->secret,
+                'customer'  => $this->customer,
+                'secret'    => $this->secret,
+                'logo'      => $logoPath,
+                'contact'   => $mail
             ]
         );
     }
