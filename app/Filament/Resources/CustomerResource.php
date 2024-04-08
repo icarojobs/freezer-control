@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -45,7 +46,12 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('document')
                     ->label('Documento')
                     ->required()
-                    ->maxLength(255),
+                    ->unique()
+                    ->mask(RawJs::make(<<<'JS'
+                        '999.999.999-99'
+                    JS
+                    ))
+                    ->rule('cpf_ou_cnpj'),
 
                 Forms\Components\TextInput::make('email')
                     ->email()
