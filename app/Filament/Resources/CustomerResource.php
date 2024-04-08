@@ -58,8 +58,9 @@ class CustomerResource extends Resource
 
                 Forms\Components\TextInput::make('mobile')
                     ->label('Celular')
+                    ->mask('(99) 99999-9999')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(15),
             ]);
     }
 
