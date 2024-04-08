@@ -6,6 +6,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Customer;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -60,6 +61,15 @@ class CustomerResource extends Resource
 
                 Forms\Components\DatePicker::make('birthdate')
                     ->label('Data Nascimento')
+                    ->rules([
+                        function () {
+                            return function (string $attribute, $value, Closure $fail) {
+                                if (now()->parse($value)->age < 18) {
+                                    $fail('A data de nascimento deve ser maior que 18 anos.');
+                                }
+                            };
+                        }
+                    ])
                     ->required(),
 
                 Forms\Components\TextInput::make('mobile')
