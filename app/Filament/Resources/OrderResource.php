@@ -352,6 +352,9 @@ class OrderResource extends Resource
 
                         $set('sub_total', $sub_total);
                     })
+                    ->disabled(function ($get) {
+                        return empty($get('name'));
+                    })
                     ->columnSpan(2),
 
                 PtbrMoney::make('unit_price')
