@@ -59,6 +59,8 @@ e o `monitoramento de vendas`.
  - Docker + docker-compose
  - curl
  - Make 4.x
+ - [laravel](https://github.com/laravel/framework)
+ - [filament](https://github.com/filamentphp/filament)
  - [filament-shield](https://github.com/bezhansalleh/filament-shield)
  - [filament-api-service](https://github.com/rupadana/filament-api-service)
  - [simplesoftwareio/simple-qrcode](https://github.com/simplesoftwareio/simple-qrcode)
@@ -113,12 +115,13 @@ Agora, basta acessar a URL `http://laravel.test`
 > :construction: É crucial verificar o arquivo .ENV para garantir que as variáveis da API do ASAAS estejam definidas corretamente.
 
 Instanciar o conector (adapter) do gateway de pagamento que deseja
+
 ```bash
 $adapter = new App\Services\PaymentGateway\Connectors\AsaasConnector;
 ```
 
 Instanciar o cliente Gateway utilizando o adapter criado préviamente
-```bash
+```php
 $gateway = new App\Services\PaymentGateway\Gateway($adapter);
 ```
 
