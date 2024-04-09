@@ -9,30 +9,36 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Enums\ProductTransactionTypeEnum;
 
+
 class StatsControlPanelService
 {
     public static function getTotalProductTransactions(): ?array
     {
+        $sale = ProductTransactionTypeEnum::SALE->value;
+        $buy = ProductTransactionTypeEnum::BUY->value;
+        $paid = OrderStatusEnum::PAID->value;
+
         $query = ProductTransaction::selectRaw('
         SUM(
             CASE 
-                WHEN type = "sale" THEN 
+                WHEN type = "' . $sale . '" THEN 
                     (quantity * (
                         SELECT sale_price 
                         FROM products 
-                        WHERE products.id = product_transactions.product_id
-                    )) 
-                    + COALESCE(
-                        (SELECT SUM(total) FROM orders WHERE status = "PAID"), 
-                        0
-                    ) 
+                        WHERE products.id = product_transactions.product_id AND product_transactions.type = "' . $sale . '"
+                    ))
                 ELSE 
                     0 
             END
         ) AS totalSales,
+        (
+            SELECT SUM(total) 
+            FROM orders 
+            WHERE status = "' . $paid . '"
+        ) as totalSalesOrders,
         SUM(
             CASE
-                WHEN type = "buy" THEN
+                WHEN type = "' . $buy . '" THEN
                 (quantity * (
                     SELECT cost_price 
                     FROM products 
@@ -42,7 +48,7 @@ class StatsControlPanelService
         ) AS totalPurchases,
         SUM(
             CASE 
-                WHEN type = "sale" THEN 
+                WHEN type = "' . $sale . '" THEN 
                     (quantity * (
                         SELECT sale_price 
                         FROM products 
@@ -59,7 +65,6 @@ class StatsControlPanelService
         ) AS totalEarnings
         ')->first();
 
-
         $queryEarningsOrder = Order::select('items')->where('status', OrderStatusEnum::PAID->value)->pluck('items');
         $totalEarningsOrders = 0;
 
@@ -72,7 +77,7 @@ class StatsControlPanelService
         });
 
         return [
-            'totalSales' => $query->totalSales,
+            'totalSales' => $query->totalSales + $query->totalSalesOrders,
             'totalPurchases' => $query->totalPurchases,
             'totalEarnings' => $query->totalEarnings + $totalEarningsOrders,
         ];

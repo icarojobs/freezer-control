@@ -23,15 +23,18 @@ class StatsOverviewWidget extends BaseWidget
         $totalSalesFormatted = formatCurrency($productTransactions['totalSales']);
         $totalPurchasesFormatted = formatCurrency($productTransactions['totalPurchases']);
         $totalEarningsFormatted = formatCurrency($productTransactions['totalEarnings']);
-        $percentEarnings = sprintf("%.2f", ($productTransactions['totalEarnings'] / $productTransactions['totalSales']) * 100);
+        $percentEarnings = $productTransactions['totalSales'] > 0 ? sprintf("%.2f", ($productTransactions['totalEarnings'] / $productTransactions['totalSales']) * 100) : '0';
+
+        $descriptionSales = $totalSales > 1 ? 'vendas confirmadas' : 'venda confirmada';
+        $descriptionPurchases = $totalPurchases > 1 ? 'compras realizadas' : 'compra realizada';
 
         return [
             Stat::make('Total em Vendas (R$)', $totalSalesFormatted)
-                ->description($totalSales . ' vendas')
+                ->description($totalSales . ' ' . $descriptionSales)
                 ->descriptionIcon('heroicon-m-arrow-up-right')
                 ->color('warning'),
             Stat::make('Total em Compras (R$)', $totalPurchasesFormatted)
-                ->description($totalPurchases . ' compras')
+                ->description($totalPurchases . ' ' . $descriptionPurchases)
                 ->descriptionIcon('heroicon-m-arrow-down-right')
                 ->color('danger'),
             Stat::make('Ganhos Totais (R$)', $totalEarningsFormatted)
