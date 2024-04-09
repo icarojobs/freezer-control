@@ -59,6 +59,8 @@ e o `monitoramento de vendas`.
  - Docker + docker-compose
  - curl
  - Make 4.x
+ - [laravel](https://github.com/laravel/framework)
+ - [filament](https://github.com/filamentphp/filament)
  - [filament-shield](https://github.com/bezhansalleh/filament-shield)
  - [filament-api-service](https://github.com/rupadana/filament-api-service)
  - [simplesoftwareio/simple-qrcode](https://github.com/simplesoftwareio/simple-qrcode)
