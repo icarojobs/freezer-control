@@ -382,4 +382,9 @@ class OrderResource extends Resource
 
         return compact('orders');
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::count();
+    }
 }
