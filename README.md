@@ -233,6 +233,7 @@ Estrutura de Rotas Necessárias:
 </h4>
 
 ### :construction: Pendências
+- [URGENTE] - Ao cadastrar um cliente, não está guardando o CustomerID (ASAAS_ID)
 - Quando realizar uma venda, baixar itens vendidos do Estoque.
 - Dashboards, Relatórios, Gráficos, ETECETARASS!!!!
 - Criar painel APP com a tela de "Venda" (que pode chamar "Comprar")
