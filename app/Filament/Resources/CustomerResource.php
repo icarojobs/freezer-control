@@ -6,10 +6,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Customer;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -45,7 +47,12 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('document')
                     ->label('Documento')
                     ->required()
-                    ->maxLength(255),
+                    ->unique()
+                    ->mask(RawJs::make(<<<'JS'
+                        '999.999.999-99'
+                    JS
+                    ))
+                    ->rule('cpf_ou_cnpj'),
 
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -54,12 +61,22 @@ class CustomerResource extends Resource
 
                 Forms\Components\DatePicker::make('birthdate')
                     ->label('Data Nascimento')
+                    ->rules([
+                        function () {
+                            return function (string $attribute, $value, Closure $fail) {
+                                if (now()->parse($value)->age < 18) {
+                                    $fail('A data de nascimento deve ser maior que 18 anos.');
+                                }
+                            };
+                        }
+                    ])
                     ->required(),
 
                 Forms\Components\TextInput::make('mobile')
                     ->label('Celular')
+                    ->mask('(99) 99999-9999')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(15),
             ]);
     }
 
