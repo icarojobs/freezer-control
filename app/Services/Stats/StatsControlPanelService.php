@@ -8,15 +8,28 @@ use App\Enums\OrderStatusEnum;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Enums\ProductTransactionTypeEnum;
+use Carbon\Carbon;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
 
 
 class StatsControlPanelService
 {
-    public static function getTotalProductTransactions(): ?array
+    protected ?string $startDate = null;
+    protected ?string $endDate = null;
+
+    public function __construct(?string $startDate, ?string $endDate)
+    {
+        $this->startDate = $startDate ?? Carbon::parse('2000-01-01')->format('Y-m-d 00:00:00');
+        $this->endDate = $endDate ?? date('Y-m-d 23:59:59');
+    }
+
+    public function getTotalProductTransactions(): ?array
     {
         $sale = ProductTransactionTypeEnum::SALE->value;
         $buy = ProductTransactionTypeEnum::BUY->value;
         $paid = OrderStatusEnum::PAID->value;
+
+        $datesBinding = $this->generateBindings(9);
 
         $query = ProductTransaction::selectRaw('
         SUM(
@@ -25,7 +38,9 @@ class StatsControlPanelService
                     (quantity * (
                         SELECT sale_price 
                         FROM products 
-                        WHERE products.id = product_transactions.product_id AND product_transactions.type = "' . $sale . '"
+                        WHERE products.id = product_transactions.product_id 
+                        AND product_transactions.type = "' . $sale . '"
+                    AND (date(product_transactions.created_at) BETWEEN ? AND ?)
                     ))
                 ELSE 
                     0 
@@ -35,6 +50,7 @@ class StatsControlPanelService
             SELECT SUM(total) 
             FROM orders 
             WHERE status = "' . $paid . '"
+            AND (date(created_at) BETWEEN ? AND ?)
         ) as totalSalesOrders,
         SUM(
             CASE
@@ -43,6 +59,7 @@ class StatsControlPanelService
                     SELECT cost_price 
                     FROM products 
                     WHERE products.id = product_transactions.product_id
+                    AND (date(product_transactions.created_at) BETWEEN ? AND ?)
                 )) 
             END
         ) AS totalPurchases,
@@ -53,19 +70,26 @@ class StatsControlPanelService
                         SELECT sale_price 
                         FROM products 
                         WHERE products.id = product_transactions.product_id
+                        AND (date(product_transactions.created_at) BETWEEN  ? AND ?)
                     )) 
                     - (quantity * (
                         SELECT cost_price 
                         FROM products 
                         WHERE products.id = product_transactions.product_id
+                        AND (date(product_transactions.created_at) BETWEEN  ? AND ?)
                     )) 
                 ELSE 
                     0 
             END
         ) AS totalEarnings
-        ')->first();
+        ')
+            ->setBindings($datesBinding)
+            ->first();
 
-        $queryEarningsOrder = Order::select('items')->where('status', OrderStatusEnum::PAID->value)->pluck('items');
+        $queryEarningsOrder = Order::select('items')->where('status', OrderStatusEnum::PAID->value)
+            ->whereDate('created_at', '>=', $this->startDate)
+            ->whereDate('created_at', '<=', $this->endDate)->pluck('items');
+
         $totalEarningsOrders = 0;
 
         $queryEarningsOrder->each(function ($items) use (&$totalEarningsOrders) {
@@ -83,32 +107,38 @@ class StatsControlPanelService
         ];
     }
 
-    public static function getTotalEarningsByNavSales(): Collection
+    public function getTotalSales(): string
     {
-        $query = Order::select('items')->where('status', OrderStatusEnum::PAID->value)->pluck('items')->collapse();
-        return $query;
+        $datesBinding = $this->generateBindings(3);
+        array_push($datesBinding, ProductTransactionTypeEnum::SALE->value);
+
+        $query = ProductTransaction::select(
+            DB::raw('(SELECT COUNT(*) WHERE (date(created_at) BETWEEN ? AND ?)) as total_sales'),
+            DB::raw('(SELECT COUNT(*) FROM orders WHERE (date(created_at) BETWEEN ? AND ?) AND status = "' . OrderStatusEnum::PAID->value . '") as total_orders')
+        )
+            ->where('type', '?')
+            ->setBindings($datesBinding)
+            ->first();
+
+        if ($query) {
+            return array_sum($query->toArray());
+        }
+
+        return '0';
     }
 
-    public static function getTotalSales(): string
+    public function getTotalPurchases(): string
     {
-        $query = ProductTransaction::select(
-            DB::raw('COUNT(*) as total_sales'),
-            DB::raw('(SELECT COUNT(*) FROM orders WHERE status = "' . OrderStatusEnum::PAID->value . '") as total_orders')
-        )
-            ->where('type', ProductTransactionTypeEnum::SALE->value)
-            ->first()->toArray();
-
-        return array_sum($query);
-    }
-
-    public static function getTotalPurchases(): string
-    {
-        $query = ProductTransaction::select(
-            DB::raw('COUNT(*) as total_sales'),
-        )
+        return ProductTransaction::whereDate('created_at', '>=', $this->startDate)
+            ->whereDate('created_at', '<=', $this->endDate)
             ->where('type', ProductTransactionTypeEnum::BUY->value)
-            ->first()->toArray();
+            ->count();
+    }
 
-        return array_sum($query);
+    private function generateBindings(int $qty = 1): array
+    {
+        return array_map(function ($index) {
+            return $index % 2 == 0 ? $this->startDate : Carbon::parse($this->endDate)->format('Y-m-d 23:59:59');
+        }, range(0, $qty));
     }
 }

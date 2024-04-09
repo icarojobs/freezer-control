@@ -16,9 +16,14 @@ class StatsOverviewWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $productTransactions = StatsControlPanelService::getTotalProductTransactions();
-        $totalSales = StatsControlPanelService::getTotalSales();
-        $totalPurchases = StatsControlPanelService::getTotalPurchases(ProductTransactionTypeEnum::BUY->value);
+        $startDate = $this->filters['startDate'] ?? null;
+        $endDate = $this->filters['endDate'] ?? null;
+
+        $statsControlPanelService = new StatsControlPanelService($startDate, $endDate);
+
+        $productTransactions = $statsControlPanelService->getTotalProductTransactions();
+        $totalSales = $statsControlPanelService->getTotalSales();
+        $totalPurchases = $statsControlPanelService->getTotalPurchases();
 
         $totalSalesFormatted = formatCurrency($productTransactions['totalSales']);
         $totalPurchasesFormatted = formatCurrency($productTransactions['totalPurchases']);
