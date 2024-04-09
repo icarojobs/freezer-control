@@ -21,4 +21,9 @@ class ProductTransaction extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function scopeApplyFirstQueryScopeGetSale($query)
+    {
+        return $query->where('type', ProductTransactionTypeEnum::SALE->value);
+    }
 }

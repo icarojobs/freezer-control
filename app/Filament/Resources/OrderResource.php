@@ -323,6 +323,7 @@ class OrderResource extends Resource
                         $product = Product::find($state);
                         $set('name', $product->name ?? '');
                         $set('unit_price', $product->sale_price ?? 0);
+                        $set('cost_price', $product->cost_price ?? 0);
                         $set('sub_total', $product->sale_price ?? 0);
                         $set('quantity', 1);
                     })
