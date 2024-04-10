@@ -16,7 +16,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "laravellegends/pt-br-validator": "^10.0",
+        "laravellegends/pt-br-validator": "^11.0",
         "owenvoke/blade-fontawesome": "^2.6",
         "rupadana/filament-api-service": "^3.1",
         "simplesoftwareio/simple-qrcode": "~4"
@@ -30,6 +30,8 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-laravel": "^2.3",
         "phpunit/phpunit": "^10.1",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.0"

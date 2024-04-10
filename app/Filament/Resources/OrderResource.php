@@ -255,21 +255,21 @@ class OrderResource extends Resource
                                 ->schema([
                                     TextInput::make('card_number')
                                         ->label('Número do Cartão de Crédito')
-                                        ->default('4444 4444 4444 4444')
+                                        ->default(fn (): string => app()->isLocal() ? '4444 4444 4444 4444' : '')
                                         ->required()
                                         ->extraAlpineAttributes(['x-mask' => '9999 999999 99999']),
                                     TextInput::make('name_on_card')
                                         ->label('Nome no Cartão')
-                                        ->default('John Doe')
+                                        ->default(fn (): string => app()->isLocal() ? 'John Doe' : '')
                                         ->required(),
                                     TextInput::make('expiration_date')
                                         ->label('Validade')
-                                        ->default('12/24')
+                                        ->default(fn (): string => app()->isLocal() ? '12/24' : '')
                                         ->required()
                                         ->extraAlpineAttributes(['x-mask' => '99/99']),
                                     TextInput::make('cvv')
                                         ->label('CVV')
-                                        ->default('123')
+                                        ->default(fn (): string => app()->isLocal() ? '123' : '')
                                         ->required()
                                         ->extraAlpineAttributes(['x-mask' => '999']),
                                 ]),
@@ -323,6 +323,7 @@ class OrderResource extends Resource
                         $product = Product::find($state);
                         $set('name', $product->name ?? '');
                         $set('unit_price', $product->sale_price ?? 0);
+                        $set('cost_price', $product->cost_price ?? 0);
                         $set('sub_total', $product->sale_price ?? 0);
                         $set('quantity', 1);
                     })
@@ -352,6 +353,9 @@ class OrderResource extends Resource
 
                         $set('sub_total', $sub_total);
                     })
+                    ->disabled(function ($get) {
+                        return empty($get('name'));
+                    })
                     ->columnSpan(2),
 
                 PtbrMoney::make('unit_price')
@@ -378,5 +382,10 @@ class OrderResource extends Resource
         $orders = Order::where('customer_id', $customerId)->get();
 
         return compact('orders');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::count();
     }
 }

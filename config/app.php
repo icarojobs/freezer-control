@@ -172,6 +172,7 @@ return [
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\Filament\AppPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \Pest\Laravel\PestServiceProvider::class,
     ])->toArray(),
 
     /*

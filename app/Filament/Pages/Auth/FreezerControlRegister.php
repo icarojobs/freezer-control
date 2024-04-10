@@ -73,11 +73,39 @@ class FreezerControlRegister extends Register
     #[Override]
     public function register(): ?RegistrationResponse
     {
-        $this->rateLimit(2);
+        //$this->rateLimit(2);
 
         $this->data = $this->form->getState();
 
         try {
+
+            // Verificar se o e-mail ou o CPF já existem na base de dados
+            $existingCustomer = Customer::where('email', $this->data['email'])
+                ->orWhere('document', sanitize($this->data['document']))
+                ->first();
+
+            if ($existingCustomer) {
+                if ($existingCustomer->email === $this->data['email']) {
+                    Notification::make('register_error')
+                        ->title('Cadastro de e-mail invalido!')
+                        ->body('Usuário com este e-mail já está cadastrado!')
+                        ->danger()
+                        ->persistent()
+                        ->send();
+                    $this->data['email'] = '';
+                } elseif ($existingCustomer->document === sanitize($this->data['document'])) {
+                    Notification::make('register_error')
+                        ->title('Cadastro de CPF invalido!')
+                        ->body('Usuário com este CPF já está cadastrado!')
+                        ->danger()
+                        ->persistent()
+                        ->send();
+                    $this->data['document'] = '';
+                }
+
+                return null;
+            }
+
             $adapter = new AsaasConnector();
             $gateway = new Gateway($adapter);
 
@@ -93,19 +121,23 @@ class FreezerControlRegister extends Register
             if (!isset($customer['id'])) {
                 // Checks if 'error' exists and if it is a string
                 if (isset($customer['error']) && is_string($customer['error'])) {
-                    // Removes extra whitespace and the prefix "HTTP request returned status code 400:"
-                    $jsonString = trim(substr($customer['error'], strpos($customer['error'], '{')));
 
-                    // Decode JSON string to an associative array
-                    $errorArray = json_decode($jsonString, true);
-
-                    // Checks whether JSON decoding occurred without errors
-                    if ($errorArray !== null && isset($errorArray['errors']) && is_array($errorArray['errors']) && !empty($errorArray['errors'])) {
-                        // Get the first error message
-                        $errorCode = $errorArray['errors'][0]['description'];
+                    $errorArray = json_decode($customer['error'], true);
+                    
+                    if ($errorArray === null && json_last_error() !== JSON_ERROR_NONE) {
+                        $errorCode = $customer['error'];
                     } else {
-                        // Sif there are problems with decoding the JSON or the structure is not as expected, gives a standard error message
-                        $errorCode = 'Erro inesperado ao processar a resposta.';
+                        // Removes extra whitespace and the prefix "HTTP request returned status code 400:"
+                        $jsonString = trim(substr($customer['error'], strpos($customer['error'], '{')));
+                      
+                        // Checks whether JSON decoding occurred without errors
+                        if ($errorArray !== null && isset($errorArray['errors']) && is_array($errorArray['errors']) && !empty($errorArray['errors'])) {
+                            // Get the first error message
+                            $errorCode = $errorArray['errors'][0]['description'];
+                        } else {
+                            // Sif there are problems with decoding the JSON or the structure is not as expected, gives a standard error message
+                            $errorCode = 'Erro inesperado ao processar a resposta.';
+                        }
                     }
                 } else {
                     // If 'error' is not defined or is not a string, gives a default error message

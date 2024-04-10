@@ -1,11 +1,13 @@
 services:
     laravel.test:
         build:
-            context: ./docker/8.3
+            context: ./vendor/laravel/sail/runtimes/8.3
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.3/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
         ports:
             - '${APP_PORT:-80}:80'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
@@ -35,8 +37,8 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - './.docker/mysql/dbdata:/var/lib/mysql'
-            - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - 'sail-mysql:/var/lib/mysql'
+            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
