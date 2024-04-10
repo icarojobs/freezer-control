@@ -41,13 +41,13 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
-
-    protected static ?string $pluralModelLabel = "Vendas";
-    protected static ?string $modelLabel = "Venda";
-
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
+    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
+
+    protected static ?string $modelLabel = 'Venda';
+
+    protected static ?string $pluralModelLabel = 'Vendas';
 
     public static function form(Form $form): Form
     {
@@ -180,26 +180,26 @@ class OrderResource extends Resource
 
                             TextInput::make('customer_email')
                                 ->label('Email')
-                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->hidden(fn (Get $get) => $get('customer_id') == null)
                                 ->disabled()
                                 ->columnSpan(1),
 
                             TextInput::make('customer_document')
                                 ->label('CPF')
                                 ->extraAlpineAttributes(['x-mask' => '999.999.999-99'])
-                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->hidden(fn (Get $get) => $get('customer_id') == null)
                                 ->disabled()
                                 ->columnSpan(1),
 
                             TextInput::make('customer_mobile')
                                 ->label('Celular')
-                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->hidden(fn (Get $get) => $get('customer_id') == null)
                                 ->disabled()
                                 ->columnSpan(1),
 
                             TextInput::make('customer_birthdate')
                                 ->label('Data Nascimento')
-                                ->hidden(fn ($get) => $get('customer_id') == null)
+                                ->hidden(fn (Get $get) => $get('customer_id') == null)
                                 ->disabled()
                                 ->columnSpan(1),
                         ])
@@ -210,7 +210,7 @@ class OrderResource extends Resource
                                 ->label('Últimas Compras')
                                 ->content(function ($get) {
                                     if (is_null($get('customer_id'))) {
-                                        return "Nenhum cliente selecionado";
+                                        return 'Nenhum cliente selecionado';
                                     }
 
                                     return new HtmlString(
@@ -235,8 +235,8 @@ class OrderResource extends Resource
             Grid::make(3)
                 ->schema([
                     Section::make()
+                        ->columnSpan(2)
                         ->schema([
-
                             ToggleButtons::make('payment_method')
                                 ->label('Forma de Pagamento')
                                 ->inline()
@@ -251,7 +251,7 @@ class OrderResource extends Resource
 
                             Fieldset::make('credit_card')
                                 ->label('Cartão de Crédito')
-                                ->visible(fn ($get): bool => $get('payment_method') === 'credit_card')
+                                ->visible(fn (Get $get): bool => $get('payment_method') === 'credit_card')
                                 ->schema([
                                     TextInput::make('card_number')
                                         ->label('Número do Cartão de Crédito')
@@ -276,18 +276,15 @@ class OrderResource extends Resource
 
                             Fieldset::make('pix')
                                 ->label('Pix')
-                                ->visible(fn ($get): bool => $get('payment_method') === 'pix')
+                                ->visible(fn (Get $get): bool => $get('payment_method') === 'pix')
                                 ->schema([
                                     ViewField::make('pix_button')
                                         ->view('orders.qr-code-generate')
                                         ->columnSpanFull(),
-
-
-
                                 ]),
-                        ])
-                        ->columnSpan(2),
+                        ]),
                     Section::make()
+                        ->columnSpan(1)
                         ->schema([
                             Placeholder::make('sale_resume')
                                 ->label('Resumo do pedido')
@@ -299,12 +296,10 @@ class OrderResource extends Resource
                                         )->render()
                                     );
                                 }),
-                        ])
-                        ->columnSpan(1)
+                        ]),
                 ])
         ];
     }
-
 
     public static function getItemsRepeater(): Repeater
     {
@@ -331,8 +326,6 @@ class OrderResource extends Resource
                     ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                     ->columnSpan(3),
 
-
-
                 TextInput::make('quantity')
                     ->label('Quantidade')
                     ->numeric()
@@ -341,9 +334,7 @@ class OrderResource extends Resource
                     ->hint(function ($get) {
                         $stock = Product::find($get('product_id'))?->in_stock;
 
-                        if (!is_null($stock)) return "{$stock} em estoque";
-
-                        return null;
+                        return !is_null($stock) ? "{$stock} em estoque" : null;
                     })
                     ->afterStateUpdated(function ($state, $set, $get) {
 
@@ -353,9 +344,7 @@ class OrderResource extends Resource
 
                         $set('sub_total', $sub_total);
                     })
-                    ->disabled(function ($get) {
-                        return empty($get('name'));
-                    })
+                    ->disabled(fn (Get $get) => empty($get('name')))
                     ->columnSpan(2),
 
                 PtbrMoney::make('unit_price')
@@ -378,7 +367,6 @@ class OrderResource extends Resource
 
     public static function getSelectedCustomer(string|int $customerId): array
     {
-
         $orders = Order::where('customer_id', $customerId)->get();
 
         return compact('orders');
