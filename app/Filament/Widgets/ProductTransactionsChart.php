@@ -3,9 +3,9 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use App\Services\Stats\Charts\StatsChartsTransactionsService;
+use App\Services\Stats\Charts\StatsChartsService;
 use App\Enums\ProductTransactionTypeEnum;
-use Carbon\CarbonImmutable;
+use App\Models\ProductTransaction;
 
 class ProductTransactionsChart extends ChartWidget
 {
@@ -13,12 +13,10 @@ class ProductTransactionsChart extends ChartWidget
     protected static ?int $sort = 1;
     protected int $totalMaxValue = 0;
 
-
-
     protected function getData(): array
     {
-
-        $transactions = StatsChartsTransactionsService::getTransactions();
+        $transactionsStatsService = new StatsChartsService(new ProductTransaction());
+        $transactions = $transactionsStatsService->getData('type');
 
         $qtyPerMonthBuy = $qtyPerMonthSale = $qtyPerMonthInventory = array_fill(0, 12, 0);
 

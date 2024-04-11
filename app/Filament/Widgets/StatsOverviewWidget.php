@@ -6,7 +6,6 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Services\Stats\StatsControlPanelService;
-use App\Enums\ProductTransactionTypeEnum;
 
 class StatsOverviewWidget extends BaseWidget
 {

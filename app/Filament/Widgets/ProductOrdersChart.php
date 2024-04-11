@@ -4,8 +4,8 @@ namespace App\Filament\Widgets;
 
 use App\Enums\OrderStatusEnum;
 use Filament\Widgets\ChartWidget;
-use App\Services\Stats\Charts\StatsChartsOrdersService;
-use Carbon\CarbonImmutable;
+use App\Services\Stats\Charts\StatsChartsService;
+use App\Models\Order;
 
 class ProductOrdersChart extends ChartWidget
 {
@@ -15,7 +15,8 @@ class ProductOrdersChart extends ChartWidget
 
     protected function getData(): array
     {
-        $orders = StatsChartsOrdersService::getOrders();
+        $orderStatsService = new StatsChartsService(new Order);
+        $orders = $orderStatsService->getData('status');
 
         $qtyPerMonthPaid = $qtyPerMonthPending = $qtyPerMonthFailed = array_fill(0, 12, 0);
 
