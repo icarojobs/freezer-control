@@ -73,36 +73,22 @@ class FreezerControlRegister extends Register
     #[Override]
     public function register(): ?RegistrationResponse
     {
-        //$this->rateLimit(2);
+        $this->rateLimit(2);
 
         $this->data = $this->form->getState();
 
         try {
-
-            // Verificar se o e-mail ou o CPF já existem na base de dados
             $existingCustomer = Customer::where('email', $this->data['email'])
                 ->orWhere('document', sanitize($this->data['document']))
                 ->first();
 
-            if ($existingCustomer) {
-                if ($existingCustomer->email === $this->data['email']) {
-                    Notification::make('register_error')
-                        ->title('Cadastro de e-mail invalido!')
-                        ->body('Usuário com este e-mail já está cadastrado!')
-                        ->danger()
-                        ->persistent()
-                        ->send();
-                    $this->data['email'] = '';
-                } elseif ($existingCustomer->document === sanitize($this->data['document'])) {
-                    Notification::make('register_error')
-                        ->title('Cadastro de CPF invalido!')
-                        ->body('Usuário com este CPF já está cadastrado!')
-                        ->danger()
-                        ->persistent()
-                        ->send();
-                    $this->data['document'] = '';
-                }
-
+            if ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document'])) {
+                Notification::make('register_error')
+                    ->title('Cadastro invalido!')
+                    ->body('Seu E-mail ou CPF são invalidos!')
+                    ->danger()
+                    ->persistent()
+                    ->send();
                 return null;
             }
 
@@ -123,13 +109,13 @@ class FreezerControlRegister extends Register
                 if (isset($customer['error']) && is_string($customer['error'])) {
 
                     $errorArray = json_decode($customer['error'], true);
-                    
+
                     if ($errorArray === null && json_last_error() !== JSON_ERROR_NONE) {
                         $errorCode = $customer['error'];
                     } else {
                         // Removes extra whitespace and the prefix "HTTP request returned status code 400:"
                         $jsonString = trim(substr($customer['error'], strpos($customer['error'], '{')));
-                      
+
                         // Checks whether JSON decoding occurred without errors
                         if ($errorArray !== null && isset($errorArray['errors']) && is_array($errorArray['errors']) && !empty($errorArray['errors'])) {
                             // Get the first error message
