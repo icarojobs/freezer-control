@@ -10,7 +10,6 @@
   },
   "resources/js/app.js": {
     "file": "assets/app-bffOyMeo.js",
-    "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   }

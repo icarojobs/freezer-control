@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Customer;
+use App\Services\AsaasPhp\Customer\CreateCustomerFromModel;
 use App\Services\PaymentGateway\Connectors\AsaasConnector;
 use App\Services\PaymentGateway\Gateway;
 use Illuminate\Console\Command;
@@ -33,33 +34,8 @@ class NormalizeCustomerIdCommand extends Command
             ->orWhere('customer_id', '')
             ->get();
 
-        $adapter = new AsaasConnector();
-        $gateway = new Gateway($adapter);
-
-        $customers->each(function (Customer $customer) use ($gateway) {
-            $data = [
-                'name' => $customer->name,
-                'cpfCnpj' => sanitize($customer->document),
-                'email' => $customer->email,
-                'mobilePhone' => sanitize($customer->mobile),
-            ];
-
-            $response = $gateway->customer()->create($data);
-
-            if (!isset($response['id']) && is_string($response['error'])) {
-                $this->line("Erro ao atualizar {$customer->name}: {$response['error']}");
-                return true;
-            }
-
-            if (!isset($response['id']) && is_array($response['error'])) {
-                $error = $response['error'][0]['description'] ?? 'Erro de integração';
-                $this->line("Erro ao atualizar {$customer->name}: {$error}");
-                return true;
-            }
-
-            $customer->customer_id = $response['id'];
-            $customer->save();
-            return true;
+        $customers->each(function (Customer $customer) {
+            (new CreateCustomerFromModel($customer))->send();
         });
 
         return 0;
