@@ -109,22 +109,13 @@ class StatsControlPanelService
 
     public function getTotalSales(): string
     {
-        $datesBinding = $this->generateBindings(3);
-        array_push($datesBinding, ProductTransactionTypeEnum::SALE->value);
+        $datesBinding = $this->generateBindings(1);
 
-        $query = ProductTransaction::select(
-            DB::raw('(SELECT COUNT(*) WHERE (date(created_at) BETWEEN ? AND ?)) as total_sales'),
-            DB::raw('(SELECT COUNT(*) FROM orders WHERE (date(created_at) BETWEEN ? AND ?) AND status = "' . OrderStatusEnum::PAID->value . '") as total_orders')
-        )
-            ->where('type', '?')
-            ->setBindings($datesBinding)
-            ->first();
+        $countProductTransaction = (ProductTransaction::whereRaw('(date(created_at) BETWEEN ? AND ?) AND type = "' . ProductTransactionTypeEnum::SALE->value . '"', $datesBinding)->count());
 
-        if ($query) {
-            return array_sum($query->toArray());
-        }
+        $countOrders = (Order::whereRaw('(date(created_at) BETWEEN ? AND ?) AND status = "' . OrderStatusEnum::PAID->value . '"', $datesBinding)->count());
 
-        return '0';
+        return $countProductTransaction + $countOrders ?? '0';
     }
 
     public function getTotalPurchases(): string
