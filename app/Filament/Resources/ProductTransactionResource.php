@@ -17,39 +17,46 @@ class ProductTransactionResource extends Resource
 {
     protected static ?string $model = ProductTransaction::class;
 
-    protected static ?string $navigationGroup = "Logística";
-    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
-
-    protected static ?string $pluralModelLabel = "Movimentações";
-    protected static ?string $modelLabel = "Movimentação";
+    protected static ?string $navigationGroup = 'Logística';
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+
+    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
+
+    protected static ?string $modelLabel = 'Movimentação';
+
+    protected static ?string $pluralModelLabel = 'Movimentações';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('product_id')
-                    ->label('Produto')
-                    ->relationship('product', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required(),
+                Forms\Components\Section::make()
+                    ->columns(2)
+                    ->schema([
+                        Forms\Components\Select::make('product_id')
+                            ->label('Produto')
+                            ->relationship('product', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
 
-                Forms\Components\TextInput::make('description')
-                    ->label('Descrição')
-                    ->disabled()
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('quantity')
+                            ->label('Quantidade')
+                            ->required()
+                            ->numeric(),
 
-                Forms\Components\Select::make('type')
-                    ->label('Tipo de Movimentação')
-                    ->options(ProductTransactionTypeEnum::class)
-                    ->native(false),
+                        Forms\Components\ToggleButtons::make('type')
+                            ->required()
+                            ->label('Tipo de Movimentação')
+                            ->options(ProductTransactionTypeEnum::class)
+                            ->inline(),
 
-                Forms\Components\TextInput::make('quantity')
-                    ->label('Quantidade')
-                    ->required()
-                    ->numeric(),
+                        Forms\Components\Placeholder::make('description')
+                            ->label('Descrição')
+                            ->hidden(fn (?ProductTransaction $record): bool => $record == null)
+                            ->content(fn ($state) => $state),
+                    ])
             ]);
     }
 
@@ -76,12 +83,14 @@ class ProductTransactionResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Atualizado em')
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -91,7 +100,7 @@ class ProductTransactionResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                ])->tooltip("Menu")
+                ])->tooltip('Menu')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

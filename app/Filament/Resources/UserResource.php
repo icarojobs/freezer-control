@@ -22,40 +22,47 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
     protected static ?string $activeNavigationIcon = 'heroicon-o-user';
 
-    protected static ?string $pluralModelLabel = "Usuários";
-    protected static ?string $modelLabel = "Usuário";
+    protected static ?string $modelLabel = 'Usuário';
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $pluralModelLabel = 'Usuários';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nome')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->label('E-mail')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('panel')
-                    ->label('Tipo de acesso')
-                    ->options(PanelTypeEnum::class)
-                    ->default('app')
-                    ->searchable()
-                    ->preload()
-                    ->reactive()
-                    ->distinct(),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nome')
+                            ->required()
+                            ->maxLength(255)
+                            ->placeholder('Foo Bar'),
+                        Forms\Components\TextInput::make('email')
+                            ->label('E-mail')
+                            ->email()
+                            ->required()
+                            ->maxLength(255)
+                            ->placeholder('foo@bar.com'),
 
-                Forms\Components\TextInput::make('password')
-                    ->label('Senha')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('password')
+                            ->label('Senha')
+                            ->password()
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\ToggleButtons::make('panel')
+                            ->label('Tipo de acesso')
+                            ->options(PanelTypeEnum::class)
+                            ->default(PanelTypeEnum::APP)
+                            ->inline()
+                            ->required(),
+                    ])
             ]);
     }
 
@@ -64,16 +71,15 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->description(function (User $record) {
-                        return ($record->panel->value === "admin" ? 'Acesso administrativo':'acesso aplicativo');
-                    })
-                    ->searchable(),
+                    ->searchable()
+                    ->description(fn (User $record) => $record->panel->value === 'admin' ? 'Acesso administrativo' : 'acesso aplicativo'),
 
                 TextColumn::make('email')
                     ->searchable(),
 
                 TextColumn::make('panel')
-                    ->searchable()->badge(),
+                    ->searchable()
+                    ->badge(),
             ])
             ->filters([
                 //
@@ -87,33 +93,20 @@ class UserResource extends Resource
                         ->form([
                             Select::make('panel')
                                 ->options(PanelTypeEnum::class)
-                                ->default(function (User $user){
-                                    $panel = null;
-
-                                    if($user->panel->value === 'admin'){
-                                        $panel = PanelTypeEnum::ADMIN->value;
-                                    }else{
-                                        $panel = PanelTypeEnum::APP->value;
-                                    }
-
-                                    return $panel;
-                                })
+                                ->default(fn (User $user): string =>  $user->panel->value === 'admin' ? PanelTypeEnum::ADMIN->value : PanelTypeEnum::APP->value)
                         ])
-                        ->action(function (User $user, array $data): void
-                        {
+                        ->action(function (User $user, array $data): void {
                             $user->panel = $data['panel'];
                             $user->save();
 
                             Notification::make()
                                 ->title('Alteração de status')
-                                ->body("O tipo do usuário " . $user->name . " foi modificado com sucesso!")
+                                ->body('O tipo do usuário ' . $user->name . ' foi modificado com sucesso!')
                                 ->icon('heroicon-o-shield-check')
                                 ->color('success')
                                 ->send();
                         }),
-
-                ])
-                    ->tooltip("Menu")
+                ])->tooltip('Menu')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -137,7 +130,7 @@ class UserResource extends Resource
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
-    
+
     public static function getNavigationBadge(): ?string
     {
         return (string) static::getModel()::count();

@@ -19,64 +19,67 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationGroup = "Carteira de clientes";
-    protected static ?string $activeNavigationIcon = 'heroicon-o-wallet';
-    protected static ?string $modelLabel = "Cliente";
+    protected static ?string $navigationGroup = 'Carteira de clientes';
 
     protected static ?string $navigationIcon = 'heroicon-o-wallet';
+
+    protected static ?string $modelLabel = 'Cliente';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-//                Select::make('user_id')
-//                    ->label('Usuário')
-//                    ->searchable()
-//                    ->relationship('user', 'name')
-//                    ->required(),
+                Forms\Components\Section::make()
+                    ->columns(2)
+                    ->schema([
+                        Forms\Components\Placeholder::make('customer_id')
+                            ->label('ASAAS ID')
+                            ->content(fn (?string $state): ?string => $state)
+                            ->hidden(fn (?Customer $record): bool => $record == null),
 
-                Forms\Components\TextInput::make('customer_id')
-                    ->label('ASAAS ID')
-                    ->disabled(),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nome Completo')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpan(fn (?Customer $record): string|int => $record == null ? 'full' : 1),
 
-                Forms\Components\TextInput::make('name')
-                    ->label('Nome Completo')
-                    ->required()
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('document')
+                            ->label('Documento')
+                            ->required()
+                            ->unique()
+                            ->mask(RawJs::make(
+                                <<<'JS'
+                                    '999.999.999-99'
+                                JS
+                            ))
+                            ->rule('cpf_ou_cnpj'),
 
-                Forms\Components\TextInput::make('document')
-                    ->label('Documento')
-                    ->required()
-                    ->unique()
-                    ->mask(RawJs::make(<<<'JS'
-                        '999.999.999-99'
-                    JS
-                    ))
-                    ->rule('cpf_ou_cnpj'),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
 
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\DatePicker::make('birthdate')
-                    ->label('Data Nascimento')
-                    ->rules([
-                        function () {
-                            return function (string $attribute, $value, Closure $fail) {
-                                if (now()->parse($value)->age < 18) {
-                                    $fail('A data de nascimento deve ser maior que 18 anos.');
+                        Forms\Components\DatePicker::make('birthdate')
+                            ->label('Data Nascimento')
+                            ->rules([
+                                function () {
+                                    return function (string $attribute, $value, Closure $fail) {
+                                        if (now()->parse($value)->age < 18) {
+                                            $fail('A data de nascimento deve ser maior que 18 anos.');
+                                        }
+                                    };
                                 }
-                            };
-                        }
-                    ])
-                    ->required(),
+                            ])
+                            ->required(),
 
-                Forms\Components\TextInput::make('mobile')
-                    ->label('Celular')
-                    ->mask('(99) 99999-9999')
-                    ->required()
-                    ->maxLength(15),
+                        Forms\Components\TextInput::make('mobile')
+                            ->label('Celular')
+                            ->mask('(99) 99999-9999')
+                            ->required()
+                            ->maxLength(15),
+                    ]),
             ]);
     }
 
@@ -105,12 +108,14 @@ class CustomerResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Atualizado em')
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -120,7 +125,7 @@ class CustomerResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                ])->tooltip("Menu")
+                ])->tooltip('Menu')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

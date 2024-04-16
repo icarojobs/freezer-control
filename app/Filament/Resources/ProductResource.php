@@ -17,44 +17,51 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationGroup = "Logística";
-    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
-
-    protected static ?string $pluralModelLabel = "Produtos";
-    protected static ?string $modelLabel = "Produto";
+    protected static ?string $navigationGroup = 'Logística';
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+
+    protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
+
+    protected static ?string $modelLabel = 'Produto';
+
+    protected static ?string $pluralModelLabel = 'Produtos';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nome do Produto')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Section::make()
+                    ->columns(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nome do Produto')
+                            ->required()
+                            ->maxLength(255),
 
-                PtbrMoney::make('cost_price')
-                    ->label('Preço de Custo')
-                    ->required(),
+                        Forms\Components\TextInput::make('in_stock')
+                            ->label('Estoque Atual')
+                            ->required()
+                            ->numeric()
+                            ->disabled()
+                            ->default(0),
 
-                PtbrMoney::make('sale_price')
-                    ->label('Preço de Venda')
-                    ->required(),
+                        PtbrMoney::make('cost_price')
+                            ->label('Preço de Custo')
+                            ->required(),
 
-                Forms\Components\TextInput::make('in_stock')
-                    ->label('Estoque Atual')
-                    ->required()
-                    ->numeric()
-                    ->disabled()
-                    ->default(0),
+                        PtbrMoney::make('sale_price')
+                            ->label('Preço de Venda')
+                            ->required(),
 
-                Forms\Components\FileUpload::make('image')
-                    ->label('Foto do Produto')
-                    ->image()
-                    ->openable()
-                    ->downloadable()
-                    ->directory('images'),
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Foto do Produto')
+                            ->image()
+                            ->openable()
+                            ->downloadable()
+                            ->directory('images')
+                            ->columnSpanFull(),
+                    ]),
             ]);
     }
 
@@ -71,12 +78,12 @@ class ProductResource extends Resource
 
                 Tables\Columns\TextColumn::make('cost_price')
                     ->label('Preço de Custo')
-                    ->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.'))
+                    ->formatStateUsing(fn (int $state): string => 'R$ ' . number_format($state, 2, ',', '.'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('sale_price')
                     ->label('Preço de Venda')
-                    ->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.'))
+                    ->formatStateUsing(fn (int $state): string => 'R$ ' . number_format($state, 2, ',', '.'))
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('in_stock')
@@ -85,12 +92,14 @@ class ProductResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Atualizado em')
+                    ->dateTime('d/m/Y H:i:s')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -100,7 +109,7 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                ])->tooltip("Menu")
+                ])->tooltip('Menu')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
