@@ -6,6 +6,7 @@ namespace App\Filament\Resources\CustomerResource\Pages;
 
 use App\Filament\Resources\CustomerResource;
 use App\Models\Customer;
+use App\Services\AsaasPhp\Customer\CreateCustomerFromModel;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -29,6 +30,17 @@ class CreateCustomer extends CreateRecord
                 ->send();
 
             $this->halt();
+        }
+    }
+
+    protected function afterCreate(): void
+    {
+        $customer = Customer::query()->firstWhere('email', $this->data['email']);
+
+        $customerId = (new CreateCustomerFromModel($customer))->send();
+
+        if (filled($customer)) {
+            $this->data['customer_id'] = $customerId;
         }
     }
 }
