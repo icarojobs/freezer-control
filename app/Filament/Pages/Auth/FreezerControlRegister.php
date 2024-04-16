@@ -73,36 +73,20 @@ class FreezerControlRegister extends Register
     #[Override]
     public function register(): ?RegistrationResponse
     {
-        //$this->rateLimit(2);
+        $this->rateLimit(2);
 
         $this->data = $this->form->getState();
 
         try {
+            $existingCustomer = Customer::where('email', $this->data['email'])->orWhere('document', sanitize($this->data['document']))->first();
 
-            // Verificar se o e-mail ou o CPF já existem na base de dados
-            $existingCustomer = Customer::where('email', $this->data['email'])
-                ->orWhere('document', sanitize($this->data['document']))
-                ->first();
-
-            if ($existingCustomer) {
-                if ($existingCustomer->email === $this->data['email']) {
-                    Notification::make('register_error')
-                        ->title('Cadastro de e-mail invalido!')
-                        ->body('Usuário com este e-mail já está cadastrado!')
-                        ->danger()
-                        ->persistent()
-                        ->send();
-                    $this->data['email'] = '';
-                } elseif ($existingCustomer->document === sanitize($this->data['document'])) {
-                    Notification::make('register_error')
-                        ->title('Cadastro de CPF invalido!')
-                        ->body('Usuário com este CPF já está cadastrado!')
-                        ->danger()
-                        ->persistent()
-                        ->send();
-                    $this->data['document'] = '';
-                }
-
+            if ($existingCustomer && ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document']))) {
+                Notification::make('register_error')
+                    ->title('Cadastro invalido!')
+                    ->body('Seu E-mail ou CPF são invalidos!')
+                    ->danger()
+                    ->persistent()
+                    ->send();
                 return null;
             }
 
