@@ -20,17 +20,15 @@ class CreateUser extends CreateRecord
         $existingCustomer = User::where('email', $this->data['email'])
             ->first();
 
-        if ($existingCustomer) {
-            if ($existingCustomer->email === $this->data['email']) {
-                Notification::make('register_error')
-                    ->title('Cadastro invalido!')
-                    ->body('Seu E-mail já foi registrado!')
-                    ->danger()
-                    ->persistent()
-                    ->send();
+        if ($existingCustomer && ($existingCustomer->email === $this->data['email'])) {
+            Notification::make('register_error')
+                ->title('Cadastro invalido!')
+                ->body('Seu E-mail já foi registrado!')
+                ->danger()
+                ->persistent()
+                ->send();
 
-                $this->halt();
-            }
+            $this->halt();
         }
     }
 }

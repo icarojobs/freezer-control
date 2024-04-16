@@ -20,17 +20,15 @@ class CreateCustomer extends CreateRecord
             ->orWhere('document', sanitize($this->data['document']))
             ->first();
 
-        if ($existingCustomer) {
-            if ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document'])) {
-                Notification::make('register_error')
-                    ->title('Cadastro invalido!')
-                    ->body('Seu E-mail ou CPF são invalidos!')
-                    ->danger()
-                    ->persistent()
-                    ->send();
+        if ($existingCustomer && ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document']))) {
+            Notification::make('register_error')
+                ->title('Cadastro invalido!')
+                ->body('Seu E-mail ou CPF são invalidos!')
+                ->danger()
+                ->persistent()
+                ->send();
 
-                $this->halt();
-            }
+            $this->halt();
         }
     }
 }

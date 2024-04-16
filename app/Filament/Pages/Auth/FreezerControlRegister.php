@@ -78,22 +78,17 @@ class FreezerControlRegister extends Register
         $this->data = $this->form->getState();
 
         try {
-            $existingCustomer = Customer::where('email', $this->data['email'])
-                ->orWhere('document', sanitize($this->data['document']))
-                ->first();
+            $existingCustomer = Customer::where('email', $this->data['email'])->orWhere('document', sanitize($this->data['document']))->first();
 
-            if($existingCustomer){
-                if ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document'])) {
-                    Notification::make('register_error')
-                        ->title('Cadastro invalido!')
-                        ->body('Seu E-mail ou CPF são invalidos!')
-                        ->danger()
-                        ->persistent()
-                        ->send();
-                    return null;
-                }
+            if ($existingCustomer && ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document']))) {
+                Notification::make('register_error')
+                    ->title('Cadastro invalido!')
+                    ->body('Seu E-mail ou CPF são invalidos!')
+                    ->danger()
+                    ->persistent()
+                    ->send();
+                return null;
             }
-
 
             $adapter = new AsaasConnector();
             $gateway = new Gateway($adapter);
