@@ -15,6 +15,7 @@ trait AsaasConfig
         $environment = app()->isLocal() ? 'sandbox' : 'production';
         $token = config("asaas.{$environment}.token");
         $url = config("asaas.{$environment}.url");
+
         $this->http = Http::withHeader('access_token', $token)->baseUrl($url);
     }
 

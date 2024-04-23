@@ -9,7 +9,8 @@
     "src": "resources/images/bg.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-bffOyMeo.js",
+    "file": "assets/app-BR3JmC2K.js",
+    "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   }

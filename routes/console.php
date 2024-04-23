@@ -8,6 +8,15 @@ use App\Services\PaymentGateway\Gateway;
 use Illuminate\Support\Facades\Artisan;
 
 Artisan::command('play', function () {
+//    $adapter = app(AsaasConnector::class);
+//
+//    $gateway = new Gateway($adapter);
+//
+//    $customers = $gateway->customer()->list();
+//
+//    dd($customers);
+
+
 //    $chargeId = 'pay_qeh5d7oe2s1odisx';
 //
 //    $adapter = app(AsaasConnector::class);
