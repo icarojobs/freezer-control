@@ -41,8 +41,11 @@ Artisan::command('play', function () {
 //    dd($payment);
 
     // Retorna a listagem de cobranças
-    $payment = $gateway->payment()->get($chargeId);
+    $adapter = app(AsaasConnector::class);
 
-    dd($payment);
+    $gateway = new Gateway($adapter);
+
+    $customers = $gateway->customer()->list();
+    dd($customers);
 
 });

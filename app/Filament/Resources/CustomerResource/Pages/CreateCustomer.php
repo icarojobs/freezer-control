@@ -24,7 +24,7 @@ class CreateCustomer extends CreateRecord
         if ($existingCustomer && ($existingCustomer->email === $this->data['email'] || $existingCustomer->document === sanitize($this->data['document']))) {
             Notification::make('register_error')
                 ->title('Cadastro invalido!')
-                ->body('Seu E-mail ou CPF são invalidos!')
+                ->body('Seu e-mail ou CPF já estão registrados no sistema!')
                 ->danger()
                 ->persistent()
                 ->send();
