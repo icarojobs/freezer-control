@@ -83,7 +83,7 @@ make
 # Depois que você realizar o clone faça os seguintes comandos
 php artisan storage:link
 php artisan migrate:fresh --seed
-php artisan shield:instal
+php artisan shield:install
 ```
 > Usuário de acesso `admin@admin.com` e senha `password`
 
