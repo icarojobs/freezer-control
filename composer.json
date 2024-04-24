@@ -69,7 +69,7 @@
         "install-project":[
             "@php artisan storage:link",
             "@php artisan migrate:fresh --seed",
-            "@php artisan shield:instal"
+            "@php artisan shield:install"
         ]
     },
     "extra": {
