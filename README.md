@@ -79,11 +79,11 @@ make
 ```
 
 ### :books: Como rodar o projeto em novo ambiente `SEM` o `make`
-```comandos
+```bash
 # Depois que você realizar o clone faça os seguintes comandos
-    php artisan storage:link
-    php artisan migrate:fresh --seed
-    php artisan shield:instal
+php artisan storage:link
+php artisan migrate:fresh --seed
+php artisan shield:install
 ```
 > Usuário de acesso `admin@admin.com` e senha `password`
 
@@ -116,7 +116,7 @@ Agora, basta acessar a URL `http://laravel.test`
 
 Instanciar o conector (adapter) do gateway de pagamento que deseja
 
-```bash
+```php
 $adapter = new App\Services\PaymentGateway\Connectors\AsaasConnector;
 ```
 
