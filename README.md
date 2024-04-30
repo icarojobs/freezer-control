@@ -85,6 +85,13 @@ php artisan storage:link
 php artisan migrate:fresh --seed
 php artisan shield:install
 ```
+
+### :books: Como rodar o projeto em novo ambiente `SEM` o `make` utilizando o composer
+```comandos
+# Depois que você realizar o clone faça os seguintes comandos
+composer run install-project
+```
+
 > Usuário de acesso `admin@admin.com` e senha `password`
 
 

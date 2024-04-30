@@ -65,6 +65,11 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "install-project":[
+            "@php artisan storage:link",
+            "@php artisan migrate:fresh --seed",
+            "@php artisan shield:install"
         ]
     },
     "extra": {
