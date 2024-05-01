@@ -87,7 +87,7 @@ php artisan shield:install
 ```
 
 ### :books: Como rodar o projeto em novo ambiente `SEM` o `make` utilizando o composer
-```comandos
+```bash
 # Depois que você realizar o clone faça os seguintes comandos
 composer run install-project
 ```
