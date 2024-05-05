@@ -243,7 +243,7 @@ return [
             'hiddens' => [], // hides sensitive values using array paths
         ],
         'symfony_request' => [
-            'hiddens' => [], // hides sensitive values using array paths, example: request_request.password
+            'hiddens' => [], // hides sensitive values using array paths, createPanelUser: request_request.password
         ],
         'events' => [
             'data' => false, // collect events data, listeners

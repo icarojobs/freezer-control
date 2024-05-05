@@ -30,67 +30,260 @@
         </nav>
     </div>
 
+    {{--    {{auth()->user()->name}} {{auth()->user()->customer->orders->count()}} {{$this->form}}--}}
 
-    <section>
-        <div class="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
-            <div class="grid justify-items-start gap-8 sm:gap-20 lg:grid-cols-2 lg:items-center">
-                <!-- CTA Content -->
-                <div class="flex flex-col items-start">
-                    <h2 class="mb-4 text-3xl font-bold md:text-5xl">Under Maintenance</h2>
-                    <p class="mb-6 max-w-[480px] text-[#647084] md:mb-10 lg:mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus</p>
-                    <a href="#" class="flex flex-row items-center bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,245)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
-                        <p class="mr-6 font-bold">Get Started {{auth()->user()->name}}</p>
-                        <svg fill="currentColor" class="h-4 w-4 flex-none" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
-                            <title>Arrow Right</title>
-                            <h3>Minhas ordens criadas: {{auth()->user()->customer->orders->count()}}</h3>
-                            <p>{{$this->form}}</p>
-                            <polygon points="16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"></polygon>
-                        </svg>
-                    </a>
-                </div>
+
+
+
+    <section class="py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-start mb-5">
+                <h2 class="mb-4 text-3xl font-bold md:text-5xl">Showcase de bebidas</h2>
+                <p class="mb-6 max-w-[480px] text-[#647084] md:mb-10 lg:mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus</p>
             </div>
-        </div>
-    </section>
 
-    <section>
-        <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
-            <!-- Title -->
-            <h2 class="text-center text-3xl font-bold md:text-5xl">Portfolio</h2>
-            <p class="msm:text-base mb-8 mt-4 text-center text-sm text-[#636262] md:mb-12 lg:mb-16">Lorem ipsum dolor sit amet elit ut aliquam</p>
-            <!-- Content -->
-            <div class="grid justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3">
-                <!-- Item -->
-                <a href="#" class="flex flex-col rounded-md p-4 lg:p-2">
-                    <img src="https://images.unsplash.com/photo-1649261191624-ca9f79ca3fc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    <p class="mb-1 text-center font-bold">Project Name</p>
-                    <p class="text-center text-sm mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="flex flex-col rounded-md p-4 lg:p-2">
-                    <img src="https://images.unsplash.com/photo-1649261191624-ca9f79ca3fc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    <p class="mb-1 text-center font-bold">Project Name</p>
-                    <p class="text-center text-sm mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="flex flex-col rounded-md p-4 lg:p-2">
-                    <img src="https://images.unsplash.com/photo-1649261191624-ca9f79ca3fc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    <p class="mb-1 text-center font-bold">Project Name</p>
-                    <p class="text-center text-sm mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="flex flex-col rounded-md p-4 lg:p-2">
-                    <img src="https://images.unsplash.com/photo-1649261191624-ca9f79ca3fc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    <p class="mb-1 text-center font-bold">Project Name</p>
-                    <p class="text-center text-sm mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="flex flex-col rounded-md p-4 lg:p-2">
-                    <img src="https://images.unsplash.com/photo-1649261191624-ca9f79ca3fc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    <p class="mb-1 text-center font-bold">Project Name</p>
-                    <p class="text-center text-sm mt-1 text-lg font-medium text-gray-900">$35</p>
-                </a>
-                <a href="#" class="flex flex-col rounded-md p-4 lg:p-2">
-                    <img src="https://images.unsplash.com/photo-1649261191624-ca9f79ca3fc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    <p class="mb-1 text-center font-bold">Project Name</p>
-                    <p class="text-center text-sm mt-1 text-lg font-medium text-gray-900">$35</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
                 </a>
 
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
+
+                <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
+                    <img src="https://marcaspelomundo.com.br/wp-content/uploads/2022/11/Velho-Barreiro-Refresca-e1668604264256.jpg" alt="Jacket image" class="rounded-xl">
+
+                    <div class="flex flex-col items-center justify-between mb-2">
+                        <h6 class="font-semibold text-base leading-7 text-black ">Trendy Jacket</h6>
+                        <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">$100</h6>
+                        <div class="inline-flex items-center mt-2">
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                </svg>
+                            </button>
+                            <div
+                                class="inline-flex items-center px-4 py-1 select-none">
+                                2
+                            </div>
+                            <button
+                                class="bg-white rounded-lg border text-gray-600 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1 border-r border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
