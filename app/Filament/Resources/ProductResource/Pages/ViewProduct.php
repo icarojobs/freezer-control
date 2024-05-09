@@ -10,10 +10,12 @@ class ViewProduct extends ViewRecord
 {
     protected static string $resource = ProductResource::class;
 
+    protected static ?string $navigationLabel = 'Visualizar produto';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            Actions\DeleteAction::make()
         ];
     }
 }
