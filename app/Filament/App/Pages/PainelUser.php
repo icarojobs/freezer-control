@@ -50,12 +50,6 @@ class PainelUser extends Page
     }
 
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([]);
-    }
-
     public static function get(Table $table): Table
     {
         return $table

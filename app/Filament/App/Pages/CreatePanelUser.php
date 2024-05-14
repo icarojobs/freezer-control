@@ -10,7 +10,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 class createPanelUser extends CreateRecord
 {
-    protected static string $resource = OrderResource::class;
+    protected static string $resource = Product::class;
 
     public function form(Form $form): Form
     {

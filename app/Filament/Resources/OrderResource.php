@@ -376,4 +376,6 @@ class OrderResource extends Resource
     {
         return (string) static::getModel()::count();
     }
+
+
 }
