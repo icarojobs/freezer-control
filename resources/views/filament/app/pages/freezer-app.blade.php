@@ -44,7 +44,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
 
-                @foreach(\App\Models\Product::all() as $product)
+                @foreach(\App\Models\Product::where('in_stock', '>', 0)->get() as $product)
                     <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
                         <img src="{{Storage::url($product->image)}}" alt="image" class="rounded-xl h-13 w-13">
 
@@ -56,7 +56,7 @@
                                     Adicionar
                                 </x-filament::button>
                             </div>
-                            <p class="text-xs leading-5 text-gray-500">Women's Winter Wear</p>
+                            <p class="text-xs leading-5 text-gray-500 mt-1">Estoque {{$product->in_stock}}</p>
                         </div>
                     </a>
                 @endforeach
