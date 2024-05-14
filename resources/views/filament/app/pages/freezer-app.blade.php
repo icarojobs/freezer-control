@@ -38,18 +38,18 @@
     <section class="py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col items-start mb-5">
-                <h2 class="mb-4 text-3xl font-bold md:text-5xl">Showcase de bebidas</h2>
-                <p class="mb-6 max-w-[480px] text-[#647084] md:mb-10 lg:mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus</p>
+                <h2 class="mb-4 text-3xl font-bold md:text-5xl">ShowCase de bebidas</h2>
+                <p class="mb-6 max-w-[480px] text-[#647084] md:mb-10 lg:mb-12">Aproveite as bebidas mais deliciosas de nosso freezer.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 mx-auto max-w-screen-xl px-4 2xl:px-0">
 
                 @foreach(\App\Models\Product::where('in_stock', '>', 0)->get() as $product)
                     <a href="#" class="relative bg-cover group rounded-xl bg-center overflow-hidden mx-auto sm:mr-0 xl:mx-auto cursor-pointer">
                         <img src="{{Storage::url($product->image)}}" alt="image" class="rounded-xl h-13 w-13">
 
-                        <div class="flex flex-col items-center justify-between mb-2">
-                            <h6 class="font-semibold text-base leading-7 text-black ">{{$product->name}}</h6>
+                        <div class="flex flex-col items-center justify-between mb-3">
+                            <h6 class="font-semibold text-base leading-7 text-black mt-2">{{$product->name}}</h6>
                             <h6 class="font-semibold text-base leading-7 text-indigo-600 text-right">R$ {{$product->sale_price}}</h6>
                             <div class="inline-flex items-center mt-2">
                                 <x-filament::button wire:click="openNewUserModal">
@@ -62,13 +62,8 @@
                 @endforeach
 
             </div>
+
         </div>
     </section>
-
-    <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-        <x-filament::button wire:click="submit" type="submit" form="submit" outlined>
-            Atualizar dados
-        </x-filament::button>
-    </div>
 
 </x-filament-panels::page>
