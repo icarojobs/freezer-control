@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\Login;
+use App\Filament\Pages\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
 use Filament\Navigation\NavigationItem;
-use Filament\Pages;
-use App\Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -31,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
             ->brandName(config('app.name'))
             ->favicon(asset('images/brands/icon-340.png'))
             ->navigationItems([
@@ -40,14 +41,15 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-link')
                     ->group('Fornecedores')
                     ->sort(5)
-                    ->openUrlInNewTab()
+                    ->openUrlInNewTab(),
             ])
             ->userMenuItems([
+                'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl()),
                 MenuItem::make()
                     ->label('Configurações')
                     ->url('')
                     ->icon('heroicon-o-cog-6-tooth'),
-                'logout' => MenuItem::make()->label('Sair')
+                'logout' => MenuItem::make()->label('Sair'),
             ])
             ->colors([
                 'primary' => Color::Amber,
@@ -77,7 +79,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                ApiServicePlugin::make()
+                ApiServicePlugin::make(),
             ]);
     }
 }
