@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 
 class CustomerResource extends Resource
@@ -125,6 +126,12 @@ class CustomerResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
+                    DeleteAction::make()
+                        ->action(fn (Customer $record) => $record->delete())
+                        ->requiresConfirmation()
+                        ->modalHeading('Deletar '. $table->getModelLabel())
+                        ->modalDescription('Tem certeza de que deseja excluir este '. $table->getModelLabel() .'? Isto não pode ser desfeito.')
+                        ->modalSubmitActionLabel('Sim, deletar!'),
                 ])->tooltip('Menu')
             ])
             ->bulkActions([

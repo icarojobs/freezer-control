@@ -11,6 +11,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 
 class ProductResource extends Resource
@@ -109,6 +110,12 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
+                    DeleteAction::make()
+                        ->action(fn (Product $record) => $record->delete())
+                        ->requiresConfirmation()
+                        ->modalHeading('Deletar '. $table->getModelLabel())
+                        ->modalDescription('Tem certeza de que deseja excluir este '. $table->getModelLabel() .'? Isto não pode ser desfeito.')
+                        ->modalSubmitActionLabel('Sim, deletar!'),
                 ])->tooltip('Menu')
             ])
             ->bulkActions([
