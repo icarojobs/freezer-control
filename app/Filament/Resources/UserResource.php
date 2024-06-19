@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Enums\PanelTypeEnum;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Pages\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use App\Enums\PanelTypeEnum;
-use Illuminate\Database\Eloquent\Model;
 
 class UserResource extends Resource
 {
@@ -31,6 +32,8 @@ class UserResource extends Resource
     protected static ?string $pluralModelLabel = 'Usuários';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Form $form): Form
     {
@@ -72,7 +75,7 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable()
-                    ->description(fn (User $record) => $record->panel->value === 'admin' ? 'Acesso administrativo' : 'acesso aplicativo'),
+                    ->description(fn(User $record) => $record->panel->value === 'admin' ? 'Acesso administrativo' : 'acesso aplicativo'),
 
                 TextColumn::make('email')
                     ->searchable(),
@@ -93,7 +96,7 @@ class UserResource extends Resource
                         ->form([
                             Select::make('panel')
                                 ->options(PanelTypeEnum::class)
-                                ->default(fn (User $user): string =>  $user->panel->value === 'admin' ? PanelTypeEnum::ADMIN->value : PanelTypeEnum::APP->value)
+                                ->default(fn(User $user): string => $user->panel->value === 'admin' ? PanelTypeEnum::ADMIN->value : PanelTypeEnum::APP->value)
                         ])
                         ->action(function (User $user, array $data): void {
                             $user->panel = $data['panel'];
@@ -115,6 +118,14 @@ class UserResource extends Resource
             ]);
     }
 
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\ViewUser::class,
+            Pages\EditUser::class,
+        ]);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -128,11 +139,12 @@ class UserResource extends Resource
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+            'view' => Pages\ViewUser::route('/{record}'),
         ];
     }
 
     public static function getNavigationBadge(): ?string
     {
-        return (string) static::getModel()::count();
+        return (string)static::getModel()::count();
     }
 }

@@ -1,23 +1,21 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Filament\Resources\ProductResource\Pages;
 
 use App\Filament\Resources\ProductResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditProduct extends EditRecord
+class ViewProduct extends ViewRecord
 {
     protected static string $resource = ProductResource::class;
 
-    protected static ?string $navigationLabel = 'Editar produto';
+    protected static ?string $navigationLabel = 'Visualizar produto';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
         ];
     }
 }
