@@ -23,6 +23,8 @@ class ProductResource extends Resource
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
 
+    protected static ?string $slug = 'produtos';
+
     protected static ?string $modelLabel = 'Produto';
 
     protected static ?string $pluralModelLabel = 'Produtos';
