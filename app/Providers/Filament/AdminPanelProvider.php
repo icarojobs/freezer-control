@@ -35,10 +35,16 @@ class AdminPanelProvider extends PanelProvider
             ->brandName(config('app.name'))
             ->favicon(asset('images/brands/icon-340.png'))
             ->navigationItems([
-                NavigationItem::make('Links externo')
+                NavigationItem::make('GitHub')
                     ->url('https://github.com/icarojobs/freezer-control')
                     ->icon('heroicon-o-link')
-                    ->group('Fornecedores')
+                    ->group('Links')
+                    ->sort(5)
+                    ->openUrlInNewTab(),
+                NavigationItem::make('App usuários')
+                    ->url('app')
+                    ->icon('heroicon-o-link')
+                    ->group('Links')
                     ->sort(5)
                     ->openUrlInNewTab()
             ])
