@@ -6,6 +6,7 @@ use App\Enums\PanelTypeEnum;
 use App\Filament\Forms\Components\PtbrMoney;
 use App\Filament\Resources\OrderResource;
 use App\Filament\Resources\ProductResource;
+use App\Models\Order;
 use App\Models\Product;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
@@ -126,11 +127,21 @@ class FreezerApp extends BaseDashboard implements HasTable, HasForms
                 Stack::make([
                     ImageColumn::make('image')
                         ->height('100%')
-                        ->width('100%'),
+                        ->width('100%')
+                        ->action(
+                            ViewAction::make()->label('')
+                                ->infolist(fn(Infolist $infolist) => ProductResource::infolist($infolist))
+                                ->form(fn(Form $form) => ProductResource::form($form))->icon('heroicon-m-eye')->tooltip('Ver mais'),
+                        ),
                     Stack::make([
                         TextColumn::make('name')
                             ->weight(FontWeight::ExtraBold)
-                            ->alignCenter()->size(200),
+                            ->alignCenter()->size(200)
+                            ->action(
+                                ViewAction::make()->label('')
+                                    ->infolist(fn(Infolist $infolist) => ProductResource::infolist($infolist))
+                                    ->form(fn(Form $form) => ProductResource::form($form))->icon('heroicon-m-eye')->tooltip('Ver mais'),
+                            ),
                     ]),
 
                     Split::make([
@@ -170,9 +181,6 @@ class FreezerApp extends BaseDashboard implements HasTable, HasForms
                     ->icon('heroicon-m-plus-circle')
                     ->color(Color::Teal)
                     ->url(fn(Product $record): string => '#' . urlencode($record->url)),
-                ViewAction::make()->label('')
-                    ->infolist(fn(Infolist $infolist) => ProductResource::infolist($infolist))
-                    ->form(fn(Form $form) => ProductResource::form($form))->icon('heroicon-m-eye')->tooltip('Ver mais'),
                 ActionGroup::make([
                     EditAction::make()->form(fn(Form $form) => ProductResource::form($form)),
                     DeleteAction::make(),
