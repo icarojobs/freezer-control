@@ -28,6 +28,8 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\AttachAction;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -40,6 +42,8 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Filament\Pages\Dashboard as BaseDashboard;
+use Illuminate\Support\Facades\Auth;
+
 
 class FreezerApp extends BaseDashboard implements HasTable, HasForms
 {
@@ -91,6 +95,9 @@ class FreezerApp extends BaseDashboard implements HasTable, HasForms
                             ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                             ->columnSpan(3),
 
+                        Hidden::make('user_id')
+                            ->dehydrateStateUsing(fn($state) => Auth::id()),
+
                         TextInput::make('quantity')
                             ->label('Quantidade')
                             ->numeric()
@@ -121,7 +128,7 @@ class FreezerApp extends BaseDashboard implements HasTable, HasForms
 
     public function table(Table $table): Table
     {
-        return $table
+        return OrderResource::table($table)
             ->query(Product::query())//where('in_stock', '>', 0)
             ->columns([
                 Stack::make([
@@ -145,7 +152,8 @@ class FreezerApp extends BaseDashboard implements HasTable, HasForms
                     ]),
 
                     Split::make([
-                        TextColumn::make('sale_price')->prefix('R$ ')->size(90)->alignCenter(),
+                        TextColumn::make('sale_price')
+                            ->prefix('R$ ')->size(90)->alignCenter(),
 
                     ])
                 ])->space(1),
@@ -156,6 +164,14 @@ class FreezerApp extends BaseDashboard implements HasTable, HasForms
                     //       TextColumn::make('cost_price')->prefix('R$ '),
                     //    ]),
                     //])->collapsible(),
+            ])->headerActions([
+                // ...
+                Action::make('shopping-cart')
+                    ->label(' Finalizar comprar')
+                    ->button()
+                    ->icon('heroicon-m-plus-circle')
+                    ->color(Color::Cyan),
+
             ])
             ->contentGrid([
                 'sm' => 1,
