@@ -100,6 +100,7 @@ class CreateOrder extends CreateRecord
                                 ->label('Cliente')
                                 ->disabled()
                                 ->columnSpan(1),
+
                             TextInput::make('placeholder_total')
                                 ->label('Valor total da compra')
                                 ->disabled()

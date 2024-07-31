@@ -204,6 +204,7 @@ class OrderResource extends Resource
                                 ->columnSpan(1),
                         ])
                         ->columnSpan(2),
+
                     Section::make()
                         ->schema([
                             Placeholder::make('total')
