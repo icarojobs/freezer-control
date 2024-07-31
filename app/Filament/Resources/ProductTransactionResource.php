@@ -23,6 +23,8 @@ class ProductTransactionResource extends Resource
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
 
+    protected static ?string $slug = 'movimentacoes';
+
     protected static ?string $modelLabel = 'Movimentação';
 
     protected static ?string $pluralModelLabel = 'Movimentações';
