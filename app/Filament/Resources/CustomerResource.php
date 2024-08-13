@@ -24,6 +24,8 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-wallet';
 
+    protected static ?string $slug = 'clientes';
+
     protected static ?string $modelLabel = 'Cliente';
 
     protected static ?string $recordTitleAttribute = 'name';

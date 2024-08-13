@@ -44,6 +44,8 @@ class OrderResource extends Resource
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
 
+    protected static ?string $slug = 'pedidos';
+
     protected static ?string $modelLabel = 'Venda';
 
     protected static ?string $pluralModelLabel = 'Vendas';
