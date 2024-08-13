@@ -7,6 +7,17 @@
 
 * Add botões de deleção com notificações no resources ([ef6cacd](https://github.com/icarojobs/freezer-control/commit/ef6cacda1b74d8238df548c75b789618fa0fd597))
 * add link produto modal infolist ([cfc703a](https://github.com/icarojobs/freezer-control/commit/cfc703a8ac117f7eb457a996c3d75f60b69bce9b))
+* add url amigavel slug resources ([563348d](https://github.com/icarojobs/freezer-control/commit/563348d1b7a30bb83db7ada3e52cc12c3a51bb62))
+* adicionado lista de produtos na Panel APP ([07f59d0](https://github.com/icarojobs/freezer-control/commit/07f59d06ff5ff886dc94b681f8f5c6a59c05fc14))
+* Iniciando dashboard APP | produtos ([42b2651](https://github.com/icarojobs/freezer-control/commit/42b26514ff4d140cdd11cd10360fe327f1ae1d35))
+
+## [1.1.0](https://github.com/icarojobs/freezer-control/compare/v1.0.0...v1.1.0) (2024-08-13)
+
+
+### Features
+
+* Add botões de deleção com notificações no resources ([ef6cacd](https://github.com/icarojobs/freezer-control/commit/ef6cacda1b74d8238df548c75b789618fa0fd597))
+* add link produto modal infolist ([cfc703a](https://github.com/icarojobs/freezer-control/commit/cfc703a8ac117f7eb457a996c3d75f60b69bce9b))
 * adicionado lista de produtos na Panel APP ([07f59d0](https://github.com/icarojobs/freezer-control/commit/07f59d06ff5ff886dc94b681f8f5c6a59c05fc14))
 * Iniciando dashboard APP | produtos ([42b2651](https://github.com/icarojobs/freezer-control/commit/42b26514ff4d140cdd11cd10360fe327f1ae1d35))
 
