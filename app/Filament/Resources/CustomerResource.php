@@ -15,6 +15,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 
 class CustomerResource extends Resource
@@ -24,6 +25,8 @@ class CustomerResource extends Resource
     protected static ?string $navigationGroup = 'Carteira de clientes';
 
     protected static ?string $navigationIcon = 'heroicon-o-wallet';
+
+    protected static ?string $slug = 'clientes';
 
     protected static ?string $modelLabel = 'Cliente';
 
@@ -129,6 +132,12 @@ class CustomerResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
+                    DeleteAction::make()
+                        ->action(fn (Customer $record) => $record->delete())
+                        ->requiresConfirmation()
+                        ->modalHeading('Deletar '. $table->getModelLabel())
+                        ->modalDescription('Tem certeza de que deseja excluir este '. $table->getModelLabel() .'? Isto não pode ser desfeito.')
+                        ->modalSubmitActionLabel('Sim, deletar!'),
                 ])->tooltip('Menu')
             ])
             ->bulkActions([

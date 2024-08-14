@@ -36,7 +36,6 @@ use Filament\Forms\Components\Hidden;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 
-
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
@@ -44,6 +43,8 @@ class OrderResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
+
+    protected static ?string $slug = 'pedidos';
 
     protected static ?string $modelLabel = 'Venda';
 
@@ -204,6 +205,7 @@ class OrderResource extends Resource
                                 ->columnSpan(1),
                         ])
                         ->columnSpan(2),
+
                     Section::make()
                         ->schema([
                             Placeholder::make('total')
@@ -337,7 +339,13 @@ class OrderResource extends Resource
                         return !is_null($stock) ? "{$stock} em estoque" : null;
                     })
                     ->afterStateUpdated(function ($state, $set, $get) {
+                        $stock = Product::find($get('product_id'))?->in_stock;
 
+                        if($state > $stock) {
+                            $state = $stock;
+                            $set('quantity', $stock);
+                        }
+                        
                         $unit_price = $get('unit_price');
 
                         $sub_total = number_format((float)$state * $unit_price, 2, '.', '');

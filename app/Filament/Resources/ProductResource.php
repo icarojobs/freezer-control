@@ -6,13 +6,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Forms\Components\PtbrMoney;
 use App\Filament\Resources\ProductResource\Pages;
+use App\Models\Blog\Link;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
+use Filament\Infolists\Components\ColorEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 
 class ProductResource extends Resource
@@ -24,6 +30,8 @@ class ProductResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-shopping-cart';
+
+    protected static ?string $slug = 'produtos';
 
     protected static ?string $modelLabel = 'Produto';
 
@@ -66,6 +74,16 @@ class ProductResource extends Resource
                             ->directory('images')
                             ->columnSpanFull(),
                     ]),
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('name'),
+                TextEntry::make('sale_price'),
+                ImageEntry::make('image'),
             ]);
     }
 
@@ -113,6 +131,12 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
+                    DeleteAction::make()
+                        ->action(fn (Product $record) => $record->delete())
+                        ->requiresConfirmation()
+                        ->modalHeading('Deletar '. $table->getModelLabel())
+                        ->modalDescription('Tem certeza de que deseja excluir este '. $table->getModelLabel() .'? Isto não pode ser desfeito.')
+                        ->modalSubmitActionLabel('Sim, deletar!'),
                 ])->tooltip('Menu')
             ])
             ->bulkActions([

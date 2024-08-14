@@ -11,9 +11,12 @@ Route::get('/qr-code', QrCodeController::class)
     ->name('frontend.qr-code');
 
 Route::get('teste', function () {
-    $customer = Customer::find(7);
+    $teste = 123;
 
-    (new CreateCustomerFromModel($customer))->send();
+    dd($teste);
+    //$customer = Customer::find(7);
+
+    //(new CreateCustomerFromModel($customer))->send();
 });
 
 Route::fallback(function () {

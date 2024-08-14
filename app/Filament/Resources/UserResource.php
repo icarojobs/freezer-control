@@ -16,6 +16,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -26,6 +27,8 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-user';
+
+    protected static ?string $slug = 'usuarios';
 
     protected static ?string $modelLabel = 'Usuário';
 
@@ -90,6 +93,26 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
+                    DeleteAction::make()
+                        ->action(function(User $record){
+                            if ($record->customer == null) {
+                                static::notificationDelete($record);
+                            } else {
+                                if($record->customer->orders->isEmpty()){
+                                    static::notificationDelete($record);
+                                    return null;
+                                }
+                                Notification::make()
+                                    ->title('Não é possível excluir este usuário!')
+                                    ->body("Este usuário tem pedidos associados em andamento.")
+                                    ->danger()
+                                    ->send();
+                            }
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Deletar '. $table->getModelLabel())
+                        ->modalDescription('Tem certeza de que deseja excluir este '. $table->getModelLabel() .'? Isto não pode ser desfeito.')
+                        ->modalSubmitActionLabel('Sim, deletar!'),
 
                     Action::make('Editar tipo')
                         ->icon('heroicon-o-pencil-square')
@@ -124,6 +147,17 @@ class UserResource extends Resource
             Pages\ViewUser::class,
             Pages\EditUser::class,
         ]);
+    }
+  
+    public static function notificationDelete(User $record): void
+    {
+        $record->delete();
+
+        Notification::make()
+            ->title('Excluído com sucesso!')
+            ->body("Usuário removido da sua carteira de clientes!")
+            ->success()
+            ->send();
     }
 
     public static function getRelations(): array

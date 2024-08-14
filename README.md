@@ -72,6 +72,15 @@ e o `monitoramento de vendas`.
  - [mockery/mockery](https://github.com/mockery/mockery)
 
 ---
+### 🔨 Github Templates + Workflow + Actions
+- [.github/workflows/dependabot-auto-merge.yml](https://github.com/dependabot/fetch-metadata)
+- [.github/workflows/release.yml](https://github.com/google-github-actions/release-please-action)
+- [.gihub/ISSUE_TEMPLATE](https://docs.github.com/pt/communities/using-templates-to-encourage-useful-issues-and-pull-requests/manually-creating-a-single-issue-template-for-your-repository)
+- [.github/CONTRIBUTING.md](https://docs.github.com/pt/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors)
+- [.github/PULL_REQUEST_TEMPLATE.md](https://docs.github.com/pt/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository)
+- [.github/dependabot.yml](https://docs.github.com/pt/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
+
+---
 ### :books: Configurando o projeto em um novo ambiente
 Simplesmente execute o comando `make` no seu terminal:
 ```bash
