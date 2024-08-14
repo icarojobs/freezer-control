@@ -17,6 +17,11 @@ up:
 	@./vendor/bin/sail up --force-recreate -d
 	@./vendor/bin/sail art storage:link
 
+.PHONY: npm
+npm:
+	@echo "--> Installing NPM dependencies......"
+	@./vendor/bin/sail npm install
+
 .PHONY: key-generate
 key-generate:
 	@echo "--> Generating new laravel key..."
