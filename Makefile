@@ -1,4 +1,4 @@
-default: env prepare up key-generate populate
+default: env prepare up npm key-generate populate
 	@echo "--> Your environment is ready to use! Access http://laravel.test and enjoy it!"
 
 .PHONY: env
