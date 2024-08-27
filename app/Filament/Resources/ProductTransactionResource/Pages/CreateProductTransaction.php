@@ -8,12 +8,18 @@ use App\Enums\ProductTransactionTypeEnum;
 use App\Filament\Resources\ProductTransactionResource;
 use App\Models\Product;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
 
 class CreateProductTransaction extends CreateRecord
 {
     protected static string $resource = ProductTransactionResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 
     protected function afterCreate(): void
     {
@@ -37,8 +43,19 @@ class CreateProductTransaction extends CreateRecord
             return;
         }
 
-        $this->updateStock();
-        $this->updateDescription();
+        if ($this->data['type'] === ProductTransactionTypeEnum::INVENTORY->value) {
+            $this->updateStock();
+            $this->updateDescription();
+
+            return;
+        }
+
+        Notification::make()
+            ->title("Erro ao realizar movimentação")
+            ->body("Selecione uma opção de movimentação válida")
+            ->warning()
+            ->persistent()
+            ->send();
     }
 
     private function updateStock(): void

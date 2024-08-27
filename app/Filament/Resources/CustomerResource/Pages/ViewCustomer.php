@@ -1,18 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Filament\Resources\CustomerResource\Pages;
 
 use App\Filament\Resources\CustomerResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditCustomer extends EditRecord
+class ViewCustomer extends ViewRecord
 {
     protected static string $resource = CustomerResource::class;
 
-    protected static ?string $navigationLabel = 'Editar cliente';
+    protected static ?string $navigationLabel = 'Visualizar cliente';
+
     protected function getHeaderActions(): array
     {
         return [
