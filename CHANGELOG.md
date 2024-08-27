@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/icarojobs/freezer-control/compare/v1.1.0...v1.1.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* call npm on  makefile ([16d2ab6](https://github.com/icarojobs/freezer-control/commit/16d2ab68097ad9dc73bbde20eadbcb6062a05e73))
+* corrige bug na movimentação de produtos ([c219237](https://github.com/icarojobs/freezer-control/commit/c219237acc7d5f4632c677a556ab88085251f854))
+* npm install command added to makefile ([7dcba57](https://github.com/icarojobs/freezer-control/commit/7dcba5780039f8d8b0a33d5cd1cc0572c7be4d9d))
+
 ## [1.1.0](https://github.com/icarojobs/freezer-control/compare/v1.0.0...v1.1.0) (2024-08-13)
 
 
