@@ -6,7 +6,6 @@ namespace App\Services\PaymentGateway\Connectors;
 
 use App\Services\PaymentGateway\Connectors\Asaas\Concerns\AsaasConfig;
 use App\Services\PaymentGateway\Contracts\AdapterInterface;
-use Illuminate\Support\Facades\Http;
 
 class AsaasConnector implements AdapterInterface
 {
@@ -14,49 +13,54 @@ class AsaasConnector implements AdapterInterface
 
     public function get(string $url)
     {
+        $request = $this->http
+            ->get($url);
+
         try {
-            return $this->http
-                ->get($url)
+            return $request
                 ->throw()
                 ->json();
-        } catch (\Exception $exception) {
-            return ['error' => $exception->getMessage()];
+        } catch (\Exception) {
+            return ['error' => json_decode($request->body(), true)];
         }
     }
 
     public function post(string $url, array $params)
     {
+        $request = $this->http->post($url, $params);
+
         try {
-            return $this->http
-                ->post($url, $params)
+            return $request
                 ->throw()
                 ->json();
-        } catch (\Exception $exception) {
-            return ['error' => $exception->getMessage()];
+        } catch (\Exception) {
+            return ['error' => json_decode($request->body(), true)];
         }
     }
 
     public function delete(string $url)
     {
+        $request = $this->http->delete($url);
+
         try {
-            return $this->http
-                ->delete($url)
+            return $request
                 ->throw()
                 ->json();
-        } catch (\Exception $exception) {
-            return ['error' => $exception->getMessage()];
+        } catch (\Exception) {
+            return ['error' => json_decode($request->body(), true)];
         }
     }
 
     public function put(string $url, array $params)
     {
+        $request = $this->http->put($url, $params);
+
         try {
-            return $this->http
-                ->put($url, $params)
+            return $request
                 ->throw()
                 ->json();
-        } catch (\Exception $exception) {
-            return ['error' => $exception->getMessage()];
+        } catch (\Exception) {
+            return ['error' => json_decode($request->body(), true)];
         }
     }
 }

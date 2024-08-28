@@ -157,32 +157,39 @@ class CreateOrder extends CreateRecord
         ];
     }
 
+    /**
+     * @throws Halt
+     */
     protected function handleRecordCreation(array $data): Model
     {
         $chargeData = $this->prepareData($this->data);
 
-        $gateway = self::Gateway();
+        $gateway = get_gateway();
         $payment = $gateway->payment()->create($chargeData);
+
+        $error = data_get($payment, 'error.errors.*.description')[0] ?? null;
+
+        if ($error) {
+            Notification::make()
+                ->title('Erro ao processar pagamento')
+                ->body($error)
+                ->danger()
+                ->persistent()
+                ->send();
+
+            throw new Halt();
+        }
 
         $creditCardData = $this->prepareCreditCardData($this->data);
 
         $response = $gateway->payment()->payWithCreditCard($payment['id'], $creditCardData);
 
         if ($response['status'] == 'CONFIRMED') {
-
             $data['status'] = OrderStatusEnum::PAID->value;
             $record = static::getModel()::create($data);
-        } else {
-            Notification::make()
-                ->title('Erro ao processar pagamento')
-                ->body('Não foi prossivel processar o pagamento. Tente novamente.')
-                ->danger()
-                ->send();
-            throw new Halt();
         }
 
-
-        //This need to be a job??!?!
+        //This need to be a job??!?! Maybe yes.
         OrderTransaction::create([
             'order_id' => $record->id,
             'charge_id' => $response['id'],
@@ -195,7 +202,6 @@ class CreateOrder extends CreateRecord
             'remote_ip' => $_SERVER['REMOTE_ADDR'], // Asaas não esta retornando o IP
 
         ]);
-
 
         return $record;
     }
@@ -237,14 +243,6 @@ class CreateOrder extends CreateRecord
         ];
     }
 
-    private static function Gateway()
-    {
-        $adapter = app(AsaasConnector::class);
-        $gateway = app(Gateway::class, ['adapter' => $adapter]);
-
-        return $gateway;
-    }
-
     protected function getCreatedNotificationTitle(): ?string
     {
         return 'Venda realizada com sucesso!';
@@ -252,7 +250,6 @@ class CreateOrder extends CreateRecord
 
     public function chargePix(): void
     {
-
         // 1. Gerar cobrança
       $data = [
             "billingType" => "PIX",
@@ -263,9 +260,7 @@ class CreateOrder extends CreateRecord
             "daysAfterDueDateToCancellationRegistration" => 1,
         ];
 
-        $adapter = app(AsaasConnector::class);
-        $gateway = app(Gateway::class, ['adapter' => $adapter]);
-
+        $gateway = get_gateway();
         $payment = $gateway->payment()->create($data);
 
         if (!isset($payment['id'])) {
@@ -286,9 +281,7 @@ class CreateOrder extends CreateRecord
     {
         $chargeId = session('session_'.Auth::id())['payment_id'];
 
-        $adapter = app(AsaasConnector::class);
-        $gateway = new Gateway($adapter);
-
+        $gateway = get_gateway();
         $payment = $gateway->payment()->get($chargeId);
 
         $this->setStatus($payment);
@@ -300,7 +293,6 @@ class CreateOrder extends CreateRecord
                 $this->paymentStatus = OrderTransactionsStatusEnum::RECEIVED->value;
             }
         }
-
 
         if (
             in_array(
