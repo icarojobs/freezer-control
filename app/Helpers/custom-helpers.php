@@ -1,6 +1,15 @@
 <?php
 
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
 use Carbon\CarbonImmutable;
+
+if (!function_exists('get_gateway')) {
+    function get_gateway() {
+        $adapter = app(AsaasConnector::class);
+        return app(Gateway::class, ['adapter' => $adapter]);
+    }
+}
 
 if (!function_exists('clear_string')) {
     function clear_string(?string $string): ?string
