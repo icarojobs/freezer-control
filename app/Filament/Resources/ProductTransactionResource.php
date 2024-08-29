@@ -7,8 +7,11 @@ namespace App\Filament\Resources;
 use App\Enums\ProductTransactionTypeEnum;
 use App\Filament\Resources\ProductTransactionResource\Pages;
 use App\Models\ProductTransaction;
+use Closure;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -52,7 +55,16 @@ class ProductTransactionResource extends Resource
                             ->required()
                             ->label('Tipo de Movimentação')
                             ->options(ProductTransactionTypeEnum::class)
-                            ->inline(),
+                            ->inline()
+                            ->reactive(),
+
+                        Forms\Components\Select::make('supplier_id')
+                            ->label('Fornecedor')
+                            ->relationship('supplier', 'registered_name')
+                            ->searchable()
+                            ->preload()
+                            ->reactive()
+                            ->hidden(fn ($get) => $get('type') !== 'buy'),
 
                         Forms\Components\Placeholder::make('description')
                             ->label('Descrição')
@@ -71,6 +83,7 @@ class ProductTransactionResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->label('Descrição')
                     ->searchable(),
 
@@ -82,6 +95,10 @@ class ProductTransactionResource extends Resource
                 Tables\Columns\TextColumn::make('quantity')
                     ->label('Quantidade')
                     ->numeric()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('supplier.registered_name')
+                    ->label('Fornecedor')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')

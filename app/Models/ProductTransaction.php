@@ -21,6 +21,10 @@ class ProductTransaction extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class)->where('status', 1);
+    }
 
     public function scopeApplyFirstQueryScopeGetSale($query)
     {
