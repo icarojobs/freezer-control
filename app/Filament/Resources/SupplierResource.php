@@ -38,12 +38,13 @@ class SupplierResource extends Resource
                         Forms\Components\TextInput::make('document')
                             ->label('Cnpj')
                             ->required()
-                            ->maxLength(14),
+                            ->mask('99.999.999/9999-99'),
                         Forms\Components\TextInput::make('ie')
                             ->label('Incrição estadual')
                             ->maxLength(14),
                         Forms\Components\TextInput::make('telephone')
                             ->label('Telefone')
+                            ->mask('(99) 99999-9999')
                             ->tel()
                             ->maxLength(120),
                         Forms\Components\TextInput::make('email')
