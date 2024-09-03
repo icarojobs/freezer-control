@@ -174,7 +174,7 @@ class CreateOrder extends CreateRecord
                 ->title('Erro ao processar pagamento')
                 ->body($error)
                 ->danger()
-                ->persistent()
+                ->duration(4000)
                 ->send();
 
             throw new Halt();
