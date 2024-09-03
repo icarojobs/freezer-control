@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/icarojobs/freezer-control/compare/v1.1.1...v1.1.2) (2024-08-28)
+
+
+### Bug Fixes
+
+* solve problem of client response ([bfd6e41](https://github.com/icarojobs/freezer-control/commit/bfd6e4150b4f5c3b9d4aed69faaa40384161d4c0))
+
 ## [1.1.1](https://github.com/icarojobs/freezer-control/compare/v1.1.0...v1.1.1) (2024-08-27)
 
 
