@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
-            "version": "1.2.23",
+            "version": "1.2.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnourValar/eloquent-serialize.git",
-                "reference": "fd7bc1dc2c98fe705647ab4b81d13ea3d599ea1f"
+                "reference": "77e3fc7da44fa96b6148a1613dd76fe954a5f279"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnourValar/eloquent-serialize/zipball/fd7bc1dc2c98fe705647ab4b81d13ea3d599ea1f",
-                "reference": "fd7bc1dc2c98fe705647ab4b81d13ea3d599ea1f",
+                "url": "https://api.github.com/repos/AnourValar/eloquent-serialize/zipball/77e3fc7da44fa96b6148a1613dd76fe954a5f279",
+                "reference": "77e3fc7da44fa96b6148a1613dd76fe954a5f279",
                 "shasum": ""
             },
             "require": {
@@ -68,9 +68,9 @@
             ],
             "support": {
                 "issues": "https://github.com/AnourValar/eloquent-serialize/issues",
-                "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.23"
+                "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.24"
             },
-            "time": "2024-07-12T10:52:26+00:00"
+            "time": "2024-09-08T15:57:08+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -816,16 +816,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.9.0",
+            "version": "3.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "d8f68ea6cc00912e5313237130b8c8decf4d28c6"
+                "reference": "d7dc08f98cba352b2bab5d32c5e58f7e745c11a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d8f68ea6cc00912e5313237130b8c8decf4d28c6",
-                "reference": "d8f68ea6cc00912e5313237130b8c8decf4d28c6",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d7dc08f98cba352b2bab5d32c5e58f7e745c11a7",
+                "reference": "d7dc08f98cba352b2bab5d32c5e58f7e745c11a7",
                 "shasum": ""
             },
             "require": {
@@ -841,7 +841,7 @@
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "1.11.7",
+                "phpstan/phpstan": "1.12.0",
                 "phpstan/phpstan-strict-rules": "^1.6",
                 "phpunit/phpunit": "9.6.20",
                 "psalm/plugin-phpunit": "0.18.4",
@@ -909,7 +909,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.9.0"
+                "source": "https://github.com/doctrine/dbal/tree/3.9.1"
             },
             "funding": [
                 {
@@ -925,7 +925,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-08-15T07:34:42+00:00"
+            "time": "2024-09-01T13:49:23+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -2401,16 +2401,16 @@
         },
         {
             "name": "lara-zeus/quantity",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lara-zeus/quantity.git",
-                "reference": "55e1c628a0298c8040f8643e4dfb884983fb35d8"
+                "reference": "30558966665b990eba55b558c8a1ef4bd02cb011"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lara-zeus/quantity/zipball/55e1c628a0298c8040f8643e4dfb884983fb35d8",
-                "reference": "55e1c628a0298c8040f8643e4dfb884983fb35d8",
+                "url": "https://api.github.com/repos/lara-zeus/quantity/zipball/30558966665b990eba55b558c8a1ef4bd02cb011",
+                "reference": "30558966665b990eba55b558c8a1ef4bd02cb011",
                 "shasum": ""
             },
             "require": {
@@ -2478,7 +2478,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-17T04:07:52+00:00"
+            "time": "2024-09-02T16:16:19+00:00"
         },
         {
             "name": "laravel/framework",
