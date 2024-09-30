@@ -13,7 +13,7 @@
         "laravel-vite-plugin": "^1.0.5",
         "postcss": "^8.4.47",
         "scrollreveal": "^4.0.9",
-        "tailwindcss": "^3.4.12",
+        "tailwindcss": "^3.4.13",
         "vite": "^5.4.8"
     }
 }
