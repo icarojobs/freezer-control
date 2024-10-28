@@ -5270,16 +5270,16 @@
         },
         {
             "name": "rupadana/filament-api-service",
-            "version": "3.3.1",
+            "version": "3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rupadana/filament-api-service.git",
-                "reference": "aa665e9208b26dc2052a91d8deb5c44b679c459b"
+                "reference": "373e2bca08a98143f317015f2e00ba86e705b92d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/aa665e9208b26dc2052a91d8deb5c44b679c459b",
-                "reference": "aa665e9208b26dc2052a91d8deb5c44b679c459b",
+                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/373e2bca08a98143f317015f2e00ba86e705b92d",
+                "reference": "373e2bca08a98143f317015f2e00ba86e705b92d",
                 "shasum": ""
             },
             "require": {
@@ -5289,7 +5289,7 @@
                 "laravel/sanctum": "^3.2|^4.0",
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.14.0",
-                "spatie/laravel-query-builder": "^5.3"
+                "spatie/laravel-query-builder": "^5.3|^6.2"
             },
             "require-dev": {
                 "laravel/pint": "^1.0",
@@ -5348,7 +5348,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-28T07:48:26+00:00"
+            "time": "2024-10-23T13:33:32+00:00"
         },
         {
             "name": "ryangjchandler/blade-capture-directive",
@@ -5758,16 +5758,16 @@
         },
         {
             "name": "spatie/laravel-query-builder",
-            "version": "5.8.1",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-query-builder.git",
-                "reference": "caa8467fa9e127ba7ea9e0aac93c71324365bae2"
+                "reference": "64f0453f4dea6a6fabf1ce4ddbb553e14da67bb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/caa8467fa9e127ba7ea9e0aac93c71324365bae2",
-                "reference": "caa8467fa9e127ba7ea9e0aac93c71324365bae2",
+                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/64f0453f4dea6a6fabf1ce4ddbb553e14da67bb6",
+                "reference": "64f0453f4dea6a6fabf1ce4ddbb553e14da67bb6",
                 "shasum": ""
             },
             "require": {
@@ -5780,10 +5780,11 @@
             "require-dev": {
                 "ext-json": "*",
                 "mockery/mockery": "^1.4",
+                "nunomaduro/larastan": "^2.0",
                 "orchestra/testbench": "^7.0|^8.0",
                 "pestphp/pest": "^2.0",
-                "spatie/invade": "^2.0",
-                "spatie/laravel-ray": "^1.28"
+                "phpunit/phpunit": "^10.0",
+                "spatie/invade": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -5827,7 +5828,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-05-10T08:19:35+00:00"
+            "time": "2024-10-03T11:10:10+00:00"
         },
         {
             "name": "symfony/console",
