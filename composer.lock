@@ -2405,16 +2405,16 @@
         },
         {
             "name": "lara-zeus/quantity",
-            "version": "1.0.8",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lara-zeus/quantity.git",
-                "reference": "30558966665b990eba55b558c8a1ef4bd02cb011"
+                "reference": "32db691418a896ae1ef8407be654c0ba0f51af5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lara-zeus/quantity/zipball/30558966665b990eba55b558c8a1ef4bd02cb011",
-                "reference": "30558966665b990eba55b558c8a1ef4bd02cb011",
+                "url": "https://api.github.com/repos/lara-zeus/quantity/zipball/32db691418a896ae1ef8407be654c0ba0f51af5e",
+                "reference": "32db691418a896ae1ef8407be654c0ba0f51af5e",
                 "shasum": ""
             },
             "require": {
@@ -2449,9 +2449,8 @@
             ],
             "authors": [
                 {
-                    "name": "php coder",
-                    "email": "info@larazeus.com",
-                    "role": "Owner"
+                    "name": "Lara Zeus (Ash)",
+                    "email": "info@larazeus.com"
                 }
             ],
             "description": "filamentphp Input Number component, with user-friendly increment and decrement controls",
@@ -2482,7 +2481,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-02T16:16:19+00:00"
+            "time": "2024-12-22T14:48:49+00:00"
         },
         {
             "name": "laravel/framework",
