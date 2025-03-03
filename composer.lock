@@ -2479,16 +2479,16 @@
         },
         {
             "name": "lara-zeus/quantity",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lara-zeus/quantity.git",
-                "reference": "32db691418a896ae1ef8407be654c0ba0f51af5e"
+                "reference": "9311b096dce9720feac98a5b8d5e722545604a32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lara-zeus/quantity/zipball/32db691418a896ae1ef8407be654c0ba0f51af5e",
-                "reference": "32db691418a896ae1ef8407be654c0ba0f51af5e",
+                "url": "https://api.github.com/repos/lara-zeus/quantity/zipball/9311b096dce9720feac98a5b8d5e722545604a32",
+                "reference": "9311b096dce9720feac98a5b8d5e722545604a32",
                 "shasum": ""
             },
             "require": {
@@ -2555,7 +2555,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-22T14:48:49+00:00"
+            "time": "2025-03-02T14:28:41+00:00"
         },
         {
             "name": "laravel/framework",
