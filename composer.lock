@@ -649,20 +649,20 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.11.33",
+            "version": "v0.12.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "3c44e2ec517045590cb36b165967283fd5798edc"
+                "reference": "996dc8db3e09e7f893d4883dfdfa8f2839fee531"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/3c44e2ec517045590cb36b165967283fd5798edc",
-                "reference": "3c44e2ec517045590cb36b165967283fd5798edc",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/996dc8db3e09e7f893d4883dfdfa8f2839fee531",
+                "reference": "996dc8db3e09e7f893d4883dfdfa8f2839fee531",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^10.0|^11.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
                 "myclabs/deep-copy": "^1.12",
                 "nikic/php-parser": "^5.0",
                 "php": "^8.1",
@@ -672,10 +672,10 @@
             "require-dev": {
                 "laravel/pint": "^v1.1.0",
                 "nunomaduro/collision": "^7.0|^8.0",
-                "orchestra/testbench": "^8.0|^9.0",
-                "pestphp/pest": "^2.34",
-                "pestphp/pest-plugin-laravel": "^2.3",
-                "phpunit/phpunit": "^10.5",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "pestphp/pest": "^2.34|^3.7",
+                "pestphp/pest-plugin-laravel": "^2.3|^3.1",
+                "phpunit/phpunit": "^10.5|^11.5.3",
                 "spatie/laravel-permission": "^6.10",
                 "spatie/pest-plugin-snapshots": "^2.1"
             },
@@ -713,7 +713,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.11.33"
+                "source": "https://github.com/dedoc/scramble/tree/v0.12.10"
             },
             "funding": [
                 {
@@ -721,7 +721,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-08T07:53:14+00:00"
+            "time": "2025-02-24T20:12:29+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -3956,16 +3956,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.12.1",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845"
+                "reference": "024473a478be9df5fdaca2c793f2232fe788e414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/123267b2c49fbf30d78a7b2d333f6be754b94845",
-                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/024473a478be9df5fdaca2c793f2232fe788e414",
+                "reference": "024473a478be9df5fdaca2c793f2232fe788e414",
                 "shasum": ""
             },
             "require": {
@@ -4004,7 +4004,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.12.1"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.0"
             },
             "funding": [
                 {
@@ -4012,7 +4012,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-08T17:47:46+00:00"
+            "time": "2025-02-12T12:17:51+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -5441,28 +5441,28 @@
         },
         {
             "name": "rupadana/filament-api-service",
-            "version": "3.4.2",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rupadana/filament-api-service.git",
-                "reference": "815ffbae95d45a9c14291db26bcd59b174b02d9a"
+                "reference": "ed75b8db2a5f4600618f6b3047903606c9b1ea8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/815ffbae95d45a9c14291db26bcd59b174b02d9a",
-                "reference": "815ffbae95d45a9c14291db26bcd59b174b02d9a",
+                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/ed75b8db2a5f4600618f6b3047903606c9b1ea8d",
+                "reference": "ed75b8db2a5f4600618f6b3047903606c9b1ea8d",
                 "shasum": ""
             },
             "require": {
-                "dedoc/scramble": "^0.11.12",
+                "dedoc/scramble": "^0.12.10",
                 "filament/filament": "^3.2",
-                "illuminate/contracts": "^10.0|^11.0",
-                "laravel/framework": "^10.10|^11.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "laravel/framework": "^10.10|^11.0|^12.0",
                 "laravel/sanctum": "^3.2|^4.0",
                 "php": "^8.1",
-                "spatie/laravel-package-tools": "^1.14.0",
+                "spatie/laravel-package-tools": "^1.19",
                 "spatie/laravel-permission": "^6.0",
-                "spatie/laravel-query-builder": "^5.3|^6.2"
+                "spatie/laravel-query-builder": "^5.3|^6.3"
             },
             "require-dev": {
                 "laravel/pint": "^1.0",
@@ -5521,7 +5521,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-19T08:51:51+00:00"
+            "time": "2025-03-03T01:29:13+00:00"
         },
         {
             "name": "ryangjchandler/blade-capture-directive",
@@ -5849,16 +5849,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "6.15.0",
+            "version": "6.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "86074fcfd127f9fa7bcdf550b7c938e3beb0d65f"
+                "reference": "4fa03c06509e037a4d42c131d0f181e3e4bbd483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/86074fcfd127f9fa7bcdf550b7c938e3beb0d65f",
-                "reference": "86074fcfd127f9fa7bcdf550b7c938e3beb0d65f",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/4fa03c06509e037a4d42c131d0f181e3e4bbd483",
+                "reference": "4fa03c06509e037a4d42c131d0f181e3e4bbd483",
                 "shasum": ""
             },
             "require": {
@@ -5920,7 +5920,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/6.15.0"
+                "source": "https://github.com/spatie/laravel-permission/tree/6.16.0"
             },
             "funding": [
                 {
@@ -5928,36 +5928,35 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-17T19:18:01+00:00"
+            "time": "2025-02-28T20:29:57+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
-            "version": "6.3.0",
+            "version": "6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-query-builder.git",
-                "reference": "96746011866fc3c67953557c17b7d017bf5b3e07"
+                "reference": "465d9b7364590c9ae3ee3738ff8a293e685dd588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/96746011866fc3c67953557c17b7d017bf5b3e07",
-                "reference": "96746011866fc3c67953557c17b7d017bf5b3e07",
+                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/465d9b7364590c9ae3ee3738ff8a293e685dd588",
+                "reference": "465d9b7364590c9ae3ee3738ff8a293e685dd588",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^10.0|^11.0",
-                "illuminate/http": "^10.0|^11.0",
-                "illuminate/support": "^10.0|^11.0",
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "illuminate/http": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
                 "php": "^8.2",
                 "spatie/laravel-package-tools": "^1.11"
             },
             "require-dev": {
                 "ext-json": "*",
-                "larastan/larastan": "^2.9",
                 "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^7.0|^8.0",
-                "pestphp/pest": "^2.0",
-                "phpunit/phpunit": "^10.0",
+                "orchestra/testbench": "^7.0|^8.0|^10.0",
+                "pestphp/pest": "^2.0|^3.7",
+                "phpunit/phpunit": "^10.0|^11.5.3",
                 "spatie/invade": "^2.0"
             },
             "type": "library",
@@ -6002,7 +6001,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-12-23T22:16:11+00:00"
+            "time": "2025-02-19T07:14:53+00:00"
         },
         {
             "name": "symfony/console",
