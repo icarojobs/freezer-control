@@ -649,16 +649,16 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.12.10",
+            "version": "v0.12.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "996dc8db3e09e7f893d4883dfdfa8f2839fee531"
+                "reference": "aee9401500f398e9b570298a6757104a757c170c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/996dc8db3e09e7f893d4883dfdfa8f2839fee531",
-                "reference": "996dc8db3e09e7f893d4883dfdfa8f2839fee531",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/aee9401500f398e9b570298a6757104a757c170c",
+                "reference": "aee9401500f398e9b570298a6757104a757c170c",
                 "shasum": ""
             },
             "require": {
@@ -713,7 +713,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.12.10"
+                "source": "https://github.com/dedoc/scramble/tree/v0.12.15"
             },
             "funding": [
                 {
@@ -721,7 +721,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-24T20:12:29+00:00"
+            "time": "2025-03-22T13:58:51+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -5441,16 +5441,16 @@
         },
         {
             "name": "rupadana/filament-api-service",
-            "version": "3.4.4",
+            "version": "3.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rupadana/filament-api-service.git",
-                "reference": "ed75b8db2a5f4600618f6b3047903606c9b1ea8d"
+                "reference": "e3e5532be402cfb6bbf44786d29c7aea2490595c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/ed75b8db2a5f4600618f6b3047903606c9b1ea8d",
-                "reference": "ed75b8db2a5f4600618f6b3047903606c9b1ea8d",
+                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/e3e5532be402cfb6bbf44786d29c7aea2490595c",
+                "reference": "e3e5532be402cfb6bbf44786d29c7aea2490595c",
                 "shasum": ""
             },
             "require": {
@@ -5521,7 +5521,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-03T01:29:13+00:00"
+            "time": "2025-03-21T00:50:24+00:00"
         },
         {
             "name": "ryangjchandler/blade-capture-directive",
