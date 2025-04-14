@@ -14,6 +14,6 @@
         "postcss": "^8.5.3",
         "scrollreveal": "^4.0.9",
         "tailwindcss": "^3.4.17",
-        "vite": "^5.4.11"
+        "vite": "^6.2.6"
     }
 }
