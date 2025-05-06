@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/icarojobs/freezer-control/compare/v1.1.2...v1.1.3) (2024-09-03)
+
+
+### Bug Fixes
+
+* corrige notification ao exibir erro no pedido ([a167a2d](https://github.com/icarojobs/freezer-control/commit/a167a2d99edd302b995332c18062ce3ea4bdf58e))
+
 ## [1.1.2](https://github.com/icarojobs/freezer-control/compare/v1.1.1...v1.1.2) (2024-08-28)
 
 
