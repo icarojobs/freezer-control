@@ -1443,16 +1443,16 @@
         },
         {
             "name": "filament/actions",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/actions.git",
-                "reference": "08caa8dec43ebf4192dcd999cca786656a3dbc90"
+                "reference": "66b509aa72fa882ce91218eb743684a9350bc3fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/actions/zipball/08caa8dec43ebf4192dcd999cca786656a3dbc90",
-                "reference": "08caa8dec43ebf4192dcd999cca786656a3dbc90",
+                "url": "https://api.github.com/repos/filamentphp/actions/zipball/66b509aa72fa882ce91218eb743684a9350bc3fb",
+                "reference": "66b509aa72fa882ce91218eb743684a9350bc3fb",
                 "shasum": ""
             },
             "require": {
@@ -1492,20 +1492,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2025-04-30T09:16:43+00:00"
+            "time": "2025-05-19T07:25:24+00:00"
         },
         {
             "name": "filament/filament",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/panels.git",
-                "reference": "2c4783bdd973967cc2dbc2dc518c70b04839ace3"
+                "reference": "ed0a0109e6b2663247fcd73076c95c918bc5b412"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/panels/zipball/2c4783bdd973967cc2dbc2dc518c70b04839ace3",
-                "reference": "2c4783bdd973967cc2dbc2dc518c70b04839ace3",
+                "url": "https://api.github.com/repos/filamentphp/panels/zipball/ed0a0109e6b2663247fcd73076c95c918bc5b412",
+                "reference": "ed0a0109e6b2663247fcd73076c95c918bc5b412",
                 "shasum": ""
             },
             "require": {
@@ -1557,20 +1557,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2025-04-30T09:16:38+00:00"
+            "time": "2025-05-21T08:45:13+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "22e62dc2b4c68018e9846aadf7e8c5310d0e38cf"
+                "reference": "eeb18e482b1addc5fe88d57f59d6b91cb71957ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/22e62dc2b4c68018e9846aadf7e8c5310d0e38cf",
-                "reference": "22e62dc2b4c68018e9846aadf7e8c5310d0e38cf",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/eeb18e482b1addc5fe88d57f59d6b91cb71957ff",
+                "reference": "eeb18e482b1addc5fe88d57f59d6b91cb71957ff",
                 "shasum": ""
             },
             "require": {
@@ -1613,11 +1613,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2025-04-30T09:16:39+00:00"
+            "time": "2025-05-21T08:45:29+00:00"
         },
         {
             "name": "filament/infolists",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/infolists.git",
@@ -1668,16 +1668,16 @@
         },
         {
             "name": "filament/notifications",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
-                "reference": "edf7960621b2181b4c2fc040b0712fbd5dd036ef"
+                "reference": "356f50e24798a6f06522bfa5123c6ffd054171d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/edf7960621b2181b4c2fc040b0712fbd5dd036ef",
-                "reference": "edf7960621b2181b4c2fc040b0712fbd5dd036ef",
+                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/356f50e24798a6f06522bfa5123c6ffd054171d3",
+                "reference": "356f50e24798a6f06522bfa5123c6ffd054171d3",
                 "shasum": ""
             },
             "require": {
@@ -1716,20 +1716,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2025-04-23T06:39:49+00:00"
+            "time": "2025-05-21T08:44:14+00:00"
         },
         {
             "name": "filament/support",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "0ab49fdb2bc937257d6f8e1f7b97a03216a43656"
+                "reference": "537663fa2c5057aa236a189255b623b5124d32d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/0ab49fdb2bc937257d6f8e1f7b97a03216a43656",
-                "reference": "0ab49fdb2bc937257d6f8e1f7b97a03216a43656",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/537663fa2c5057aa236a189255b623b5124d32d8",
+                "reference": "537663fa2c5057aa236a189255b623b5124d32d8",
                 "shasum": ""
             },
             "require": {
@@ -1775,20 +1775,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2025-04-30T09:16:34+00:00"
+            "time": "2025-05-21T08:45:20+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "bb5fad7306c39fdbb08d97982073114ac465bf92"
+                "reference": "64806e3c13caeabb23a8668a7aaf1efc8395df96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/bb5fad7306c39fdbb08d97982073114ac465bf92",
-                "reference": "bb5fad7306c39fdbb08d97982073114ac465bf92",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/64806e3c13caeabb23a8668a7aaf1efc8395df96",
+                "reference": "64806e3c13caeabb23a8668a7aaf1efc8395df96",
                 "shasum": ""
             },
             "require": {
@@ -1827,11 +1827,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2025-04-30T09:16:33+00:00"
+            "time": "2025-05-19T07:26:42+00:00"
         },
         {
             "name": "filament/widgets",
-            "version": "v3.3.14",
+            "version": "v3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/widgets.git",
@@ -6168,16 +6168,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.5.1",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6"
+                "reference": "63afe740e99a13ba87ec199bb07bbdee937a5b62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
-                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/63afe740e99a13ba87ec199bb07bbdee937a5b62",
+                "reference": "63afe740e99a13ba87ec199bb07bbdee937a5b62",
                 "shasum": ""
             },
             "require": {
@@ -6190,7 +6190,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.5-dev"
+                    "dev-main": "3.6-dev"
                 }
             },
             "autoload": {
@@ -6215,7 +6215,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -6231,7 +6231,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2024-09-25T14:21:43+00:00"
         },
         {
             "name": "symfony/error-handler",
@@ -6390,16 +6390,16 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v3.5.1",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "7642f5e970b672283b7823222ae8ef8bbc160b9f"
+                "reference": "59eb412e93815df44f05f342958efa9f46b1e586"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/7642f5e970b672283b7823222ae8ef8bbc160b9f",
-                "reference": "7642f5e970b672283b7823222ae8ef8bbc160b9f",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/59eb412e93815df44f05f342958efa9f46b1e586",
+                "reference": "59eb412e93815df44f05f342958efa9f46b1e586",
                 "shasum": ""
             },
             "require": {
@@ -6413,7 +6413,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.5-dev"
+                    "dev-main": "3.6-dev"
                 }
             },
             "autoload": {
@@ -6446,7 +6446,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.5.1"
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -6462,7 +6462,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2024-09-25T14:21:43+00:00"
         },
         {
             "name": "symfony/finder",
@@ -7736,16 +7736,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v3.5.1",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "e53260aabf78fb3d63f8d79d69ece59f80d5eda0"
+                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/e53260aabf78fb3d63f8d79d69ece59f80d5eda0",
-                "reference": "e53260aabf78fb3d63f8d79d69ece59f80d5eda0",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
+                "reference": "f021b05a130d35510bd6b25fe9053c2a8a15d5d4",
                 "shasum": ""
             },
             "require": {
@@ -7763,7 +7763,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.5-dev"
+                    "dev-main": "3.6-dev"
                 }
             },
             "autoload": {
@@ -7799,7 +7799,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v3.5.1"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -7815,7 +7815,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2025-04-25T09:37:31+00:00"
         },
         {
             "name": "symfony/string",
@@ -8001,16 +8001,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.5.1",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "4667ff3bd513750603a09c8dedbea942487fb07c"
+                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/4667ff3bd513750603a09c8dedbea942487fb07c",
-                "reference": "4667ff3bd513750603a09c8dedbea942487fb07c",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
+                "reference": "df210c7a2573f1913b2d17cc95f90f53a73d8f7d",
                 "shasum": ""
             },
             "require": {
@@ -8023,7 +8023,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.5-dev"
+                    "dev-main": "3.6-dev"
                 }
             },
             "autoload": {
@@ -8059,7 +8059,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.5.1"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -8075,7 +8075,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2024-09-27T08:32:26+00:00"
         },
         {
             "name": "symfony/uid",
