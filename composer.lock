@@ -6009,16 +6009,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v6.4.21",
+            "version": "v6.4.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a3011c7b7adb58d89f6c0d822abb641d7a5f9719"
+                "reference": "7d29659bc3c9d8e9a34e2c3414ef9e9e003e6cf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a3011c7b7adb58d89f6c0d822abb641d7a5f9719",
-                "reference": "a3011c7b7adb58d89f6c0d822abb641d7a5f9719",
+                "url": "https://api.github.com/repos/symfony/console/zipball/7d29659bc3c9d8e9a34e2c3414ef9e9e003e6cf3",
+                "reference": "7d29659bc3c9d8e9a34e2c3414ef9e9e003e6cf3",
                 "shasum": ""
             },
             "require": {
@@ -6083,7 +6083,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.4.21"
+                "source": "https://github.com/symfony/console/tree/v6.4.22"
             },
             "funding": [
                 {
@@ -6099,7 +6099,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-07T15:42:41+00:00"
+            "time": "2025-05-07T07:05:04+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -7819,16 +7819,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.2.6",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "a214fe7d62bd4df2a76447c67c6b26e1d5e74931"
+                "reference": "f3570b8c61ca887a9e2938e85cb6458515d2b125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/a214fe7d62bd4df2a76447c67c6b26e1d5e74931",
-                "reference": "a214fe7d62bd4df2a76447c67c6b26e1d5e74931",
+                "url": "https://api.github.com/repos/symfony/string/zipball/f3570b8c61ca887a9e2938e85cb6458515d2b125",
+                "reference": "f3570b8c61ca887a9e2938e85cb6458515d2b125",
                 "shasum": ""
             },
             "require": {
@@ -7886,7 +7886,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.2.6"
+                "source": "https://github.com/symfony/string/tree/v7.3.0"
             },
             "funding": [
                 {
@@ -7902,7 +7902,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-20T20:18:16+00:00"
+            "time": "2025-04-20T20:19:01+00:00"
         },
         {
             "name": "symfony/translation",
@@ -8690,16 +8690,16 @@
         },
         {
             "name": "captainhook/captainhook",
-            "version": "5.25.2",
+            "version": "5.25.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/captainhookphp/captainhook.git",
-                "reference": "e096240c130557be6d2059881341db7ebd84f653"
+                "url": "https://github.com/captainhook-git/captainhook.git",
+                "reference": "c1e8d7adf3d43ac4b388b25a04496a47c6bbe694"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/e096240c130557be6d2059881341db7ebd84f653",
-                "reference": "e096240c130557be6d2059881341db7ebd84f653",
+                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/c1e8d7adf3d43ac4b388b25a04496a47c6bbe694",
+                "reference": "c1e8d7adf3d43ac4b388b25a04496a47c6bbe694",
                 "shasum": ""
             },
             "require": {
@@ -8761,8 +8761,8 @@
                 "prepare-commit-msg"
             ],
             "support": {
-                "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook/tree/5.25.2"
+                "issues": "https://github.com/captainhook-git/captainhook/issues",
+                "source": "https://github.com/captainhook-git/captainhook/tree/5.25.4"
             },
             "funding": [
                 {
@@ -8770,20 +8770,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-30T17:23:19+00:00"
+            "time": "2025-06-01T15:20:18+00:00"
         },
         {
             "name": "captainhook/secrets",
-            "version": "0.9.6",
+            "version": "0.9.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/captainhookphp/secrets.git",
-                "reference": "0232c67019e11c4bee4ee9bfec9575b67e0854e5"
+                "url": "https://github.com/captainhook-git/secrets.git",
+                "reference": "d62c97f75f81ac98e22f1c282482bd35fa82f631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/secrets/zipball/0232c67019e11c4bee4ee9bfec9575b67e0854e5",
-                "reference": "0232c67019e11c4bee4ee9bfec9575b67e0854e5",
+                "url": "https://api.github.com/repos/captainhook-git/secrets/zipball/d62c97f75f81ac98e22f1c282482bd35fa82f631",
+                "reference": "d62c97f75f81ac98e22f1c282482bd35fa82f631",
                 "shasum": ""
             },
             "require": {
@@ -8817,8 +8817,8 @@
                 "tokens"
             ],
             "support": {
-                "issues": "https://github.com/captainhookphp/secrets/issues",
-                "source": "https://github.com/captainhookphp/secrets/tree/0.9.6"
+                "issues": "https://github.com/captainhook-git/secrets/issues",
+                "source": "https://github.com/captainhook-git/secrets/tree/0.9.7"
             },
             "funding": [
                 {
@@ -8826,7 +8826,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-26T09:24:19+00:00"
+            "time": "2025-04-08T07:10:48+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -13016,7 +13016,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v7.2.0",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -13062,7 +13062,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.2.0"
+                "source": "https://github.com/symfony/filesystem/tree/v7.3.0"
             },
             "funding": [
                 {
