@@ -8677,16 +8677,16 @@
         },
         {
             "name": "captainhook/captainhook",
-            "version": "5.25.2",
+            "version": "5.25.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/captainhookphp/captainhook.git",
-                "reference": "e096240c130557be6d2059881341db7ebd84f653"
+                "url": "https://github.com/captainhook-git/captainhook.git",
+                "reference": "c1e8d7adf3d43ac4b388b25a04496a47c6bbe694"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/e096240c130557be6d2059881341db7ebd84f653",
-                "reference": "e096240c130557be6d2059881341db7ebd84f653",
+                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/c1e8d7adf3d43ac4b388b25a04496a47c6bbe694",
+                "reference": "c1e8d7adf3d43ac4b388b25a04496a47c6bbe694",
                 "shasum": ""
             },
             "require": {
@@ -8748,8 +8748,8 @@
                 "prepare-commit-msg"
             ],
             "support": {
-                "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook/tree/5.25.2"
+                "issues": "https://github.com/captainhook-git/captainhook/issues",
+                "source": "https://github.com/captainhook-git/captainhook/tree/5.25.4"
             },
             "funding": [
                 {
@@ -8757,20 +8757,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-30T17:23:19+00:00"
+            "time": "2025-06-01T15:20:18+00:00"
         },
         {
             "name": "captainhook/secrets",
-            "version": "0.9.6",
+            "version": "0.9.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/captainhookphp/secrets.git",
-                "reference": "0232c67019e11c4bee4ee9bfec9575b67e0854e5"
+                "url": "https://github.com/captainhook-git/secrets.git",
+                "reference": "d62c97f75f81ac98e22f1c282482bd35fa82f631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/secrets/zipball/0232c67019e11c4bee4ee9bfec9575b67e0854e5",
-                "reference": "0232c67019e11c4bee4ee9bfec9575b67e0854e5",
+                "url": "https://api.github.com/repos/captainhook-git/secrets/zipball/d62c97f75f81ac98e22f1c282482bd35fa82f631",
+                "reference": "d62c97f75f81ac98e22f1c282482bd35fa82f631",
                 "shasum": ""
             },
             "require": {
@@ -8804,8 +8804,8 @@
                 "tokens"
             ],
             "support": {
-                "issues": "https://github.com/captainhookphp/secrets/issues",
-                "source": "https://github.com/captainhookphp/secrets/tree/0.9.6"
+                "issues": "https://github.com/captainhook-git/secrets/issues",
+                "source": "https://github.com/captainhook-git/secrets/tree/0.9.7"
             },
             "funding": [
                 {
@@ -8813,7 +8813,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-26T09:24:19+00:00"
+            "time": "2025-04-08T07:10:48+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -13003,7 +13003,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v7.2.0",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -13049,7 +13049,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.2.0"
+                "source": "https://github.com/symfony/filesystem/tree/v7.3.0"
             },
             "funding": [
                 {
