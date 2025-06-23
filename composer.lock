@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "863f4ad9fd0f63894c89b0048db4828c",
+    "content-hash": "1cc430029dac8f582c182a2217383588",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3020,24 +3020,24 @@
         },
         {
             "name": "laravellegends/pt-br-validator",
-            "version": "11.0.0",
+            "version": "12.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelLegends/pt-br-validator.git",
-                "reference": "ab89fcb32661bc1a95c5836489ddc68f61a95d34"
+                "reference": "9c04c518a99047edb1da4cbf82dabb124da6bc94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelLegends/pt-br-validator/zipball/ab89fcb32661bc1a95c5836489ddc68f61a95d34",
-                "reference": "ab89fcb32661bc1a95c5836489ddc68f61a95d34",
+                "url": "https://api.github.com/repos/LaravelLegends/pt-br-validator/zipball/9c04c518a99047edb1da4cbf82dabb124da6bc94",
+                "reference": "9c04c518a99047edb1da4cbf82dabb124da6bc94",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0"
+                "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
-                "phpunit/phpunit": "^8.3 || ^9.0"
+                "orchestra/testbench": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^10.0",
+                "phpunit/phpunit": "^8.3 || ^9.0 || ^11.5.3"
             },
             "type": "library",
             "extra": {
@@ -3065,9 +3065,9 @@
             "description": "Uma biblioteca contendo validações de formatos Brasileiros, para o Laravel",
             "support": {
                 "issues": "https://github.com/LaravelLegends/pt-br-validator/issues",
-                "source": "https://github.com/LaravelLegends/pt-br-validator/tree/11.0.0"
+                "source": "https://github.com/LaravelLegends/pt-br-validator/tree/12.2.0"
             },
-            "time": "2024-03-18T20:18:50+00:00"
+            "time": "2025-06-21T21:37:01+00:00"
         },
         {
             "name": "league/commonmark",
