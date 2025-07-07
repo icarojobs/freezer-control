@@ -649,16 +649,16 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.12.19",
+            "version": "v0.12.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "f6516eb82c7c86e57e2cfaead4a05b900e4b5ecc"
+                "reference": "5b650167c81c59138e844c2ae550c14dc1a249d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/f6516eb82c7c86e57e2cfaead4a05b900e4b5ecc",
-                "reference": "f6516eb82c7c86e57e2cfaead4a05b900e4b5ecc",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/5b650167c81c59138e844c2ae550c14dc1a249d0",
+                "reference": "5b650167c81c59138e844c2ae550c14dc1a249d0",
                 "shasum": ""
             },
             "require": {
@@ -670,11 +670,15 @@
                 "spatie/laravel-package-tools": "^1.9.2"
             },
             "require-dev": {
+                "larastan/larastan": "^3.3",
                 "laravel/pint": "^v1.1.0",
                 "nunomaduro/collision": "^7.0|^8.0",
                 "orchestra/testbench": "^8.0|^9.0|^10.0",
                 "pestphp/pest": "^2.34|^3.7",
                 "pestphp/pest-plugin-laravel": "^2.3|^3.1",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.5|^11.5.3",
                 "spatie/laravel-permission": "^6.10",
                 "spatie/pest-plugin-snapshots": "^2.1"
@@ -713,7 +717,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.12.19"
+                "source": "https://github.com/dedoc/scramble/tree/v0.12.23"
             },
             "funding": [
                 {
@@ -721,7 +725,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-23T09:41:53+00:00"
+            "time": "2025-06-15T09:04:49+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -3959,16 +3963,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.1",
+            "version": "1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c"
+                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/1720ddd719e16cf0db4eb1c6eca108031636d46c",
-                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/faed855a7b5f4d4637717c2b3863e277116beb36",
+                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36",
                 "shasum": ""
             },
             "require": {
@@ -4007,7 +4011,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.1"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.3"
             },
             "funding": [
                 {
@@ -4015,7 +4019,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-29T12:36:36+00:00"
+            "time": "2025-07-05T12:25:42+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -4274,16 +4278,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
                 "shasum": ""
             },
             "require": {
@@ -4326,9 +4330,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
             },
-            "time": "2024-12-30T11:07:19+00:00"
+            "time": "2025-05-31T08:24:38+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -5430,16 +5434,16 @@
         },
         {
             "name": "rupadana/filament-api-service",
-            "version": "3.4.6",
+            "version": "3.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rupadana/filament-api-service.git",
-                "reference": "637e08940ea73a98c24c4addb2065ab1060349d0"
+                "reference": "09cb9c707289ed5c2378ebdb19104bfb6786bf23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/637e08940ea73a98c24c4addb2065ab1060349d0",
-                "reference": "637e08940ea73a98c24c4addb2065ab1060349d0",
+                "url": "https://api.github.com/repos/rupadana/filament-api-service/zipball/09cb9c707289ed5c2378ebdb19104bfb6786bf23",
+                "reference": "09cb9c707289ed5c2378ebdb19104bfb6786bf23",
                 "shasum": ""
             },
             "require": {
@@ -5510,7 +5514,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-07T05:43:58+00:00"
+            "time": "2025-07-01T11:35:02+00:00"
         },
         {
             "name": "ryangjchandler/blade-capture-directive",
