@@ -11,7 +11,7 @@
         "php": "^8.2",
         "bezhansalleh/filament-shield": "^3.2",
         "filament/filament": "^3.2",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^8.1",
         "lara-zeus/quantity": "^1.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
