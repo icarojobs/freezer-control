@@ -15,7 +15,7 @@
         "lara-zeus/quantity": "^1.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8",
+        "laravel/tinker": "^3.0",
         "laravellegends/pt-br-validator": "^11.0",
         "owenvoke/blade-fontawesome": "^2.6",
         "rupadana/filament-api-service": "^3.1",
